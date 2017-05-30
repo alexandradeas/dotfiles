@@ -26,6 +26,9 @@ Plug 'eagletmt/ghcmod-vim'
 Plug 'neovimhaskell/haskell-vim'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
+Plug 'hail2u/vim-css3-syntax'
+Plug 'cakebaker/scss-syntax.vim'
+Plug 'vim-scripts/nginx.vim'
 
 call plug#end()
 
@@ -39,7 +42,7 @@ set number
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 let g:mapleader=","
 let g:python_host_prog = '/usr/bin/python'
-let g:python3_host_prog = '/usr/bin/python3'
+let g:python3_host_prog = '/usr/local/bin/python3'
 let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 let &t_SR = "\<Esc>]50;CursorShape=2\x7"
@@ -47,6 +50,7 @@ syntax on
 filetype on
 filetype plugin indent on
 nnoremap <F3> :set hlsearch!<CR>
+set clipboard=unnamed
 
 " Color Scheme
 colorscheme gruvbox
@@ -55,7 +59,7 @@ set background=dark
 " UTILS
 
 " NERDTree
-let g:NERDTreeWinPos="right"
+let g:NERDTreeWinPos="left"
 let g:NERDTreeQuitOnOpen=0
 let g:NERDTreeMinimalUI=1
 let g:NERDTreeDirArrows=1
@@ -63,6 +67,13 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 nnoremap <Leader>f :NERDTreeToggle<CR>
+
+" Ack
+cnoreabbrev Ack Ack!
+nnoremap <Leader>a :Ack!<Space>
+let g:ack_mappings = {
+  \ 'v': '<C-W><CR><C-W>L<C-W>p<C-W>J<C-W>p',
+  \ 'gv': '<C-W><CR><C-W>L<C-W>p<C-W>J' }
 
 " LANGUAGE SUPPORT
 
@@ -101,4 +112,7 @@ let g:jsx_ext_required = 0
 
 " OCaml
 set rtp+=<SHARE_DIR>/merline/vim
+
+" SCSS
+au BufRead, BufNewFile *.scss set filetype=scss
 
