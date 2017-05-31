@@ -11,12 +11,17 @@ Plug 'raimondi/delimitmate'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'shougo/vimproc.vim', { 'do' : 'make' }
 Plug 'mileszs/ack.vim'
+Plug 'godlygeek/tabular'
+Plug 'JamshedVesuna/vim-markdown-preview'
+Plug 'tpope/vim-sexp-mappings-for-regular-people'
 
 " Color schemes
 Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'kien/rainbow_parentheses.vim'
 
 " Language Support
+Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-markdown'
 Plug 'valloric/youcompleteme'
 Plug 'raichoo/purescript-vim'
@@ -29,6 +34,12 @@ Plug 'mxw/vim-jsx'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'vim-scripts/nginx.vim'
+Plug 'mikaelj/limp'
+Plug 'mattreduce/vim-mix'
+Plug 'rhysd/vim-wasm'
+Plug 'guns/vim-clojure-static'
+Plug 'tpope/vim-classpath'
+Plug 'tpope/vim-fireplace'
 
 call plug#end()
 
@@ -51,10 +62,15 @@ filetype on
 filetype plugin indent on
 nnoremap <F3> :set hlsearch!<CR>
 set clipboard=unnamed
+set showcmd
 
 " Color Scheme
 colorscheme gruvbox
 set background=dark
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
 
 " UTILS
 
@@ -115,4 +131,8 @@ set rtp+=<SHARE_DIR>/merline/vim
 
 " SCSS
 au BufRead, BufNewFile *.scss set filetype=scss
+
+" Clojure
+let g:clojure_align_multiline_strings = 1
+let g:clojure_align_subforms = 1
 
