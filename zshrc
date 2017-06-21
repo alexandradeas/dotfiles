@@ -21,7 +21,7 @@ CASE_SENSITIVE="true"
 
 COMPLETION_WAITING_DOTS="true"
 
-plugins=(aws, bi, cabal, command-not-found, git, get-extras, get-flow, httpie, zsh-nvm, sudo, stack)
+plugins=(aws, bi, cabal, command-not-found, git, git-extras, git-flow, httpie, zsh-nvm, sudo, stack)
 
 source $ZSH/oh-my-zsh.sh
 
