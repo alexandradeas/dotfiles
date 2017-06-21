@@ -1,5 +1,18 @@
 export ZSH=~/.oh-my-zsh
 
+function zsl-line-init zsl-keymap-select {
+  VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]% %{$reset_color%}"
+  RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)} $(git_custom_status) $ESP1"
+  zle reset-prompt
+}
+
+zle -N zsl-line-init
+
+# Vim mode setup
+bindkey -v
+export KEYTIMEOUT=1
+
+
 ZSH_THEME="af-magic"
 
 CASE_SENSITIVE="true"
@@ -32,11 +45,9 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export EDITOR='nvim'
 export XLIB_SKIP_ARGB_VISUALS=1
 
-
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 export PATH=$PATH:$HOME/bin:/usr/local/bin:~/.cabal/bin:/usr/local/go/bin:~/.local/bin/scala/bin:/usr/local/opt/node@6/bin
-
