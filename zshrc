@@ -31,6 +31,7 @@ export ARCHFLAGS="-arch x86_64"
 alias zshrc='nvim ~/.zshrc'
 alias vimrc="nvim ~/.config/nvim/init.vim"
 alias ackrc="nvim ~/.ackrc"
+alias i3rc="nvim ~/.config/i3"
 alias irc="irssi"
 
 alias emacs="emacs --no-window-system"
@@ -50,4 +51,4 @@ export NVM_DIR="$HOME/.nvm"
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-export PATH=$PATH:$HOME/bin:/usr/local/bin:~/.cabal/bin:/usr/local/go/bin:~/.local/bin/scala/bin:/usr/local/opt/node@6/bin
+export PATH=$PATH:$HOME/bin:/usr/local/bin:~/.cabal/bin:/usr/local/go/bin:~/.local/bin/scala/bin
