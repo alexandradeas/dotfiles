@@ -123,7 +123,7 @@ for_window [class="Skype"] floating enable
 
 # default workspaces
 assign [class="Spotify"] $workspace10
-assign [class="qTox"] $workspace9
+assign [class="Slack"] $workspace9
 
 # key-bindings
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume $(pactl list short sinks|grep RUNNING| awk '{print $1}') +5% #increase sound volume
@@ -150,8 +150,10 @@ bindsym $mod+c focus child
 # Startup
 exec xrandr --output eDP-1 --off
 exec_always --no-startup-id feh --bg-scale $wallpaper
+exec --no-startup-id slack
 exec --no-startup-id spotify
 exec --no-startup-id compton -f
+exec --no-startup-id firefox
 
 # Keys
 exec_always xmodmap -e "clear lock" #disable caps lock switch

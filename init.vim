@@ -25,7 +25,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-markdown'
 Plug 'valloric/youcompleteme'
 Plug 'raichoo/purescript-vim'
-Plug 'frigoeu/psc-ide-vim'
+" Plug 'frigoeu/psc-ide-vim'
 Plug 'rgrinberg/vim-ocaml'
 Plug 'eagletmt/ghcmod-vim'
 Plug 'neovimhaskell/haskell-vim'
@@ -40,6 +40,7 @@ Plug 'rhysd/vim-wasm'
 Plug 'guns/vim-clojure-static'
 Plug 'tpope/vim-classpath'
 Plug 'tpope/vim-fireplace'
+Plug 'junegunn/vim-emoji'
 
 call plug#end()
 
@@ -98,7 +99,7 @@ let g:ack_mappings = {
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
 " Purescript
-let g:psc_ide_syntastic_mode=0
+" let g:psc_ide_syntastic_mode=0
 " let g:psc_ide_log_level=3
 " let g:psc_ide_server_port=4567
 " let g:purescript_indent_if=0
@@ -140,4 +141,6 @@ au BufRead, BufNewFile *.scss set filetype=scss
 " Clojure
 let g:clojure_align_multiline_strings = 1
 let g:clojure_align_subforms = 1
+
+set completefunc=emoji#complete
 

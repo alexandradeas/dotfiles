@@ -28,10 +28,7 @@ source $ZSH/oh-my-zsh.sh
 # Compilation flags
 export ARCHFLAGS="-arch x86_64"
 
-alias zshrc='nvim ~/.zshrc'
-alias vimrc="nvim ~/.config/nvim/init.vim"
-alias ackrc="nvim ~/.ackrc"
-alias i3rc="nvim ~/.config/i3"
+alias dotfiles="vi ~/dotfiles"
 alias irc="irssi"
 
 alias emacs="emacs --no-window-system"
@@ -47,8 +44,6 @@ export EDITOR='nvim'
 export XLIB_SKIP_ARGB_VISUALS=1
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # Load nvm
 
 export PATH=$PATH:$HOME/bin:/usr/local/bin:~/.cabal/bin:/usr/local/go/bin:~/.local/bin/scala/bin
