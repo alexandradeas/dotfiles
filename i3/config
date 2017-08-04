@@ -154,6 +154,7 @@ exec --no-startup-id slack
 exec --no-startup-id spotify
 exec --no-startup-id compton -f
 exec --no-startup-id firefox
+exec --no-startup-id blueman-applet
 
 # Keys
 exec_always xmodmap -e "clear lock" #disable caps lock switch
