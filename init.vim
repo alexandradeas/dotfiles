@@ -45,7 +45,7 @@ Plug 'junegunn/vim-emoji'
 call plug#end()
 
 " General settings
-set gfn=Hack\ 12,Source\ Code\ Pro\ 12,Bitstream\ Vera\ Sans\ Mono\ 11
+set gfn=Hack\ 8,Source\ Code\ Pro\ 8,Bitstream\ Vera\ Sans\ Mono\ 11
 set tabstop=2
 set shiftwidth=2
 set softtabstop=0
@@ -81,6 +81,7 @@ let g:NERDTreeWinPos="left"
 let g:NERDTreeQuitOnOpen=0
 let g:NERDTreeMinimalUI=1
 let g:NERDTreeDirArrows=1
+let g:NERDTreeWinSize=20
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
