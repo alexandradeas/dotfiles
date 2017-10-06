@@ -31,7 +31,7 @@ export ARCHFLAGS="-arch x86_64"
 alias dotfiles="vi ~/dotfiles"
 alias irc="irssi"
 
-alias emacs="emacs --no-window-system"
+# alias emacs="emacs --no-window-system"
 alias vi='nvim'
 alias vim="nvim"
 alias update_commit_time='GIT_COMMITTER_DATE="`date`" git commit --amend --date "`date`"'
@@ -46,4 +46,5 @@ export XLIB_SKIP_ARGB_VISUALS=1
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # Load nvm
 
-export PATH=$PATH:$HOME/bin:/usr/local/bin:~/.cabal/bin:/usr/local/go/bin:~/.local/bin/scala/bin
+export PATH=$PATH:$HOME/bin:/usr/local/bin:~/.cabal/bin:~/.local/go/bin:~/.local/bin/scala/bin
+export GOPATH=$HOME/.local/go

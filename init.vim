@@ -14,6 +14,8 @@ Plug 'mileszs/ack.vim'
 Plug 'godlygeek/tabular'
 Plug 'JamshedVesuna/vim-markdown-preview'
 Plug 'tpope/vim-sexp-mappings-for-regular-people'
+Plug 'yuratomo/w3m.vim'
+Plug 'HerringtonDarkholme/vim-worksheet'
 
 " Color schemes
 Plug 'morhetz/gruvbox'
@@ -25,7 +27,6 @@ Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-markdown'
 Plug 'valloric/youcompleteme'
 Plug 'raichoo/purescript-vim'
-" Plug 'frigoeu/psc-ide-vim'
 Plug 'rgrinberg/vim-ocaml'
 Plug 'eagletmt/ghcmod-vim'
 Plug 'neovimhaskell/haskell-vim'
@@ -41,6 +42,8 @@ Plug 'guns/vim-clojure-static'
 Plug 'tpope/vim-classpath'
 Plug 'tpope/vim-fireplace'
 Plug 'junegunn/vim-emoji'
+Plug 'ktvoelker/sbt-vim'
+" Plug 'frigoeu/psc-ide-vim'
 
 call plug#end()
 
@@ -117,6 +120,7 @@ autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 " au FileType purescript nmap <leader>c :PSCIDEcaseSplit<CR>
 " au FileType purescript nmap <leader>qd :PSCIDEremoveImportQualifications<CR>
 " au FileType purescript nmap <leader>qa :PSCIDEaddImportQualifications<CR>
+let g:pursuit#command = 'w3m https://pursuit.purescript.com'
 
 " Haskell
 let g:haskell_enable_quantification = 1

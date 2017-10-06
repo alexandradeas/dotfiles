@@ -1,14 +1,14 @@
 set $wallpaper ~/Pictures/wallpaper.png
 set $mod Mod4
 
-set $workspace1 "1 "
+set $workspace1 "1 "
 set $workspace2 "2 "
 set $workspace3 "3 "
 set $workspace4 "4 "
 set $workspace5 "5 "
 set $workspace6 "6 "
 set $workspace7 "7 "
-set $workspace8 "8 "
+set $workspace8 "8 "
 set $workspace9 "9 "
 set $workspace10 "10 "
 
@@ -37,13 +37,14 @@ bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
-# change container layout
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
-
+# window modes
+bindsym $mod+Shift+s layout stacking
+bindsym $mod+Shift+w layout tabbed
+bindsym $mod+Shift+e layout toggle split
 bindsym $mod+Shift+space floating toggle
+bindsym $mod+Shift+Escape sticky toggle
 bindsym $mod+space focus mode_toggle
+bindsym $mod+Shift+f fullscreen toggle
 
 # switch to workspace
 bindsym $mod+1 workspace $workspace1
@@ -74,7 +75,7 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+Delete exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window
 mode "resize" {
@@ -113,17 +114,9 @@ bar {
   font pango: System San Francisco 8
 }
 
-# sticky window
-bindsym $mod+Shift+s sticky toggle
-
 # floating
-for_window [class="qTox"] floating enable
 for_window [class="Pavucontrol"] floating enable
-for_window [class="Skype"] floating enable
-
-# default workspaces
-assign [class="Spotify"] $workspace10
-assign [class="Slack"] $workspace9
+for_window [class="Thunar"] floating enable
 
 # key-bindings
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume $(pactl list short sinks|grep RUNNING| awk '{print $1}') +5% #increase sound volume
@@ -139,24 +132,40 @@ bindsym Print exec screenshot
 bindsym $mod+d exec rofi -show run -lines 3 -eh 2 -width 100 -padding 100 -opacity "85" -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "System San Francisco Display 18"
 bindsym $mod+x split h
 bindsym $mod+y split v
-bindsym $mod+f fullscreen toggle
-bindsym $mod+Shift+Delete exec i3lock -i $wallpaper
+bindsym $mod+Shift+Pause exec i3lock -i $wallpaper
+bindsym $mod+f exec thunar
+bindsym $mod+w exec chromium-browser
 
 # focus the parent container
 bindsym $mod+a focus parent
 # focus the child container
 bindsym $mod+c focus child
 
+# default workspaces
+assign [class="Spotify"] $workspace10
+assign [class="Slack"] $workspace9
+assign [class="Chromium-browser"] $workspace1
+assign [class="Thunderbird"] $workspace8
+
 # Startup
-exec xrandr --output eDP-1 --off
-exec_always --no-startup-id feh --bg-scale $wallpaper
+
+## Applets
+exec --no-startup-id nm-applet
+exec --no-startup-id blueman-applet
+
+## Apps
 exec --no-startup-id slack
 exec --no-startup-id spotify
 exec --no-startup-id compton -f
-exec --no-startup-id firefox
-exec --no-startup-id blueman-applet
+exec --no-startup-id chromium-browser
+exec --no-startup-id thunderbird
 
-# Keys
+## Keys
 exec_always xmodmap -e "clear lock" #disable caps lock switch
 exec_always xmodmap -e "keysym Caps_Lock = Escape" # set caps_lock as escape
+
+## Displays
+exec xrandr --output eDP-1 --auto
+# exec_always xrandr --output eDP-1 --off
+exec_always --no-startup-id feh --bg-scale $wallpaper
 
