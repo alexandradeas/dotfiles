@@ -14,8 +14,6 @@ Plug 'mileszs/ack.vim'
 Plug 'godlygeek/tabular'
 Plug 'JamshedVesuna/vim-markdown-preview'
 Plug 'tpope/vim-sexp-mappings-for-regular-people'
-Plug 'yuratomo/w3m.vim'
-Plug 'HerringtonDarkholme/vim-worksheet'
 
 " Color schemes
 Plug 'morhetz/gruvbox'
@@ -43,7 +41,7 @@ Plug 'tpope/vim-classpath'
 Plug 'tpope/vim-fireplace'
 Plug 'junegunn/vim-emoji'
 Plug 'ktvoelker/sbt-vim'
-" Plug 'frigoeu/psc-ide-vim'
+Plug 'frigoeu/psc-ide-vim'
 
 call plug#end()
 
@@ -103,23 +101,23 @@ let g:ack_mappings = {
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
 " Purescript
-" let g:psc_ide_syntastic_mode=0
-" let g:psc_ide_log_level=3
-" let g:psc_ide_server_port=4567
-" let g:purescript_indent_if=0
-" let g:purescript_indent_do=0
-" let g:purescript_indent_let=0
-" let g:purescript_indent_case=0
-" let g:purescript_indent_where=0
-" nm <buffer> <silent> <leader>t :<C-U>call PSCIDEtype(PSCIDEgetKeyword(), v:true)<CR>
-" au FileType purescript nmap <leader>t :PSCIDEtype<CR>
-" au FileType purescript nmap <leader>s :PSCIDEapplySuggestions<CR>
-" au FileType purescript nmap <leader>a :PSCIDEaddTypeAnnotation<CR>
-" au FileType purescript nmap <leader>r :PSCIDEload<CR>
-" au FileType purescript nmap <leader>p :PSCIDEpursuit<CR>
-" au FileType purescript nmap <leader>c :PSCIDEcaseSplit<CR>
-" au FileType purescript nmap <leader>qd :PSCIDEremoveImportQualifications<CR>
-" au FileType purescript nmap <leader>qa :PSCIDEaddImportQualifications<CR>
+let g:psc_ide_syntastic_mode=0
+let g:psc_ide_log_level=3
+let g:psc_ide_server_port=4567
+let g:purescript_indent_if=0
+let g:purescript_indent_do=0
+let g:purescript_indent_let=0
+let g:purescript_indent_case=0
+let g:purescript_indent_where=0
+nm <buffer> <silent> <leader>t :<C-U>call PSCIDEtype(PSCIDEgetKeyword(), v:true)<CR>
+au FileType purescript nmap <leader>t :PSCIDEtype<CR>
+au FileType purescript nmap <leader>s :PSCIDEapplySuggestions<CR>
+au FileType purescript nmap <leader>a :PSCIDEaddTypeAnnotation<CR>
+au FileType purescript nmap <leader>r :PSCIDEload<CR>
+au FileType purescript nmap <leader>p :PSCIDEpursuit<CR>
+au FileType purescript nmap <leader>c :PSCIDEcaseSplit<CR>
+au FileType purescript nmap <leader>qd :PSCIDEremoveImportQualifications<CR>
+au FileType purescript nmap <leader>qa :PSCIDEaddImportQualifications<CR>
 let g:pursuit#command = 'w3m https://pursuit.purescript.com'
 
 " Haskell

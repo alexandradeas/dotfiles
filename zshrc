@@ -46,5 +46,5 @@ export XLIB_SKIP_ARGB_VISUALS=1
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # Load nvm
 
-export PATH=$PATH:$HOME/bin:/usr/local/bin:~/.cabal/bin:~/.local/go/bin:~/.local/bin/scala/bin
+export PATH=$PATH:$HOME/bin:/usr/local/bin:~/.cabal/bin:~/.local/go/bin:~/.local/bin/scala/bin:~/snap/bin:~/neovim/bin
 export GOPATH=$HOME/.local/go
