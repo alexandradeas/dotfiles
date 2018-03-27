@@ -14,6 +14,7 @@ Plug 'mileszs/ack.vim'
 Plug 'godlygeek/tabular'
 Plug 'JamshedVesuna/vim-markdown-preview'
 Plug 'tpope/vim-sexp-mappings-for-regular-people'
+Plug 'mattn/webapi-vim'
 
 " Color schemes
 Plug 'morhetz/gruvbox'
@@ -45,15 +46,17 @@ Plug 'ktvoelker/sbt-vim'
 Plug 'frigoeu/psc-ide-vim'
 Plug 'flowtype/vim-flow'
 Plug 'w0rp/ale'
+Plug 'potatoesmaster/i3-vim-syntax'
 
 call plug#end()
 
 " General settings
 set gfn=Hack\ 8,Source\ Code\ Pro\ 8,Bitstream\ Vera\ Sans\ Mono\ 11
-set tabstop=2
+set tabstop=4
 set shiftwidth=2
 set softtabstop=0
 set expandtab
+set smarttab
 set termguicolors
 set number
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
@@ -71,7 +74,7 @@ set clipboard=unnamed
 set showcmd
 
 " Color Scheme
-colorscheme solarized
+colorscheme gruvbox
 set background=dark
 au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
@@ -88,7 +91,7 @@ let g:NERDTreeQuitOnOpen=0
 let g:NERDTreeMinimalUI=1
 let g:NERDTreeDirArrows=1
 let g:NERDTreeWinSize=20
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+autocmd bufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 nnoremap <Leader>f :NERDTreeToggle<CR>
@@ -134,7 +137,6 @@ let g:haskell_enable_typeroles = 1
 let g:haskell_enable_static_pointers = 1
 let g:haskell_backpack = 1
 let g:ycm_semantic_triggers = { 'haskell' : ['.'] }
-let $PATH = $PATH . ':' .  expand('~/.cabal/bin')
 
 " JavaScript
 let g:javascript_plugin_flow = 1
@@ -172,3 +174,6 @@ let g:clojure_align_subforms = 1
 
 set completefunc=emoji#complete
 
+" Rust
+let g:rustfmt_autosave = 1
+let g:rist_clip_command = 'xclip -selection clipboard'

@@ -43,13 +43,13 @@ alias update_commit_time='GIT_COMMITTER_DATE="`date`" git commit --amend --date 
 
 alias re-source="source ~/.zshrc"
 alias t="tree -L 1"
+alias vimrc="vi ~/.config/nvim/init.vim"
+alias zshrc="vi ~/.zshrc"
+alias wmrc="vi ~/.config/i3"
 
 export XDG_CONFIG_HOME="$HOME/.config"
 export EDITOR='nvim'
 export XLIB_SKIP_ARGB_VISUALS=1
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # Load nvm
-
-export PATH=$PATH:$HOME/bin:/usr/local/bin:~/.cabal/bin:~/.local/go/bin:~/.local/bin/scala/bin:~/snap/bin:~/neovim/bin:~/.npm/bin
+export PATH=$PATH:/usr/local/bin:~/.local/bin:~/.local/rust/bin:~/.local/go/bin:~/snap/bin:~/neovim/bin:~/.local/node/bin:~/.stack/programs/x86_64-linux/ghc-nopie-8.2.2/bin
 export GOPATH=$HOME/.local/go
