@@ -1,4 +1,4 @@
-set $wallpaper ~/Desktop/nebula-1920x1080-dark-space-blue-space-deep-hd-1777.png
+set $wallpaper ~/Pictures/gandalf_the_pug.png
 set $mod Mod4
 
 # Displays from left to right
@@ -132,9 +132,10 @@ set $inactive-bg-color     #21242c
 set $text-color            #f3f4f5
 set $inactive-text-color   #9ea6ae
 set $urgent-bg-color       #e53935
+set $active-bg-color       #00ff00
 
 #                        border             background         text                 indicator
-client.focused           $bg-color          $bg-color          $text-color          bg-color
+client.focused           $active-bg-color   $bg-color          $text-color          $bg-color
 client.unfocused         $inactive-bg-color $inactive-bg-color $inactive-text-color $inactive-bg-color
 client.focused_inactive  $inactive-bg-color $inactive-bg-color $inactive-text-color $inactive-bg-color
 client.urgent            $urgent-bg-color   $urgent-bg-color   $text-color          $urgent-bg-color

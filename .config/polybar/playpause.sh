@@ -2,12 +2,12 @@
 status=""
 
 setStatus() {
-  $status = playerctl status || ""
+  $status = playerctl status
 }
 
 if [ "$status" = "Playing" ]
 then
-  echo "%{F#dd49b5b5}"
+  echo "%{#dd49b5b5}"
 elif [ "$status" = "Paused" ]
 then
   echo "%{F#dd49b5b5}"

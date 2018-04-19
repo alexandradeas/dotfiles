@@ -23,7 +23,6 @@ Plug 'kien/rainbow_parentheses.vim'
 Plug 'altercation/vim-colors-solarized'
 
 " Language Support
-Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-markdown'
 Plug 'valloric/youcompleteme'
 Plug 'raichoo/purescript-vim'
@@ -47,11 +46,12 @@ Plug 'frigoeu/psc-ide-vim'
 Plug 'flowtype/vim-flow'
 Plug 'w0rp/ale'
 Plug 'potatoesmaster/i3-vim-syntax'
+Plug 'wlangstroth/vim-racket'
+Plug 'rust-lang/rust.vim'
 
 call plug#end()
 
 " General settings
-set gfn=Hack\ 8,Source\ Code\ Pro\ 8,Bitstream\ Vera\ Sans\ Mono\ 11
 set tabstop=4
 set shiftwidth=2
 set softtabstop=0
@@ -72,6 +72,8 @@ filetype plugin indent on
 nnoremap <F3> :set hlsearch!<CR>
 set clipboard=unnamed
 set showcmd
+set autoread
+au CursorHold * checktime " check file every 4 seconds and reload the buffer on change
 
 " Color Scheme
 colorscheme gruvbox
@@ -176,4 +178,4 @@ set completefunc=emoji#complete
 
 " Rust
 let g:rustfmt_autosave = 1
-let g:rist_clip_command = 'xclip -selection clipboard'
+let g:rust_clip_command = 'xclip -selection clipboard'
