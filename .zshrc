@@ -36,7 +36,6 @@ function makeDirectoryAndEnter () {
   cd $1
 }
 
-# alias emacs="emacs --no-window-system"
 alias vi='nvim' 
 alias vim="nvim"
 alias update_commit_time='GIT_COMMITTER_DATE="`date`" git commit --amend --date "`date`"'
@@ -50,6 +49,17 @@ alias wmrc="vi ~/.config/i3"
 export XDG_CONFIG_HOME="$HOME/.config"
 export EDITOR='nvim'
 export XLIB_SKIP_ARGB_VISUALS=1
+export MONGODB_URI="mongodb://localhost:27017/pb"
 
-export PATH=$PATH:/usr/local/bin:~/.local/bin:~/.local/rust/bin:~/.local/go/bin:~/snap/bin:~/neovim/bin:~/.local/node/bin:~/.stack/programs/x86_64-linux/ghc-nopie-8.2.2/bin
-export GOPATH=$HOME/.local/go
+export PATH=$PATH:/usr/local/bin:$HOME/snap/bin:$HOME/neovim/bin:$HOME/yarn/bin
+
+# OPAM configuration
+. /home/alex/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+
+function slack () {
+  slack-term --config $HOME/.slack-term/${1}.json
+}
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
