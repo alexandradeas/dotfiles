@@ -43,7 +43,7 @@ Plug 'flowtype/vim-flow'
 Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
 Plug 'jason0x43/vim-js-indent'
 Plug 'leafgarland/typescript-vim'
-Plug 'Quramy/vim-dtsm'
+" Plug 'Quramy/vim-dtsm'
 Plug 'Quramy/vim-js-pretty-template'
 
 " CSS
@@ -234,7 +234,7 @@ let g:ale_linters = {
 \  'typescript': ['tslint', 'tsserver', 'typecheck']
 \}
 let g:ale_fixers = {
-\  'javascript': ['flow', 'eslint'],
+\  'javascript': ['eslint'],
 \  'typescript': ['tslint']
 \}
 let g:ale_fix_on_save=1
