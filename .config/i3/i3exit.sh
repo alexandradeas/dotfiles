@@ -44,7 +44,7 @@ lock() {
       --textcolor="$foreground" --timecolor="$foreground" --datecolor="$foreground" \
       --force-clock --indicator 
 
-  exec playerctl play-pause
+  exec playerctl pause
   # rm $TMPBG
 
   pkill -u "$USER" -USR2 dunst

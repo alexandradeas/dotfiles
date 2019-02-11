@@ -1,4 +1,3 @@
-set $wallpaper ~/Pictures/wallpaper.png
 set $mod Mod4
 
 # Displays from left to right
@@ -70,7 +69,7 @@ set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
 
-exec_always xrandr $display2 --auto --left-of $display1
+exec_always xrandr $display2
 
 # switch to workspace
 bindsym $mod+0 workspace $ws0
@@ -83,21 +82,8 @@ bindsym $mod+6 workspace $ws6
 bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
-
-# Navigate workspaces
-# workspace $ws1 output $display2
-# workspace $ws2 output $display2
-# workspace $ws3 output $display2
-# workspace $ws4 output $display2
-# workspace $ws5 output $display2
-# workspace $ws6 output $display2
-# workspace $ws7 output $display2
-# workspace $ws8 output $display2
-# workspace $ws9 output $display2
-# workspace $ws10 output $display1
-
-bindsym $mod+Ctrl+l workspace next
-bindsym $mod+Ctrl+h workspace prev
+bindsym $mod+Ctrl+l workspace left
+bindsym $mod+Ctrl+h workspace right
 
 # move focused container to workspace
 bindsym $mod+Shift+0 move container to workspace $ws0
@@ -172,15 +158,14 @@ exec --no-startup-id spotify
 exec --no-startup-id slack
 exec --no-startup-id firefox
 exec --no-startup-id discord
+exec --no-startup-id gitter
 
-exec_always feh --bg-scale $wallpaper
-exec_always --no
+exec_always feh --randomize --bg-scale ~/Pictures/wallpapers/
 
-for_window [urgent=latest] focus
-
-assign [class="^Spotify$"] $ws1
-assign [class="^Slack$"] $ws0
-assign [class="^Discord$"] $ws0 
+assign [class="^Spotify$"] $ws9
+assign [class="^Slack$"] $ws9
+assign [class="^Discord$"] $ws9
+assign [class="^Gitter$"] $ws9
 
 for_window [workspace=$ws0] layout stacked
 for_window [class="Gnome-calculator"] floating enable
@@ -207,7 +192,7 @@ set $i3exit $HOME/.config/i3/i3exit.sh
 set $mode_power [l]ock [e]logout [s]uspend [h]ibernate [r]eboot [p]oweroff (shutdown)
 bindsym $mod+shift+Delete mode "$mode_power"
 mode "$mode_power" {
-    bindsym l mode "default", exec --no-startup-id $i3exit lock $wallpaper
+    bindsym l mode "default", exec --no-startup-id $i3exit lock 
     bindsym e mode "default", exec --no-startup-id $i3exit logout
     bindsym s mode "default", exec --no-startup-id $i3exit suspend
     bindsym h mode "default", exec --no-startup-id $i3exit hibernate

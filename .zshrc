@@ -56,10 +56,6 @@ export PATH=$PATH:/usr/local/bin:$HOME/snap/bin:$HOME/neovim/bin:$HOME/yarn/bin
 # OPAM configuration
 . /home/alex/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 
-function slack () {
-  slack-term --config $HOME/.slack-term/${1}.json
-}
-
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
