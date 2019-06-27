@@ -21,9 +21,27 @@ CASE_SENSITIVE="true"
 
 COMPLETION_WAITING_DOTS="true"
 
-plugins=(aws, bi, cabal, command-not-found, git, git-extras, git-flow, httpie, zsh-nvm, sudo, stack)
-
 source $ZSH/oh-my-zsh.sh
+
+plugins=(
+  aws
+  colorize
+  command-not-found
+  common-aliases
+  docker
+  git
+  git-extras
+  gitfast
+  git-flow
+  github
+  gitignore
+  kubectl
+  node
+  npm
+  npx
+  ubuntu
+  yarn
+)
 
 # Compilation flags
 export ARCHFLAGS="-arch x86_64"
@@ -36,8 +54,6 @@ function makeDirectoryAndEnter () {
   cd $1
 }
 
-alias vi='nvim' 
-alias vim="nvim"
 alias update_commit_time='GIT_COMMITTER_DATE="`date`" git commit --amend --date "`date`"'
 
 alias re-source="source ~/.zshrc"
@@ -49,13 +65,12 @@ alias wmrc="vi ~/.config/i3"
 export XDG_CONFIG_HOME="$HOME/.config"
 export EDITOR='nvim'
 export XLIB_SKIP_ARGB_VISUALS=1
-export MONGODB_URI="mongodb://localhost:27017/pb"
+if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
+  source /etc/profile.d/vte.sh
+fi
+source <(aws-okta completion zsh)
+function kubeshell() {
+  kubectl exec -it $1 -- sh
+}
 
-export PATH=$PATH:/usr/local/bin:$HOME/snap/bin:$HOME/neovim/bin:$HOME/yarn/bin
-
-# OPAM configuration
-. /home/alex/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

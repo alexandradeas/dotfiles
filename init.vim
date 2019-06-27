@@ -24,9 +24,14 @@ Plug 'kien/rainbow_parentheses.vim'
 Plug 'altercation/vim-colors-solarized'
 "
 " Completion
-Plug 'Shougo/deoplete.nvim'
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
 Plug 'Shougo/denite.nvim'
-Plug 'w0rp/ale'
 Plug 'vim-syntastic/syntastic'
 
 " =============== Language Support ===============
@@ -40,7 +45,7 @@ Plug 'mxw/vim-jsx'
 Plug 'flowtype/vim-flow'
 
 " Typescript
-Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
+Plug 'mhartington/nvim-typescript', { 'build': './install.sh' }
 Plug 'jason0x43/vim-js-indent'
 Plug 'leafgarland/typescript-vim'
 " Plug 'Quramy/vim-dtsm'
@@ -79,7 +84,6 @@ let &t_SR = "\<Esc>]50;CursorShape=2\x7"
 syntax on
 filetype on
 filetype plugin indent on
-set clipboard=unnamed
 set showcmd
 set autoread
 au CursorHold * checktime " check file every 4 seconds and reload the buffer on change
@@ -130,16 +134,6 @@ let g:flow#showquickfix = 0
 
 au FileType typescript nm <buffer> <silent> <Leader>d :TSType<CR>
 
-
-""""""""""""""""""""""""""""""""""""""""""""""""""
-" Ocaml
-""""""""""""""""""""""""""""""""""""""""""""""""""
-
-set rtp+=<SHARE_DIR>/merlin/vim
-let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
-execute "set rtp+=" . g:opamshare . "/merlin/vim"
-execute "set rtp^=" . g:opamshare . "/ocp-indent/vim"
-execute "helptags " . g:opamshare . "/merlin/vim/doc"
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""

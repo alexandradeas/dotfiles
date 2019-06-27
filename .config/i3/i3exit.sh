@@ -13,7 +13,7 @@ lock() {
   #     com.github.chjj.compton.opts_set string:unredir_if_possible boolean:false
 
   # Suspend dunst and lock, then resume dunst when unlocked.
-  pkill -u "$USER" -USR1 dunst
+  pkill -u "$USER" -USR dunst
 
   # Lock
 
