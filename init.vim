@@ -16,14 +16,17 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'shougo/vimproc.vim', { 'do' : 'make' }
 Plug 'mileszs/ack.vim'
 Plug 'godlygeek/tabular'
+Plug 'majutsushi/tagbar'
+Plug 'makerj/vim-pdf'
 
 " Colors
 Plug 'morhetz/gruvbox'
+Plug 'altercation/vim-colors-solarized'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'kien/rainbow_parentheses.vim'
-Plug 'altercation/vim-colors-solarized'
-"
+
 " Completion
+Plug 'w0rp/ale'
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
@@ -33,11 +36,16 @@ else
 endif
 Plug 'Shougo/denite.nvim'
 Plug 'vim-syntastic/syntastic'
+Plug 'editorconfig/editorconfig-vim'
 
 " =============== Language Support ===============
 
 " i3wm
 Plug 'potatoesmaster/i3-vim-syntax'
+
+" Markdown
+Plug 'plasticboy/vim-markdown'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
 
 " JavaScript
 Plug 'pangloss/vim-javascript'
@@ -45,7 +53,7 @@ Plug 'mxw/vim-jsx'
 Plug 'flowtype/vim-flow'
 
 " Typescript
-Plug 'mhartington/nvim-typescript', { 'build': './install.sh' }
+Plug 'mhartington/nvim-typescript', { 'do': './install.sh' }
 Plug 'jason0x43/vim-js-indent'
 Plug 'leafgarland/typescript-vim'
 " Plug 'Quramy/vim-dtsm'
@@ -58,6 +66,30 @@ Plug 'cakebaker/scss-syntax.vim'
 " PureScript
 Plug 'raichoo/purescript-vim'
 Plug 'frigoeu/psc-ide-vim'
+
+" XML
+Plug 'othree/xml.vim'
+
+" Terraform
+Plug 'hashivim/vim-terraform'
+
+" Lisps
+Plug 'guns/vim-sexp'
+Plug 'tpope/vim-sexp-mappings-for-regular-people'
+Plug 'Olical/vim-scheme', { 'for': 'scheme', 'on': 'SchemeConnect' }
+
+" Erlang/Elixir
+Plug 'vim-erlang/vim-erlang-compiler'
+Plug 'vim-erlang/vim-erlang-omnicomplete'
+Plug 'vim-erlang/vim-erlang-tags'
+
+" D
+" Plug 'landaire/deoplete-d'
+Plug 'bsed/vim-dlang'
+Plug 'sirsireesh/vim-dlang-phobos-highlighter'
+
+" JSON
+Plug 'rhysd/fixjson'
 
 call plug#end()
 
@@ -87,6 +119,7 @@ filetype plugin indent on
 set showcmd
 set autoread
 au CursorHold * checktime " check file every 4 seconds and reload the buffer on change
+set clipboard=unnamedplus
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -103,8 +136,8 @@ nnoremap <F3> :set hlsearch!<CR>
 " Colors
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
-colorscheme gruvbox
 set background=dark
+colorscheme gruvbox
 au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
@@ -116,6 +149,12 @@ au Syntax * RainbowParenthesesLoadBraces
 " Languages
 "
 "=================================================
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Markdown
+""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:vim_markdown_folding_disabled = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " JavaScript
@@ -169,6 +208,12 @@ nm <buffer> <silent> <leader>p :Pursuit<CR>
 nm <buffer> <silent> <leader>T :Ptype<CR>
 
 
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Terraform
+""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:terraform_fmt_on_save=1
+
+
 "=================================================
 "
 " Plugins
@@ -213,23 +258,21 @@ let g:ack_mappings = {
 " ALE
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
-highlight clear ALEErrorSign
-highlight clear ALEWarningSign
-let g:ale_sign_error = 'X'
-let g:ale_sign_warning = '?'
-let g:ale_status_line_format = ['X %d', '? %d', '']
-let g:ale_echo_msg_format = '%linter% says %d'
+let g:ale_echo_msg_format = '%s'
 nnoremap <Leader>n :ALENextWrap<CR>
 nnoremap <Leader>p :ALEPreviousWrap<CR>
 nnoremap <Leader>l :ALELint<CR>
 nnoremap <Leader>f :ALEFix<CR>
 let g:ale_linters = {
 \  'javascript': ['flow', 'eslint'],
-\  'typescript': ['tslint', 'tsserver', 'typecheck']
+\  'typescript': ['tslint', 'tsserver', 'typecheck'],
+\  'xml'       : ['xmllint']
 \}
 let g:ale_fixers = {
 \  'javascript': ['eslint'],
-\  'typescript': ['tslint']
+\  'typescript': ['tslint'],
+\  'xml'       : ['xmllint'],
+\  'json'      : ['fixjson']
 \}
 let g:ale_fix_on_save=1
 let g:ale_lint_on_save=1
