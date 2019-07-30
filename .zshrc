@@ -96,3 +96,4 @@ function aoshell() {
   PS1=$OLDPS1;
   unset AWS_OKTA_PROFILE;
 }
+export AWS_OKTA_BACKEND=secret-service
