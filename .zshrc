@@ -1,5 +1,9 @@
 export ZSH=~/.oh-my-zsh
 
+if [ -d "$HOME/.local/bin" ]; then
+  PATH=$PATH:$HOME/.local/bin
+fi
+
 function zsl-line-init zsl-keymap-select {
   VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]% %{$reset_color%}"
   RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)} $(git_custom_status) $ESP1"
@@ -68,9 +72,27 @@ export XLIB_SKIP_ARGB_VISUALS=1
 if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
   source /etc/profile.d/vte.sh
 fi
-source <(aws-okta completion zsh)
+# source <(aws-okta completion zsh)
 function kubeshell() {
   kubectl exec -it $1 -- sh
 }
+export PATH=/home/alexandra/.cache/rebar3/bin:$PATH
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export NVM_DIR="$HOME/.config"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export AWS_OKTA_BACKEND=secret-service
+
+function aolist() { aws-okta list; }
+
+function aoweb() { aws-okta login $1; }
+
+function aoshell() {
+  export AWS_OKTA_PROFILE=$1;
+  OLDPS1=$PS1;
+  export PS1="\e[0;31m${AWS_OKTA_PROFILE}\e[m \[\033]0;\w\007\]┌─[\[\e[0;36m\]0\[\e[39m\]][\[\e[0;36m\]\W\[\e[0m\]] └─▪ ";
+  aws-okta exec $1 -- bash;
+  PS1=$OLDPS1;
+  unset AWS_OKTA_PROFILE;
+}
