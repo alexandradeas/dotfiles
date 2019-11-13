@@ -80,6 +80,7 @@ workspace $ws9 output $laptopDisplay
 workspace $ws10 output $laptopDisplay
 
 exec_always xrandr --output $hdmiDisplay --above $laptopDisplay
+exec xrandr --dpi 220
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1

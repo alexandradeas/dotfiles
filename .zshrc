@@ -1,7 +1,13 @@
 export ZSH=~/.oh-my-zsh
 
+source $HOME/news/.profile
+
 if [ -d "$HOME/.local/bin" ]; then
   PATH=$PATH:$HOME/.local/bin
+fi
+
+if [ -d "$HOME/.cargo/bin" ]; then
+  PATH=$PATH:$HOME/.cargo/bin
 fi
 
 function zsl-line-init zsl-keymap-select {
@@ -45,13 +51,17 @@ plugins=(
   npx
   ubuntu
   yarn
+  zsh-completions
 )
+
+autoload -U compinit && compinit
 
 # Compilation flags
 export ARCHFLAGS="-arch x86_64"
 
 alias dotfiles="vi ~/dotfiles"
 alias irc="irssi"
+alias python="python3"
 
 function makeDirectoryAndEnter () {
   mkdir $1
@@ -72,28 +82,48 @@ export XLIB_SKIP_ARGB_VISUALS=1
 if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
   source /etc/profile.d/vte.sh
 fi
-# source <(aws-okta completion zsh)
-function kubeshell() {
-  kubectl exec -it $1 -- sh
-}
-export PATH=/home/alexandra/.cache/rebar3/bin:$PATH
+
+if type aws > /dev/null && type aws-ta > /dev/null ; then
+  source <(aws-okta completion zsh)
+  export AWS_OKTA_BACKEND=secret-service
+
+  function aolist() { aws-okta list; }
+
+  function aoweb() { aws-okta login $1; }
+
+  function aoshell() {
+    export AWS_OKTA_PROFILE=$1;
+    OLDPS1=$PS1;
+    export PS1="\e[0;31m${AWS_OKTA_PROFILE}\e[m \[\033]0;\w\007\]┌─[\[\e[0;36m\]0\[\e[39m\]][\[\e[0;36m\]\W\[\e[0m\]] └─▪ ";
+    aws-okta exec $1 -- bash;
+    PS1=$OLDPS1;
+    unset AWS_OKTA_PROFILE;
+  }
+fi
+
+if type kubectl > /dev/null ; then
+  source <(kubectl completion zsh)
+
+  function kubeshell() {
+    kubectl exec -it $1 -- sh
+  }
+fi
+
+if [ -d "$HOME/.cache/rebar3/bin" ]; then
+  export PATH=$PATH:$HOME/.cache/rebar3/bin
+fi
+
 # [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export NVM_DIR="$HOME/.config"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-export AWS_OKTA_BACKEND=secret-service
+# opam configuration
+test -r /home/alexandra/.opam/opam-init/init.zsh && . /home/alexandra/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 
-function aolist() { aws-okta list; }
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/home/alexandra/.sdkman"
+[[ -s "/home/alexandra/.sdkman/bin/sdkman-init.sh" ]] && source "/home/alexandra/.sdkman/bin/sdkman-init.sh"
 
-function aoweb() { aws-okta login $1; }
-
-function aoshell() {
-  export AWS_OKTA_PROFILE=$1;
-  OLDPS1=$PS1;
-  export PS1="\e[0;31m${AWS_OKTA_PROFILE}\e[m \[\033]0;\w\007\]┌─[\[\e[0;36m\]0\[\e[39m\]][\[\e[0;36m\]\W\[\e[0m\]] └─▪ ";
-  aws-okta exec $1 -- bash;
-  PS1=$OLDPS1;
-  unset AWS_OKTA_PROFILE;
-}
-export AWS_OKTA_BACKEND=secret-service
+. $HOME/.asdf/asdf.sh
+. $HOME/.asdf/completions/asdf.bash
