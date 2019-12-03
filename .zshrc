@@ -1,6 +1,8 @@
 export ZSH=~/.oh-my-zsh
 
-source $HOME/news/.profile
+if [ -d "$HOME/news/profil" ]; then
+  source $HOME/news/.profile
+fi
 
 if [ -d "$HOME/.local/bin" ]; then
   PATH=$PATH:$HOME/.local/bin
@@ -83,7 +85,7 @@ if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
   source /etc/profile.d/vte.sh
 fi
 
-if type aws > /dev/null && type aws-ta > /dev/null ; then
+if type aws > /dev/null && type aws-okta > /dev/null ; then
   source <(aws-okta completion zsh)
   export AWS_OKTA_BACKEND=secret-service
 
@@ -119,11 +121,13 @@ export NVM_DIR="$HOME/.config"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # opam configuration
-test -r /home/alexandra/.opam/opam-init/init.zsh && . /home/alexandra/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+test -r $HOME/.opam/opam-init/init.zsh && . $HOME/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/home/alexandra/.sdkman"
-[[ -s "/home/alexandra/.sdkman/bin/sdkman-init.sh" ]] && source "/home/alexandra/.sdkman/bin/sdkman-init.sh"
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
-. $HOME/.asdf/asdf.sh
-. $HOME/.asdf/completions/asdf.bash
+if [ -d "$HOME/.asdf" ]; then
+  . $HOME/.asdf/asdf.sh
+  . $HOME/.asdf/completions/asdf.bash
+fi
