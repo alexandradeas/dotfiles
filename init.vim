@@ -24,6 +24,7 @@ Plug 'neomake/neomake'
 Plug 'ervandew/supertab'
 " Plug 'vim-syntastic/syntastic'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
 
 " Colorscheme
 Plug 'morhetz/gruvbox'
@@ -33,20 +34,26 @@ Plug 'kien/rainbow_parentheses.vim'
 Plug 'tomasr/molokai'
 Plug 'jaredgorski/spacecamp'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plug 'ryanoasis/vim-devicons'
+" Plug 'ryanoasis/vim-devicons'
 
 " Completion
-Plug 'dense-analysis/ale'
+" Plug 'dense-analysis/ale'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'Shougo/deoplete.nvim'
+Plug 'Shougo/denite.nvim'
 
 " =============== Language Support ===============
 
-" i3wm
+" Config
 Plug 'potatoesmaster/i3-vim-syntax'
+Plug 'baskerville/vim-sxhkdrc'
 
 " Markdown
 Plug 'plasticboy/vim-markdown'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
+
+" Golang
+Plug 'fatih/vim-go'
 
 " Hugo
 Plug 'robertbasic/vim-hugo-helper'
@@ -58,22 +65,16 @@ Plug 'niftylettuce/vim-jinja'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'flowtype/vim-flow'
+Plug 'jason0x43/vim-js-indent'
+Plug 'Quramy/vim-js-pretty-template'
 
 " Typescript
+Plug 'HerringtonDarkholme/yats.vim'
 Plug 'mhartington/nvim-typescript', { 'do': './install.sh' }
-Plug 'jason0x43/vim-js-indent'
-Plug 'leafgarland/typescript-vim'
-" Plug 'Quramy/vim-dtsm'
-Plug 'Quramy/vim-js-pretty-template'
 
 " CSS
 Plug 'hail2u/vim-css3-syntax'
 Plug 'cakebaker/scss-syntax.vim'
-
-" PureScript
-Plug 'raichoo/purescript-vim'
-" Plug 'frigoeu/psc-ide-vim'
-Plug 'danieljharvey/psc-ide-vim'
 
 " XML
 Plug 'othree/xml.vim'
@@ -95,19 +96,8 @@ Plug 'vim-erlang/vim-erlang-runtime'
 Plug 'elixir-editors/vim-elixir'
 Plug 'mhinz/vim-mix-format'
 
-" D
-Plug 'bsed/vim-dlang'
-Plug 'sirsireesh/vim-dlang-phobos-highlighter'
-
 " JSON
 Plug 'rhysd/fixjson'
-
-" Haskell
-Plug 'neovimhaskell/haskell-vim'
-Plug 'parsonsmatt/intero-neovim'
-" Plug 'eagletmt/ghcmod-vim'
-Plug 'alx741/vim-hindent'
-Plug 'nbouscal/vim-stylish-haskell'
 
 " Python
 Plug 'klen/python-mode', { 'for': 'python', 'branch': 'develop', 'do': 'git submodule update --init --recursive' }
@@ -172,7 +162,7 @@ nnoremap <F3> :set hlsearch!<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
 colorscheme gruvbox
-let g:molokai_original = 1
+" let g:molokai_original = 1
 let g:rehash256 = 1
 au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
@@ -241,6 +231,16 @@ let g:easy_align_delimiters = {
 \   }
 \ }
 
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Golang
+""""""""""""""""""""""""""""""""""""""""""""""""""
+au filetype go inoremap <buffer> <C-c> .<C-X><C-o>
+let g:go_fmt_command = "goimports"
+let g:go_auto_type_info = 1
+let g:go_fmt_autosave = 0
+autocmd FileType go setlocal shiftwidth=4 softtabstop=4
+
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " JavaScript
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -256,7 +256,8 @@ let g:flow#showquickfix = 0
 " TypeScript
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
-au FileType typescript nm <buffer> <silent> <Leader>d :TSType<CR>
+autocmd FileType typescript nm <buffer> <silent> <Leader>d :TSType<CR>
+autocmd FileType typescript nmap <buffer> <Leader>h :<C-u>echo tsuquyomi#hint()<CR>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -264,124 +265,6 @@ au FileType typescript nm <buffer> <silent> <Leader>d :TSType<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
 au BufRead, BufNewFile *.scss set filetype=scss
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""
-" Haskell
-""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:haskell_classic_highlighting = 1
-let g:haskell_indent_if = 3
-let g:haskell_indent_case = 2
-let g:haskell_indent_let = 4
-let g:haskell_indent_where = 6
-let g:haskell_indent_before_where = 2
-let g:haskell_indent_after_bare_where = 2
-let g:haskell_indent_do = 3
-let g:haskell_indent_in = 1
-let g:haskell_indent_guard = 2
-let g:haskell_indent_case_alternative = 1
-let g:cabal_indent_section = 2
-
-let g:haskellmode_completion_ghc = 1
-" autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
-
-let g:hindent_command = "stack exec -- hindent"
-
-let g:intero_backend = {
-  \ 'command': 'stack repl',
-  \ 'cwd': expand('%:p:h'),
-  \}
-
-augroup interoMaps
-  au!
-  " Maps for intero. Restrict to Haskell buffers so the bindings don't collide.
-
-  " Background process and window management
-  au FileType haskell nnoremap <silent> <leader>is :InteroStart<CR>
-  au FileType haskell nnoremap <silent> <leader>ik :InteroKill<CR>
-
-  " Open intero/GHCi split horizontally
-  au FileType haskell nnoremap <silent> <leader>io :InteroOpen<CR>
-  " Open intero/GHCi split vertically
-  au FileType haskell nnoremap <silent> <leader>iov :InteroOpen<CR><C-W>H
-  au FileType haskell nnoremap <silent> <leader>ih :InteroHide<CR>
-
-  " Reloading (pick one)
-  " Automatically reload on save
-  au BufWritePost *.hs InteroReload
-  " Manually save and reload
-  au FileType haskell nnoremap <silent> <leader>wr :w \| :InteroReload<CR>
-
-  " Load individual modules
-  au FileType haskell nnoremap <silent> <leader>il :InteroLoadCurrentModule<CR>
-  au FileType haskell nnoremap <silent> <leader>if :InteroLoadCurrentFile<CR>
-
-  " Type-related information
-  " Heads up! These next two differ from the rest.
-  au FileType haskell map <silent> <leader>t <Plug>InteroGenericType
-  au FileType haskell map <silent> <leader>T <Plug>InteroType
-  au FileType haskell nnoremap <silent> <leader>it :InteroTypeInsert<CR>
-
-  " Navigation
-  au FileType haskell nnoremap <silent> <leader>jd :InteroGoToDef<CR>
-
-  " Managing targets
-  " Prompts you to enter targets (no silent):
-  au FileType haskell nnoremap <leader>ist :InteroSetTargets<SPACE>
-
-  au FileType haskell nnoremap <leader>ii :InteroInfo<CR>
-
-  " Evaluate an expression in REPL
-  au FileType haskell nnoremap <silent> <leader>ie :InteroEval<CR>
-
-  " Reboot Intero, for when dependencies are added
-  au FileType haskell nnoremap <silent> <leader>irl :InteroKill<CR> :InteroOpen<CR>
-
-  " Managing targets
-  " Prompts you to enter targets (no silent):
-  au FileType haskell nnoremap <leader>itgs :InteroSetTargets<CR>
-
-  " " Ctrl-{hjkl} for navigating out of terminal panes
-  " tnoremap <C-h> <C-\><C-n><C-w>h
-  " tnoremap <C-j> <C-\><C-n><C-w>j
-  " tnoremap <C-k> <C-\><C-n><C-w>k
-  " tnoremap <C-l> <C-\><C-n><C-w>l
-augroup END
-
-" Enable type information on hover (when holding cursor at point for ~1 second).
-let g:intero_type_on_hover = 1
-
-" Change the intero window size; default is 10.
-let g:intero_window_size = 15
-
-" OPTIONAL: Make the update time shorter, so the type info will trigger faster.
-set updatetime=1000
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""
-" PureScript
-""""""""""""""""""""""""""""""""""""""""""""""""""
-
-let purescript_indent_if=3
-let purescript_indent_case=5
-let purescript_indent_let=4
-let purescript_indent_where=6
-let purescript_indent_do=3
-let purescript_indent_in=1
-
-nm <buffer> <silent> <leader>L :Plist<CR>
-nm <buffer> <silent> <leader>l :Pload!<CR>
-nm <buffer> <silent> <leader>r :Prebuild!<CR>
-nm <buffer> <silent> <leader>f :PaddClause<CR>
-nm <buffer> <silent> <leader>t :Ptype<CR>
-nm <buffer> <silent> <leader>T :PaddType<CR>
-nm <buffer> <silent> <leader>a :Papply<CR>
-nm <buffer> <silent> <leader>A :Papply!<CR>
-nm <buffer> <silent> <leader>C :Pcase!<CR>
-nm <buffer> <silent> <leader>i :Pimport<CR>
-nm <buffer> <silent> <leader>q :PaddImportQualifications<CR>
-nm <buffer> <silent> <leader>g :Pgoto<CR>
-nm <buffer> <silent> <leader>p :Pursuit<CR>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -407,6 +290,14 @@ let g:slimv_impl = 'sblc'
 
 let g:pymode_python = 'python3'
 
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" JSON
+""""""""""""""""""""""""""""""""""""""""""""""""""
+
+function! FormatJSON()
+:%!python -m json.tool
+endfunction
+
 
 "=================================================
 "
@@ -418,13 +309,13 @@ let g:pymode_python = 'python3'
 " ALE
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
-let g:ale_completion_tsserver_autoimport = 1
-let g:ale_completion_enabled = 1
-let g:ale_linters = {
-      \'python': ['flake8', 'pylint'],
-      \'typescript': ['tslint', 'tsc'],
-      \'javascript': ['eslint'],
-\}
+" let g:ale_completion_tsserver_autoimport = 1
+" let g:ale_completion_enabled = 1
+" let g:ale_linters = {
+"       \'python': ['flake8', 'pylint'],
+"       \'typescript': ['tslint', 'tsc'],
+"       \'javascript': ['eslint'],
+" \}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " NERDTree
@@ -440,7 +331,7 @@ autocmd bufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd StdinReadPre * let s:std_in=1
-nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-e> :NERDTreeToggle<CR>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""

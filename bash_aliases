@@ -1,0 +1,16 @@
+alias please="sudo !!"
+alias dotfiles="vi ~/dotfiles"
+alias irc="irssi"
+alias python="python3"
+alias vi="nvim"
+alias update_commit_time='GIT_COMMITTER_DATE="`date`" git commit --amend --date "`date`"'
+alias re-source="source ~/.zshrc"
+alias t="tree -L 1"
+alias vimrc="vi ~/.config/nvim/init.vim"
+alias zshrc="vi ~/.zshrc"
+alias wmrc="vi ~/.config/i3"
+alias linode="linode-cli"
+alias kc="kubectl"
+alias gs="git status"
+alias gl="git log"
+

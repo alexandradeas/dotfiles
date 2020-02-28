@@ -1,6 +1,14 @@
 export ZSH=~/.oh-my-zsh
 
-if [ -d "$HOME/news/profil" ]; then
+if [ -f "$HOME/.bash_aliases" ]; then
+  source $HOME/.bash_aliases
+fi
+
+if [ -f "$HOME/.zsh_profile" ]; then
+  source $HOME/.zsh_profile
+fi
+
+if [ -f "$HOME/news/profile" ]; then
   source $HOME/news/.profile
 fi
 
@@ -25,7 +33,7 @@ bindkey -v
 export KEYTIMEOUT=1
 
 
-ZSH_THEME="af-magic"
+ZSH_THEME="bira"
 
 CASE_SENSITIVE="true"
 
@@ -34,6 +42,8 @@ CASE_SENSITIVE="true"
 COMPLETION_WAITING_DOTS="true"
 
 source $ZSH/oh-my-zsh.sh
+
+fpath+=($ZSH/plugins/docker)
 
 plugins=(
   aws
@@ -52,31 +62,33 @@ plugins=(
   npm
   npx
   ubuntu
+  fedora
   yarn
   zsh-completions
 )
+
+unset KUBECONFIG
+
+KUBE_CONFIGS_PATH=$HOME/.kube/configs
+
+for FILE in $(ls -F $HOME/.kube/configs); do
+  FILE_PATH="$KUBE_CONFIGS_PATH/$FILE"
+  if [ -z ${KUBECONFIG} ]; then
+    export KUBECONFIG=$FILE_PATH
+  else
+    export KUBECONFIG=$KUBECONFIG:$FILE_PATH
+  fi
+done
 
 autoload -U compinit && compinit
 
 # Compilation flags
 export ARCHFLAGS="-arch x86_64"
 
-alias dotfiles="vi ~/dotfiles"
-alias irc="irssi"
-alias python="python3"
-
 function makeDirectoryAndEnter () {
   mkdir $1
   cd $1
 }
-
-alias update_commit_time='GIT_COMMITTER_DATE="`date`" git commit --amend --date "`date`"'
-
-alias re-source="source ~/.zshrc"
-alias t="tree -L 1"
-alias vimrc="vi ~/.config/nvim/init.vim"
-alias zshrc="vi ~/.zshrc"
-alias wmrc="vi ~/.config/i3"
 
 export XDG_CONFIG_HOME="$HOME/.config"
 export EDITOR='nvim'
@@ -115,6 +127,10 @@ if [ -d "$HOME/.cache/rebar3/bin" ]; then
   export PATH=$PATH:$HOME/.cache/rebar3/bin
 fi
 
+if [ -d "/snap/bin" ]; then
+  export PATH=$PATH:/snap/bin
+fi
+
 # [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export NVM_DIR="$HOME/.config"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -131,3 +147,21 @@ if [ -d "$HOME/.asdf" ]; then
   . $HOME/.asdf/asdf.sh
   . $HOME/.asdf/completions/asdf.bash
 fi
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+export PATH="$HOME/.rakudobrew/bin:$PATH"
+
+function aolist() { aws-okta list; }
+
+function aoconsole() { aws-okta login $1; }
+
+function aoshell() {
+  export AWS_OKTA_PROFILE=$1;
+  OLDPS1=$PS1;
+  export PS1="\e[0;31m${AWS_OKTA_PROFILE}\e[m \[\033]0;\w\007\]┌─[\[\e[0;36m\]0\[\e[39m\]][\[\e[0;36m\]\W\[\e[0m\]] └─▪ ";
+  aws-okta exec $1 -- bash;
+  PS1=$OLDPS1;
+  unset AWS_OKTA_PROFILE;
+}
+eval "$(/home/alexandra/.rakudobrew/bin/rakudobrew init Zsh)"
