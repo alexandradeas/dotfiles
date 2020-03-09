@@ -22,7 +22,6 @@ Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 Plug 'airblade/vim-gitgutter'
 Plug 'neomake/neomake'
 Plug 'ervandew/supertab'
-" Plug 'vim-syntastic/syntastic'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 
@@ -37,16 +36,20 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 " Plug 'ryanoasis/vim-devicons'
 
 " Completion
-" Plug 'dense-analysis/ale'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'Shougo/deoplete.nvim'
 Plug 'Shougo/denite.nvim'
+Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 
 " =============== Language Support ===============
 
 " Config
 Plug 'potatoesmaster/i3-vim-syntax'
 Plug 'baskerville/vim-sxhkdrc'
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
 
 " Markdown
 Plug 'plasticboy/vim-markdown'
@@ -102,6 +105,9 @@ Plug 'rhysd/fixjson'
 " Python
 Plug 'klen/python-mode', { 'for': 'python', 'branch': 'develop', 'do': 'git submodule update --init --recursive' }
 
+" OCaml/ReasomML
+Plug 'reasonml-editor/vim-reason-plus'
+
 call plug#end()
 
 
@@ -146,6 +152,11 @@ hi Constant ctermfg=5*
 hi Comment ctermfg=2*
 hi Normal ctermbg=none
 hi LineNr ctermfg=darkgrey
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Commands
+""""""""""""""""""""""""""""""""""""""""""""""""""
+command! Path let @+ = expand("%")
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Keymap
@@ -195,6 +206,16 @@ nnoremap <leader>[ :Tabularize /[<CR>
 "
 "=================================================
 
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Language Server
+""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:LanguageClient_serverCommands = {
+    \ 'reason': ['~/.local/bin/reason-language-server']
+    \ }
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<cr>
+nnoremap <silent> gf :call LanguageClient#textDocument_formatting()<cr>
+nnoremap <silent> <cr> :call LanguageClient#textDocument_hover()<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Markdown
@@ -304,18 +325,6 @@ endfunction
 " Plugins
 "
 "=================================================
-
-""""""""""""""""""""""""""""""""""""""""""""""""""
-" ALE
-""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" let g:ale_completion_tsserver_autoimport = 1
-" let g:ale_completion_enabled = 1
-" let g:ale_linters = {
-"       \'python': ['flake8', 'pylint'],
-"       \'typescript': ['tslint', 'tsc'],
-"       \'javascript': ['eslint'],
-" \}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " NERDTree

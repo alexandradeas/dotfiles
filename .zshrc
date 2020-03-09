@@ -1,7 +1,63 @@
 export ZSH=~/.oh-my-zsh
 
-if [ -f "$HOME/.bash_aliases" ]; then
-  source $HOME/.bash_aliases
+ZSH_THEME="spaceship"
+
+SPACESHIP_PROMPT_ORDER=(
+  time          # Time stamps section
+  user          # Username section
+  host          # Hostname section
+  dir           # Current directory section
+  git           # Git section (git_branch + git_status)
+  hg            # Mercurial section (hg_branch  + hg_status)
+  terraform     # Terraform workspace section
+  package       # Package version
+  node          # Node.js section
+  ruby          # Ruby section
+  elixir        # Elixir section
+  xcode         # Xcode section
+  swift         # Swift section
+  golang        # Go section
+  php           # PHP section
+  rust          # Rust section
+  haskell       # Haskell Stack section
+  julia         # Julia section
+  docker        # Docker section
+  aws           # Amazon Web Services section
+  venv          # virtualenv section
+  conda         # conda virtualenv section
+  pyenv         # Pyenv section
+  dotnet        # .NET section
+  ember         # Ember.js section
+  exec_time     # Execution time
+  line_sep      # Line break
+  battery       # Battery level and status
+  vi_mode       # Vi-mode indicator
+  jobs          # Background jobs indicator
+  kubectl       # Kubectl context section
+  exit_code     # Exit code section
+  char          # Prompt character
+)
+
+SPACESHIP_TIME_SHOW=false
+SPACESHIP_USER_SHOW=always
+SPACESHIP_USER_SUFFIX=""
+SPACESHIP_HOST_PREFIX="@"
+SPACESHIP_HOST_SHOW=always
+SPACESHIP_PACKAGE_SHOW=false
+
+SPACESHIP_KUBECTL_PREFIX="
+ "
+SPACESHIP_KUBECTL_SHOW=true
+SPACESHIP_KUBECTL_VERSION_SHOW=false
+
+SPACESHIP_CHAR_PREFIX="
+ "
+SPACESHIP_CHAR_SYMBOL=⇒
+SPACESHIP_CHAR_SUFFIX=" "
+
+
+if [ -f "$HOME/.zsh_aliases" ]; then
+  source $HOME/.zsh_aliases
 fi
 
 if [ -f "$HOME/.zsh_profile" ]; then
@@ -32,8 +88,6 @@ zle -N zsl-line-init
 bindkey -v
 export KEYTIMEOUT=1
 
-
-ZSH_THEME="bira"
 
 CASE_SENSITIVE="true"
 
@@ -131,6 +185,7 @@ if [ -d "/snap/bin" ]; then
   export PATH=$PATH:/snap/bin
 fi
 
+
 # [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export NVM_DIR="$HOME/.config"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -165,3 +220,43 @@ function aoshell() {
   unset AWS_OKTA_PROFILE;
 }
 eval "$(/home/alexandra/.rakudobrew/bin/rakudobrew init Zsh)"
+function assume_eks_role {
+  unset AWS_SESSION_TOKEN
+  AWS_REGION=eu-west-1
+  # Export AWS IAM User credentials
+  export AWS_ACCESS_KEY_ID=${K8S_AWS_ACCESS_KEY}
+  export AWS_SECRET_ACCESS_KEY=${K8S_AWS_SECRET_KEY}
+  export AWS_DEFAULT_REGION=${AWS_REGION}
+
+  # Assume IAM Role and export credentials
+  awsKeys=$(aws sts assume-role --role-arn ${K8S_AWS_IAM_ROLE_ARN} --role-session-name eks-session)
+  export AWS_ACCESS_KEY_ID=$(echo $awsKeys | jq -r .Credentials.AccessKeyId)
+  export AWS_SECRET_ACCESS_KEY=$(echo $awsKeys | jq -r .Credentials.SecretAccessKey)
+  export AWS_SESSION_TOKEN=$(echo $awsKeys | jq -r .Credentials.SessionToken)
+  
+  aws eks update-kubeconfig --name ${K8S_CLUSTER_NAME}
+}
+
+function assume_eks_role_dev {
+  K8S_AWS_ACCESS_KEY=changeme
+  K8S_AWS_SECRET_KEY=changeme
+  K8S_AWS_IAM_ROLE_ARN=changeme
+  K8S_CLUSTER_NAME=ceng-eks-dev
+
+  assume_eks_role
+}
+
+function talksport-dev {
+  assume_eks_role_dev
+  kubectl config set-context --current --namespace wd-talksport-dev
+}
+
+function times-dev {
+  assume_eks_role_dev
+  kubectl config set-context --current --namespace wd-times-radio-dev
+}
+
+function audio-platform-dev {
+  assume_eks_role_dev
+  kubectl config set-context --current --namespace wd-audio-platform-dev
+}
