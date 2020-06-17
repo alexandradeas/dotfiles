@@ -1,60 +1,67 @@
 #!/bin/bash
 
 # Initial setup
-sudo apt-get install software-properties-common python-software-properties curl build-essential cmake -y
+sudo apt-get install -y \
+	software-properties-common \
+	python-software-properties \
+	curl \
+	build-essential \
+	cmake \
+	python-pip \
+	python3-pip \
+	tree \
+	fonts-hack-ttf \
+	ruby-full \
+	ack-grep \
+        zsh
 
-# Add PPA's
-sudo add-apt-repository ppa:openjdk-r/ppa -y
-sudo add-apt-repository ppa:neovim-ppa/stable -y
-sudo apt-get update
 
-# Pac Managed installs
-sudo apt-get install \
-  git python3 \
-  python-dev python-pip python3-dev python3-pip \
-  zsh unzip xclip neovim \
-  tree gnome-control-center scrot imagemagick \
-  fonts-hack-ttf ruby-full blueman \
-  -y
+# Oh my zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+# Powerlevel theme
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k
+
+# Neovim
 
 # Ack
-apt-get install ack-grep
-ln -s .ackrc ~/.ackrc
+ln -s "$(pwd)/.ackrc" "$HOME/.ackrc"
 
-# SSH setup
-ssh-keygen
-ssh-add ~/.ssh/id_rsa
-
-# Node
-curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
-apt-get install nodejs
+# NVM & Node
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
 
 # Rust
 curl https://sh.rustup.rs -sSf | sh
 
-source ~/.zshrc
+# Dart & Flutter
+cd $HOME
+curl https://storage.googleapis.com/flutter_infra/releases/stable/linux/flutter_linux_1.17.3-stable.tar.xz
+tar xf flutter_linux_1.17.3-stable.tar.xz
+cd -
+
+ln -s "$(pwd)/.zshrc" "$HOME/.zshrc"
+ls -s "$(pwd)/.zsh_aliases" "$HOME/.zsh_aliases"
+source "$HOME/.zshrc"
+
+nvm install --lts
 
 # Set up nvim
 pip2 install -U neovim
-pip install -U neovim
+pip3 install -U neovim
 sudo gem install neovim
-sudo npm i -g neovim
-update-alternatives --install /usr/bin/vi vi /usr/bin/nvim 60
-update-alternatives --install /usr/bin/vim vim /usr/bin/nvim 60
-update-alternatives --install /usr/bin/editor editor /usr/bin/nvim 60
-curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-ln -s ./init.vim ~/.config/nvim/init.vim
+npm i -g neovim
+curl -fLo "$HOME/.var/app/io.neovim.nvim/data/nvim/site/autoload/plug.vim" \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+ln -s "$(pwd)./init.vim" "$HOME/.var/app/io.neovim/nvim/config/init.vim"
 
 # NPM packages
 npm i -g typescript
 
-apt-get update
-apt-get autoremove -y
+sudo apt-get update
+sudo apt-get autoremove -y
 
 echo "
 Install is now complete, although some additional steps will needs to be taken
   - Log out and log back in to ensure all changes are applied
-  - Add the SSH key to Github
-  - Compile YouCompleteMe
 "
 

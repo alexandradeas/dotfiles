@@ -1,354 +1,227 @@
-""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin List
-""""""""""""""""""""""""""""""""""""""""""""""""""
 
+""" Vim-Plug
 call plug#begin()
 
-" ===================== Util =====================
-
-" General
-Plug 'junegunn/vim-easy-align'
-Plug 'scrooloose/nerdtree'
-Plug 'terryma/vim-multiple-cursors'
+" Aesthetics - Main
+Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'vim-airline/vim-airline'
-Plug 'raimondi/delimitmate'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'shougo/vimproc.vim', { 'do' : 'make' }
-Plug 'godlygeek/tabular'
-Plug 'majutsushi/tagbar'
-Plug 'makerj/vim-pdf'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
-Plug 'airblade/vim-gitgutter'
-Plug 'neomake/neomake'
-Plug 'ervandew/supertab'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-surround'
-
-" Colorscheme
-Plug 'morhetz/gruvbox'
-Plug 'altercation/vim-colors-solarized'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'kien/rainbow_parentheses.vim'
-Plug 'tomasr/molokai'
-Plug 'jaredgorski/spacecamp'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-" Plug 'ryanoasis/vim-devicons'
+Plug 'ryanoasis/vim-devicons'
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
+Plug 'junegunn/seoul256.vim'
+Plug 'junegunn/vim-journal'
+Plug 'junegunn/rainbow_parentheses.vim'
+Plug 'nightsense/forgotten'
+Plug 'zaki/zazen'
 
-" Completion
-Plug 'editorconfig/editorconfig-vim'
-Plug 'Shougo/deoplete.nvim'
-Plug 'Shougo/denite.nvim'
-Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+" Aethetics - Additional
+Plug 'nightsense/nemo'
+Plug 'yuttie/hydrangea-vim'
+Plug 'chriskempson/tomorrow-theme', { 'rtp': 'vim' }
+Plug 'rhysd/vim-color-spring-night'
 
-" =============== Language Support ===============
+" Functionalities
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-surround'
+Plug 'majutsushi/tagbar'
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdcommenter'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'zchee/deoplete-jedi'
+Plug 'ervandew/supertab'
+Plug 'jiangmiao/auto-pairs'
+Plug 'junegunn/vim-easy-align'
+Plug 'alvan/vim-closetag'
+Plug 'tpope/vim-abolish'
+Plug 'Yggdroot/indentLine'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'chrisbra/Colorizer'
+Plug 'heavenshell/vim-pydocstring'
+Plug 'vim-scripts/loremipsum'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'metakirby5/codi.vim'
+Plug 'dkarter/bullets.vim'
 
-" Config
-Plug 'potatoesmaster/i3-vim-syntax'
-Plug 'baskerville/vim-sxhkdrc'
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
-
-" Markdown
-Plug 'plasticboy/vim-markdown'
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
-
-" Golang
-Plug 'fatih/vim-go'
-
-" Hugo
-Plug 'robertbasic/vim-hugo-helper'
-
-" Markup
-Plug 'niftylettuce/vim-jinja'
-
-" JavaScript
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
-Plug 'flowtype/vim-flow'
-Plug 'jason0x43/vim-js-indent'
-Plug 'Quramy/vim-js-pretty-template'
-
-" Typescript
-Plug 'HerringtonDarkholme/yats.vim'
-Plug 'mhartington/nvim-typescript', { 'do': './install.sh' }
-
-" CSS
-Plug 'hail2u/vim-css3-syntax'
-Plug 'cakebaker/scss-syntax.vim'
-
-" XML
-Plug 'othree/xml.vim'
-
-" Terraform
-Plug 'hashivim/vim-terraform'
-
-" Lisp
-Plug 'guns/vim-sexp'
-Plug 'tpope/vim-sexp-mappings-for-regular-people'
-Plug 'Olical/vim-scheme', { 'for': 'scheme', 'on': 'SchemeConnect' }
-Plug 'kovisoft/slimv'
-
-" Erlang/Elixir
-Plug 'vim-erlang/vim-erlang-compiler'
-Plug 'vim-erlang/vim-erlang-omnicomplete'
-Plug 'vim-erlang/vim-erlang-tags'
-Plug 'vim-erlang/vim-erlang-runtime'
-Plug 'elixir-editors/vim-elixir'
-Plug 'mhinz/vim-mix-format'
-
-" JSON
-Plug 'rhysd/fixjson'
-
-" Python
-Plug 'klen/python-mode', { 'for': 'python', 'branch': 'develop', 'do': 'git submodule update --init --recursive' }
-
-" OCaml/ReasomML
-Plug 'reasonml-editor/vim-reason-plus'
+" Language Support
+Plug 'neoclide/coc.nvim', {  'branch': 'release' }
+Plug 'neoclide/coc-tsserver', { 'do': 'yarn install --frozen-lockfile' }
+" Plug 'voldikss/coc-tasks'
+Plug 'neoclide/coc-eslint', { 'do': 'yarn install --frozen-lockfile' }
+Plug 'neoclide/coc-lists', { 'do': 'yarn install --frozen-lockfile' }
+Plug 'josa42/coc-go', { 'do': 'yarn install --frozen-lockfile' }
+Plug 'iamcco/coc-flutter', { 'do': 'yarn install --frozen-lockfile' }
+Plug 'iamcco/coc-actions', { 'do': 'yarn install --frozen-lockfile' }
+Plug 'fannheyward/coc-rust-analyzer', { 'do': 'yarn install --frozen-lockfile' }
 
 call plug#end()
 
-
-"=================================================
-"
-" Editor
-"
-"=================================================
-
-set encoding=UTF-8
-set tabstop=4
-set shiftwidth=2
-set softtabstop=2
-set expandtab
-set smarttab
-set termguicolors
-set number
-set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
-      \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
-      \,sm:block-blinkwait175-blinkoff150-blinkon175
-set nocompatible
-set number
-set showmode
-set smartcase
-set smartindent
-set autoindent
-set laststatus=0
-set mouse=a
-let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+""" Coloring
 syntax on
-filetype on
+color dracula
+highlight Pmenu guibg=white guifg=black gui=bold
+highlight Comment gui=bold
+highlight Normal gui=none
+highlight NonText guibg=none
+
+" Opaque Background (Comment out to use terminal's profile)
+set termguicolors
+
+" Transparent Background (For i3 and compton)
+highlight Normal guibg=NONE ctermbg=NONE
+highlight LineNr guibg=NONE ctermbg=NONE
+
+""" Other Configurations
 filetype plugin indent on
-au CursorHold * checktime " check file every 4 seconds and reload the buffer on change
-set clipboard=unnamedplus
-let g:SuperTabDefaultCompletionType = '<c-x><c-o>'
+set tabstop=2 softtabstop=2 shiftwidth=2 expandtab smarttab autoindent
+set incsearch ignorecase smartcase hlsearch
+set ruler laststatus=2 showcmd showmode
+set list listchars=trail:»,tab:»-
+set fillchars+=vert:\ 
+set wrap breakindent
+set encoding=utf-8
+set number
+set title
 
-colo darkblue
-hi Keyword ctermfg=darkcyan
-hi Constant ctermfg=5*
-hi Comment ctermfg=2*
-hi Normal ctermbg=none
-hi LineNr ctermfg=darkgrey
+""" Plugin Configurations
 
-""""""""""""""""""""""""""""""""""""""""""""""""""
-" Commands
-""""""""""""""""""""""""""""""""""""""""""""""""""
-command! Path let @+ = expand("%")
+" NERDTree
+let NERDTreeShowHidden=1
+let g:NERDTreeDirArrowExpandable = '↠'
+let g:NERDTreeDirArrowCollapsible = '↡'
 
-""""""""""""""""""""""""""""""""""""""""""""""""""
-" Keymap
-""""""""""""""""""""""""""""""""""""""""""""""""""
+" Airline
+let g:airline_powerline_fonts = 1
+let g:airline_section_z = ' %{strftime("%-I:%M %p")}'
+let g:airline_section_warning = ''
+"let g:airline#extensions#tabline#enabled = 1
 
-let g:mapleader=","
-nnoremap <Leader>h :tabp<CR>
-nnoremap <Leader>l :tabn<CR>
-nnoremap <F3> :set hlsearch!<CR>
+" Neovim :Terminal
+tmap <Esc> <C-\><C-n>
+tmap <C-w> <Esc><C-w>
+"tmap <C-d> <Esc>:q<CR>
+autocmd BufWinEnter,WinEnter term://* startinsert
+autocmd BufLeave term://* stopinsert
 
+" Deoplete
+let g:deoplete#enable_at_startup = 1
 
-""""""""""""""""""""""""""""""""""""""""""""""""""
-" Colors
-""""""""""""""""""""""""""""""""""""""""""""""""""
+" EasyAlign
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
 
-colorscheme gruvbox
-" let g:molokai_original = 1
-let g:rehash256 = 1
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
+" indentLine
+let g:indentLine_char = '▏'
+let g:indentLine_color_gui = '#363949'
 
+" TagBar
+let g:tagbar_width = 30
+let g:tagbar_iconchars = ['↠', '↡']
 
-""""""""""""""""""""""""""""""""""""""""""""""""""
-" Navigation
-""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <leader>ga :Grepper<cr>
-nnoremap <leader>gb :Grepper -buffer<cr>
+" fzf-vim
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-s': 'split',
+  \ 'ctrl-v': 'vsplit' }
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'Type'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Character'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
 
+""" Filetype-Specific Configurations
 
-""""""""""""""""""""""""""""""""""""""""""""""""""
-" Tabularize
-""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <leader>= :Tabularize /=<CR>
-nnoremap <leader>- :Tabularize /-><CR>
-nnoremap <leader>< :Tabularize /<-<CR>
-nnoremap <leader>, :Tabularize /,<CR>
-nnoremap <leader># :Tabularize /#-}<CR>
-nnoremap <leader>: :Tabularize /::<CR>
-nnoremap <leader>[ :Tabularize /[<CR>
+" HTML, XML, Jinja
+autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType css setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType xml setlocal shiftwidth=2 tabstop=2 softtbstop=2
+autocmd FileType htmldjango setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType htmldjango inoremap {{ {{  }}<left><left><left>
+autocmd FileType htmldjango inoremap {% {%  %}<left><left><left>
+autocmd FileType htmldjango inoremap {# {#  #}<left><left><left>
 
+" Markdown and Journal
+autocmd FileType markdown setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType journal setlocal shiftwidth=2 tabstop=2 softtabstop=2
 
-"=================================================
-"
-" Languages
-"
-"=================================================
+""" Custom Functions
 
-
-""""""""""""""""""""""""""""""""""""""""""""""""""
-" Language Server
-""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:LanguageClient_serverCommands = {
-    \ 'reason': ['~/.local/bin/reason-language-server']
-    \ }
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<cr>
-nnoremap <silent> gf :call LanguageClient#textDocument_formatting()<cr>
-nnoremap <silent> <cr> :call LanguageClient#textDocument_hover()<cr>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""
-" Markdown
-""""""""""""""""""""""""""""""""""""""""""""""""""
-au BufRead,BufNewFile *.md setlocal textwidth=80
-au FileType markdown vmap <Leader><Bslash> :EasyAlign*<Bar><CR>
-au FileType markdown setlocal spell spelllang=en_gb
-let g:vim_markdown_folding_disabled = 1
-let g:vim_markdown_frontmatter = 1
-let g:vim_markdown_toml_frontmatter = 1
-let g:vim_markdown_new_list_item_indent = 2
-let g:easy_align_delimiters = {
-\ '>': { 'pattern': '>>\|=>\|>' },
-\ '/': {
-\     'pattern':         '//\+\|/\*\|\*/',
-\     'delimiter_align': 'l',
-\     'ignore_groups':   ['!Comment'] },
-\ ']': {
-\     'pattern':       '[[\]]',
-\     'left_margin':   0,
-\     'right_margin':  0,
-\     'stick_to_left': 0
-\   },
-\ ')': {
-\     'pattern':       '[()]',
-\     'left_margin':   0,
-\     'right_margin':  0,
-\     'stick_to_left': 0
-\   },
-\ 'd': {
-\     'pattern':      ' \(\S\+\s*[;=]\)\@=',
-\     'left_margin':  0,
-\     'right_margin': 0
-\   }
-\ }
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""
-" Golang
-""""""""""""""""""""""""""""""""""""""""""""""""""
-au filetype go inoremap <buffer> <C-c> .<C-X><C-o>
-let g:go_fmt_command = "goimports"
-let g:go_auto_type_info = 1
-let g:go_fmt_autosave = 0
-autocmd FileType go setlocal shiftwidth=4 softtabstop=4
-
-""""""""""""""""""""""""""""""""""""""""""""""""""
-" JavaScript
-""""""""""""""""""""""""""""""""""""""""""""""""""
-
-let g:javascript_plugin_flow = 1
-let g:jsx_ext_required = 0
-let g:flow#autoclose = 1
-let g:flow#errjump = 1
-let g:flow#showquickfix = 0
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""
-" TypeScript
-""""""""""""""""""""""""""""""""""""""""""""""""""
-
-autocmd FileType typescript nm <buffer> <silent> <Leader>d :TSType<CR>
-autocmd FileType typescript nmap <buffer> <Leader>h :<C-u>echo tsuquyomi#hint()<CR>
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""
-" SCSS
-""""""""""""""""""""""""""""""""""""""""""""""""""
-
-au BufRead, BufNewFile *.scss set filetype=scss
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""
-" Terraform
-""""""""""""""""""""""""""""""""""""""""""""""""""
-
-let g:terraform_fmt_on_save=1
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""
-" LISP
-""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Common LISP
-let g:slimv_swank_cmd = "!ros -e '(ql:quickload :swank) (swank:create-server)' wait &"
-let g:slimv_lisp = 'ros run'
-let g:slimv_impl = 'sblc'
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""
-" LISP
-""""""""""""""""""""""""""""""""""""""""""""""""""
-
-let g:pymode_python = 'python3'
-
-""""""""""""""""""""""""""""""""""""""""""""""""""
-" JSON
-""""""""""""""""""""""""""""""""""""""""""""""""""
-
-function! FormatJSON()
-:%!python -m json.tool
+" Trim Whitespaces
+function! TrimWhitespace()
+    let l:save = winsaveview()
+    %s/\\\@<!\s\+$//e
+    call winrestview(l:save)
 endfunction
 
+" Dracula Mode (Dark)
+function! ColorDracula()
+    let g:airline_theme=''
+    color dracula
+    IndentLinesEnable
+endfunction
 
-"=================================================
-"
-" Plugins
-"
-"=================================================
+" Seoul256 Mode (Dark & Light)
+function! ColorSeoul256()
+    let g:airline_theme='silver'
+    color seoul256
+    IndentLinesDisable
+endfunction
 
-""""""""""""""""""""""""""""""""""""""""""""""""""
-" NERDTree
-""""""""""""""""""""""""""""""""""""""""""""""""""
+" Forgotten Mode (Light)
+function! ColorForgotten()
+    " Light airline themes: tomorrow, silver, alduin
+    " Light colors: forgotten-light, nemo-light
+    let g:airline_theme='tomorrow'
+    color forgotten-light
+    IndentLinesDisable
+endfunction
 
-let g:NERDTreeWinPos = "left"
-let g:NERDTreeQuitOnOpen = 1
-let g:NERDTreeMinimalUI = 1
-let g:NERDTreeDirArrows = 1
-let g:NERDTreeWinSize = 20
-let g:NERDTreeAudioDeleteBuffer = 1
-autocmd bufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-autocmd StdinReadPre * let s:std_in=1
-nnoremap <C-e> :NERDTreeToggle<CR>
+" Zazen Mode (Black & White)
+function! ColorZazen()
+    let g:airline_theme='badcat'
+    color zazen
+    IndentLinesEnable
+endfunction
 
+""" Custom Mappings
 
-""""""""""""""""""""""""""""""""""""""""""""""""""
-" Noemake
-""""""""""""""""""""""""""""""""""""""""""""""""""
-
-call neomake#configure#automake('w')
-let g:neomake_open_list = 2
-let g:neomake_haskell_enabled_makers = []
-
-
+let mapleader=","
+nmap <C-e> :NERDTreeToggle<CR>
+nmap \ <leader>q
+nmap <leader>w :TagbarToggle<CR>
+nmap <leader>ee :Colors<CR>
+nmap <leader>ea :AirlineTheme 
+nmap <leader>e1 :call ColorDracula()<CR>
+nmap <leader>e2 :call ColorSeoul256()<CR>
+nmap <leader>e3 :call ColorForgotten()<CR>
+nmap <leader>e4 :call ColorZazen()<CR>
+nmap <leader>r :so ~/.config/nvim/init.vim<CR>
+nmap <leader>t :call TrimWhitespace()<CR>
+xmap <leader>a gaip*
+nmap <leader>a gaip*
+nmap <leader>s <C-w>s<C-w>j:terminal<CR>
+nmap <leader>vs <C-w>v<C-w>l:terminal<CR>
+nmap <leader>d <Plug>(pydocstring)
+nmap <leader>f :Files<CR>
+nmap <leader>g :Goyo<CR>
+nmap <leader>h :RainbowParentheses!!<CR>
+nmap <leader>j :set filetype=journal<CR>
+nmap <leader>k :ColorToggle<CR>
+nmap <leader>l :Limelight!!<CR>
+xmap <leader>l :Limelight!!<CR>
+autocmd FileType python nmap <leader>x :0,$!~/.config/nvim/env/bin/python -m yapf<CR>
+nmap <silent> <leader><leader> :noh<CR>
+nmap <Tab> :bnext<CR>
+nmap <S-Tab> :bprevious<CR>a
