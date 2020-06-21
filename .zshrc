@@ -1,3 +1,4 @@
+OS=$(uname)
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -5,20 +6,23 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-export ZSH=~/.oh-my-zsh
+# Mac specific confi
+if [ OS == "Darwin" ]; then
+  # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+  [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+  source /usr/local/opt/powerlevel10k/powerlevel10k.zsh-theme
+fi
+
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
 if [ -s "$HOME/.zsh_aliases" ]; then
+  echo Settings zsh aliases
   source $HOME/.zsh_aliases
 fi
 
 if [ -s "$HOME/.zsh_profile" ]; then
   source $HOME/.zsh_profile
-fi
-
-if [ -s "$HOME/news/profile" ]; then
-  source $HOME/news/.profile
 fi
 
 if [ -s "$HOME/.local/bin" ]; then
@@ -147,5 +151,4 @@ if [ -s "$HOME/.krew" ]; then
   export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 fi
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+export ZSH=~/.oh-my-zsh
