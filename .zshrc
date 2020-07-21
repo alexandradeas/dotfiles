@@ -1,4 +1,5 @@
 OS=$(uname)
+ZSH=$HOME/.oh-my-zsh
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -6,13 +7,13 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
 # Mac specific confi
-if [ OS == "Darwin" ]; then
-  # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-  [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+if [ OS = "Darwin" ]; then
   source /usr/local/opt/powerlevel10k/powerlevel10k.zsh-theme
 fi
-
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
@@ -35,10 +36,6 @@ fi
 
 if [ -s "$HOME/.local/flutter" ]; then
   PATH=$PATH:$HOME/.local/flutter/bin
-fi
-
-if [ -s "$HOME/.local/android-tools" ]; then
-  PATH=$PATH:$HOME/.local/android-tools/bin
 fi
 
 function zsl-line-init zsl-keymap-select {
@@ -64,7 +61,7 @@ source $ZSH/oh-my-zsh.sh
 
 fpath+=($ZSH/plugins/docker)
 
-plugins=(
+plugins+=(
   aws
   colorize
   command-not-found
@@ -83,8 +80,14 @@ plugins=(
   ubuntu
   yarn
   zsh-completions
-  flatpak-zsh-completions
 )
+
+if [ command -v flatpak > /dev/null 2>&1 ]; then
+  if [ ! -s $HOME/.oh-my-zsh/custom/plugins/flatpak ]; then
+    git clone https://github.com/bilelmoussaoui/flatpak-zsh-completion $HOME/.oh-my-zsh/custom/plugins/flatpak
+  fi
+  plugins+=(flatpak)
+fi
 
 unset KUBECONFIG
 
@@ -150,5 +153,3 @@ fi
 if [ -s "$HOME/.krew" ]; then
   export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 fi
-
-export ZSH=~/.oh-my-zsh
