@@ -1,3 +1,4 @@
+ZSH=$HOME/.oh-my-zsh
 OS=$(uname)
 ZSH=$HOME/.oh-my-zsh
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
@@ -10,7 +11,7 @@ fi
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# Mac specific confi
+# Mac specific config
 if [ OS = "Darwin" ]; then
   source /usr/local/opt/powerlevel10k/powerlevel10k.zsh-theme
 fi
@@ -18,7 +19,6 @@ fi
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
 if [ -s "$HOME/.zsh_aliases" ]; then
-  echo Settings zsh aliases
   source $HOME/.zsh_aliases
 fi
 
@@ -36,6 +36,8 @@ fi
 
 if [ -s "$HOME/.local/flutter" ]; then
   PATH=$PATH:$HOME/.local/flutter/bin
+elif [ -s "/usr/local/flutter" ]; then
+  PATH=$PATH:/usr/local/flutter/bin
 fi
 
 function zsl-line-init zsl-keymap-select {
