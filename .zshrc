@@ -26,18 +26,31 @@ if [ -s "$HOME/.zsh_profile" ]; then
   source $HOME/.zsh_profile
 fi
 
+if [ -s "$HOME/dependencies/depot_tools" ]; then
+  export PATH="$HOME/dependencies/depot_tools:$PATH"
+fi
+
 if [ -s "$HOME/.local/bin" ]; then
-  PATH=$PATH:$HOME/.local/bin
+  export PATH=$PATH:$HOME/.local/bin
 fi
 
 if [ -s "$HOME/.cargo/bin" ]; then
-  PATH=$PATH:$HOME/.cargo/bin
+  export PATH=$PATH:$HOME/.cargo/bin
 fi
 
 if [ -s "$HOME/.local/flutter" ]; then
-  PATH=$PATH:$HOME/.local/flutter/bin
+  export PATH=$PATH:$HOME/.local/flutter/bin
 elif [ -s "/usr/local/flutter" ]; then
-  PATH=$PATH:/usr/local/flutter/bin
+  export PATH=$PATH:/usr/local/flutter/bin
+fi
+
+if [ -s "/usr/local/flutter" ]; then
+  export PATH="$PATH":"/usr/local/flutter/.pub-cache/bin"
+fi
+
+if [ -s "$HOME/Android" ]; then
+  export PATH=$PATH:$HOME/Android/Sdk/platform-tools
+  export ANDROID_HOME="$HOME/Android/Sdk"
 fi
 
 function zsl-line-init zsl-keymap-select {
@@ -129,6 +142,9 @@ if type kubectl > /dev/null ; then
   }
 fi
 
+export GEM_HOME="$HOME/.gems"
+export PATH="$PATH:$HOME/.gems/bin"
+
 # [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 if [ -s "$HOME/.nvm" ]; then
   export NVM_DIR="$HOME/.nvm"
@@ -149,9 +165,12 @@ if [ -d "$HOME/.asdf" ]; then
 fi
 
 if [ -s "$HOME/.yarn" ]; then
-  export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+  export PATH="$PATH:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin"
 fi
 
 if [ -s "$HOME/.krew" ]; then
-  export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+  export PATH="$PATH:${KREW_ROOT:-$HOME/.krew}/bin"
 fi
+alias k=kubectl
+complete -F __start_kubectl k
+source ~/.helmrc

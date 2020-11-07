@@ -1,4 +1,3 @@
-
 """ Vim-Plug
 call plug#begin()
 
@@ -44,23 +43,26 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'metakirby5/codi.vim'
 Plug 'dkarter/bullets.vim'
+Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 
 " Language Support
 Plug 'natebosch/vim-lsc'
 Plug 'natebosch/vim-lsc-dart'
 Plug 'neoclide/coc.nvim', {  'branch': 'release' }
-Plug 'neoclide/coc-tsserver', { 'do': 'yarn install --frozen-lockfile' }
-Plug 'voldikss/coc-tasks'
-Plug 'neoclide/coc-eslint', { 'do': 'yarn install --frozen-lockfile' }
-Plug 'neoclide/coc-lists', { 'do': 'yarn install --frozen-lockfile' }
-Plug 'josa42/coc-go', { 'do': 'yarn install --frozen-lockfile' }
-Plug 'iamcco/coc-flutter', { 'do': 'yarn install --frozen-lockfile' }
-Plug 'iamcco/coc-actions', { 'do': 'yarn install --frozen-lockfile' }
-Plug 'fannheyward/coc-rust-analyzer', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'thosakwe/vim-flutter'
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'andys8/vim-elm-syntax'
+Plug 'reasonml-editor/vim-reason-plus'
+Plug 'udalov/kotlin-vim'
+Plug 'hashivim/vim-terraform'
+Plug 'skanehira/docker.vim'
 
 call plug#end()
+
+" set filetypes as typescript.tsx
+autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
 
 """ Coloring
 syntax on
@@ -73,8 +75,8 @@ highlight NonText guibg=none
 set termguicolors
 
 " Transparent Background (For i3 and compton)
-highlight Normal guibg=NONE ctermbg=NONE
-highlight LineNr guibg=NONE ctermbg=NONE
+" highlight Normal guibg=NONE ctermbg=NONE
+" highlight LineNr guibg=NONE ctermbg=NONE
 
 """ Other Configurations
 filetype plugin indent on
@@ -83,10 +85,11 @@ set incsearch ignorecase smartcase hlsearch
 set ruler laststatus=2 showcmd showmode
 set list listchars=trail:»,tab:»-
 set fillchars+=vert:\ 
-set wrap breakindent
+" set wrap breakindent
 set encoding=utf-8
 set number
 set title
+set clipboard=unnamedplus
 
 """ Plugin Configurations
 
@@ -109,8 +112,8 @@ autocmd BufWinEnter,WinEnter term://* startinsert
 autocmd BufLeave term://* stopinsert
 
 " EasyAlign
-xmap ga <Plug>(EasyAlign)
-nmap ga <Plug>(EasyAlign)
+xmap ea <Plug>(EasyAlign)
+nmap ea <Plug>(EasyAlign)
 
 " indentLine
 let g:indentLine_char = '▏'
@@ -139,6 +142,11 @@ let g:fzf_colors =
   \ 'marker':  ['fg', 'Keyword'],
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
+
+" Grepper
+nnoremap <Leader>ga :Grepper<cr>
+nnoremap <Leader>gb :Grepper -buffer<cr>"
+
 
 """ Filetype-Specific Configurations
 
@@ -201,7 +209,6 @@ nmap <C-e> :NERDTreeToggle<CR>
 nmap \ <leader>q
 nmap <leader>w :TagbarToggle<CR>
 nmap <leader>ee :Colors<CR>
-nmap <leader>ea :AirlineTheme 
 nmap <leader>e1 :call ColorDracula()<CR>
 nmap <leader>e2 :call ColorSeoul256()<CR>
 nmap <leader>e3 :call ColorForgotten()<CR>
@@ -224,6 +231,11 @@ autocmd FileType python nmap <leader>x :0,$!~/.config/nvim/env/bin/python -m yap
 nmap <silent> <leader><leader> :noh<CR>
 nmap <Tab> :bnext<CR>
 nmap <S-Tab> :bprevious<CR>a
+
+""" Default Settings
+set textwidth=120
+set colorcolumn=+1
+highlight ColorColumn ctermbg=lightgrey guibg=lightgrey
 
 """ Language Server
 
