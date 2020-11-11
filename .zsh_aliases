@@ -4,16 +4,11 @@ function vi_open {
   readonly target_dir=${1:?"The target directory must be specified"}
   readonly original_dir=$PWD
   cd $target_dir
-  vi
+  nvim
   cd $original_dir
 }
 
-if [ -s "$HOME/.local/bin/nvim.appimage" ]; then
-  alias nvim="~/.local/bin/nvim.appimage"
-  export EDITOR="~/.local/bin/nvim.appimage"
-else
-  export EDITOR="nvim"
-fi
+export EDITOR="nvim"
 alias dotfiles="vi_open ~/dotfiles"
 alias irc="irssi"
 alias python="python3"

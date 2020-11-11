@@ -44,6 +44,10 @@ elif [ -s "/usr/local/flutter" ]; then
   export PATH=$PATH:/usr/local/flutter/bin
 fi
 
+if [ -s "/usr/local/go" ]; then
+  export PATH="$PATH:/usr/local/go/bin"
+fi
+
 if [ -s "/usr/local/flutter" ]; then
   export PATH="$PATH":"/usr/local/flutter/.pub-cache/bin"
 fi

@@ -6,8 +6,6 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'ryanoasis/vim-devicons'
-Plug 'junegunn/goyo.vim'
-Plug 'junegunn/limelight.vim'
 Plug 'junegunn/seoul256.vim'
 Plug 'junegunn/vim-journal'
 Plug 'junegunn/rainbow_parentheses.vim'
@@ -27,9 +25,8 @@ Plug 'tpope/vim-surround'
 Plug 'majutsushi/tagbar'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
-" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'ervandew/supertab'
-Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/vim-easy-align'
 Plug 'alvan/vim-closetag'
 Plug 'tpope/vim-abolish'
@@ -51,18 +48,32 @@ Plug 'natebosch/vim-lsc-dart'
 Plug 'neoclide/coc.nvim', {  'branch': 'release' }
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'thosakwe/vim-flutter'
+Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'styled-components/vim-styled-components', {'branch': 'main'}
+Plug 'jparise/vim-graphql'
 Plug 'andys8/vim-elm-syntax'
 Plug 'reasonml-editor/vim-reason-plus'
 Plug 'udalov/kotlin-vim'
 Plug 'hashivim/vim-terraform'
-Plug 'skanehira/docker.vim'
+Plug 'rust-lang/rust.vim'
 
 call plug#end()
 
+""" Typescript
 " set filetypes as typescript.tsx
 autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
+" Ensure highlighting works for large JSX files
+autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
+autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
+" if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
+"   let g:coc_global_extensions += ['coc-prettier']
+" endif
+" if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
+"   let g:coc_global_extensions += ['coc-eslint']
+" endif
 
 """ Coloring
 syntax on
@@ -75,8 +86,8 @@ highlight NonText guibg=none
 set termguicolors
 
 " Transparent Background (For i3 and compton)
-" highlight Normal guibg=NONE ctermbg=NONE
-" highlight LineNr guibg=NONE ctermbg=NONE
+highlight Normal guibg=NONE ctermbg=NONE
+highlight LineNr guibg=NONE ctermbg=NONE
 
 """ Other Configurations
 filetype plugin indent on
@@ -94,7 +105,7 @@ set clipboard=unnamedplus
 """ Plugin Configurations
 
 " NERDTree
-let NERDTreeShowHidden=1
+let NERDTreeShowHidden=0
 let g:NERDTreeDirArrowExpandable = '↠'
 let g:NERDTreeDirArrowCollapsible = '↡'
 
@@ -172,9 +183,11 @@ function! TrimWhitespace()
     call winrestview(l:save)
 endfunction
 
+let g:airline_theme='molokai'
+color dracula
 " Dracula Mode (Dark)
 function! ColorDracula()
-    let g:airline_theme=''
+    let g:airline_theme='molokai'
     color dracula
     IndentLinesEnable
 endfunction
@@ -206,26 +219,19 @@ endfunction
 
 let mapleader=","
 nmap <C-e> :NERDTreeToggle<CR>
-nmap \ <leader>q
 nmap <leader>w :TagbarToggle<CR>
 nmap <leader>ee :Colors<CR>
-nmap <leader>e1 :call ColorDracula()<CR>
-nmap <leader>e2 :call ColorSeoul256()<CR>
-nmap <leader>e3 :call ColorForgotten()<CR>
-nmap <leader>e4 :call ColorZazen()<CR>
-nmap <leader>r :so ~/.config/nvim/init.vim<CR>
-nmap <leader>t :call TrimWhitespace()<CR>
+nmap <leader>re :so ~/.config/nvim/init.vim<CR>
+nmap <leader>tr :call TrimWhitespace()<CR>
 xmap <leader>a gaip*
 nmap <leader>a gaip*
 nmap <leader>s <C-w>s<C-w>j:terminal<CR>
 nmap <leader>vs <C-w>v<C-w>l:terminal<CR>
 nmap <leader>d <Plug>(pydocstring)
 nmap <leader>f :Files<CR>
-nmap <leader>g :Goyo<CR>
 nmap <leader>h :RainbowParentheses!!<CR>
 nmap <leader>j :set filetype=journal<CR>
 nmap <leader>k :ColorToggle<CR>
-nmap <leader>l :Limelight!!<CR>
 xmap <leader>l :Limelight!!<CR>
 autocmd FileType python nmap <leader>x :0,$!~/.config/nvim/env/bin/python -m yapf<CR>
 nmap <silent> <leader><leader> :noh<CR>
@@ -362,7 +368,7 @@ command! -nargs=0 Format :call CocAction('format')
 command! -nargs=? Fold :call     CocAction('fold', <f-arg>)
 
 " Add `:OR` command for organize imports of the current buffer.
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport')
 
 " Add (Neo)Vim's native statusline support.
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
@@ -387,10 +393,27 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>s
 
+" Mappings for actions
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gr <Plug>(coc-references)
+
+nmap <silent> [g <Plug>(coc-diagnostic-pref)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent> <space>d :<C-u>CocList diagnostics<cr>
+
+nmap <silent> <space>s :<C-u>CocList -I symbols<cr>
+
+nmap <leader>do <Plug>(coc-codeaction)
+
+nmap <leader>ca
+
+nmap <leader>rn <Plug>(coc-rename)
+
 """ Prettier
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 """ Dart
-let g:fltter_hot_reload_on_save = 1
+let g:flutter_hot_reload_on_save = 1
 
 autocmd BufWritePre *.dart :DartFmt
