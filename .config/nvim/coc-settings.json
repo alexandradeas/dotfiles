@@ -1,0 +1,7 @@
+{
+	"coc.preferences.formatOnSaveFiletypes": ["rust", "json"],
+	"languageserver": {},
+	"rust-analyzer.inlayHints.refreshOnInsertMode": true,
+	"rust-analyzer.cargo.allFeatures": true
+}
+
