@@ -7,7 +7,15 @@ Plug 'bling/vim-airline'
 Plug 'junegunn/vim-easy-align'
 Plug 'preservim/nerdtree'
 Plug 'tpope/vim-fireplace'
-Plug 'junegunn/fzf'
+Plug 'junegunn/fzf', {'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'mileszs/ack.vim'
+
+" Syntax
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'jparise/vim-graphql'
 
 " Completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -23,6 +31,7 @@ syntax enable
 filetype plugin indent on
 set number relativenumber
 set signcolumn=yes
+set clipboard=unnamed
 
 " automatically swap to absolute line numbers when a buffer is not focused
 augroup numbertoggle
@@ -35,12 +44,30 @@ augroup END
 colorscheme dracula
 
 " NERDTree
-autocmd vimenter * NERDTree
 map <C-e> :NERDTreeToggle<CR>
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
 
+" Ack
+cnoreabbrev Ack Ack!
+nnoremap <Leader>a :Ack!<Space>
+
 " Code Support
+let g:coc_global_extensions = [
+	\'coc-tsserver',
+	\'coc-eslint',
+	\'coc-prettier',
+	\'coc-json',
+	\'coc-html',
+	\'coc-css',
+	\'coc-rust-analyzer',
+	\'coc-yaml',
+	\'coc-omnisharp'
+	\]
+
+let g:coc_filetype_map = {
+	\"typescriptreact": "typescript.tsx"
+	\}
 " Workaround some bugs in coc
 set hidden
 set nobackup

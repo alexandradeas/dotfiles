@@ -1,7 +1,28 @@
 {
-	"coc.preferences.formatOnSaveFiletypes": ["rust", "json"],
-	"languageserver": {},
-	"rust-analyzer.inlayHints.refreshOnInsertMode": true,
-	"rust-analyzer.cargo.allFeatures": true
+  "coc.preferences.formatOnSaveFiletypes": [
+    "rust",
+    "json",
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+  "tsserver.formatOnType": false,
+  "coc.preferences.formatOnType": false,
+  "languageserver": {
+    "graphql": {
+      "command": "graphql-lsp",
+      "args": ["server", "-m", "stream"],
+      "filetypes": ["typescript", "graphql"]
+    }
+  },
+  "rust-analyzer.inlayHints.refreshOnInsertMode": true,
+  "rust-analyzer.cargo.allFeatures": true,
+  "eslint.autoFixOnSave": true,
+  "eslint.filetypes": [
+    "javascript",
+    "typescript",
+    "javascriptreact",
+    "typescriptreact"
+  ]
 }
-
