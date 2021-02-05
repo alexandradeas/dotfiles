@@ -10,18 +10,25 @@ Plug 'tpope/vim-fireplace'
 Plug 'junegunn/fzf', {'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'mileszs/ack.vim'
+Plug 'junegunn/limelight.vim'
+Plug 'tpope/vim-fugitive'
 
 " Syntax
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'jparise/vim-graphql'
+Plug 'blueyed/smarty.vim'
+Plug 'pantharshit00/vim-prisma'
 
 " Completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Language Support
 Plug 'rust-lang/rust.vim'
+Plug 'jamshedvesuna/vim-markdown-preview'
+Plug 'mzlogin/vim-markdown-toc'
+
 call plug#end()
 
 " General settings
@@ -52,7 +59,15 @@ let g:NERDTreeDirArrowCollapsible = '▾'
 cnoreabbrev Ack Ack!
 nnoremap <Leader>a :Ack!<Space>
 
+" Easy Align
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
+
 " Code Support
+
+"" Enable GH flavoured markdown
+let vim_markdown_preview_github=1
+
 let g:coc_global_extensions = [
 	\'coc-tsserver',
 	\'coc-eslint',
