@@ -28,6 +28,8 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'rust-lang/rust.vim'
 Plug 'jamshedvesuna/vim-markdown-preview'
 Plug 'mzlogin/vim-markdown-toc'
+Plug 'fatih/vim-go'
+Plug 'tomlion/vim-solidity'
 
 call plug#end()
 

@@ -2,7 +2,11 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/adeas/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
+
+if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
+  source /etc/profile.d/vte.sh
+fi
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -14,8 +18,6 @@ COMPLETION_WAITING_DOTS="true"
 plugins=(
 	git
 	node
-	zsh-vim-mode
-	kafka
 )
 
 MODE_CURSOR_VIINS="#00ff00 blinking bar"
@@ -48,3 +50,19 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+export PATH="/usr/local/go/bin:$PATH"
+
+export GOPATH="$HOME/go"
+export GOBIN="$GOPATH/bin"
+
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.npm/bin:$PATH"
+
+if [ -d "$HOME/.asdf" ]; then
+	. $HOME/.asdf/asdf.sh
+fi
+
+fpath=(${ASDF_DIR}/completions $fpath)
+autoload -Uz compinit
+compinit
