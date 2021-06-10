@@ -17,6 +17,7 @@ COMPLETION_WAITING_DOTS="true"
 
 plugins=(
 	git
+	golang
 	node
 )
 
@@ -51,7 +52,7 @@ export NVM_DIR="$HOME/.nvm"
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
-export PATH="/usr/local/go/bin:$PATH"
+export PATH="/usr/local/go/bin:$(go env GOPATH)/bin:$PATH"
 
 export GOPATH="$HOME/go"
 export GOBIN="$GOPATH/bin"

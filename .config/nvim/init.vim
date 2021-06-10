@@ -42,6 +42,9 @@ set number relativenumber
 set signcolumn=yes
 set clipboard=unnamed
 
+" Language Settings
+let g:go_auto_type_info = 1
+
 " automatically swap to absolute line numbers when a buffer is not focused
 augroup numbertoggle
 	autocmd!
