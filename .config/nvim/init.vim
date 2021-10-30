@@ -2,6 +2,7 @@ call plug#begin()
 " UI
 Plug 'dracula/vim'
 Plug 'bling/vim-airline'
+Plug 'ryanoasis/vim-devicons'
 
 " Util
 Plug 'junegunn/vim-easy-align'
@@ -12,6 +13,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'mileszs/ack.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-obsession'
 
 " Syntax
 Plug 'pangloss/vim-javascript'
@@ -20,6 +22,8 @@ Plug 'maxmellon/vim-jsx-pretty'
 Plug 'jparise/vim-graphql'
 Plug 'blueyed/smarty.vim'
 Plug 'pantharshit00/vim-prisma'
+Plug 'neovimhaskell/haskell-vim'
+Plug 'alx741/vim-stylishask'
 
 " Completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -30,6 +34,7 @@ Plug 'jamshedvesuna/vim-markdown-preview'
 Plug 'mzlogin/vim-markdown-toc'
 Plug 'fatih/vim-go'
 Plug 'tomlion/vim-solidity'
+Plug 'dart-lang/dart-vim-plugin'
 
 call plug#end()
 
@@ -40,7 +45,7 @@ syntax enable
 filetype plugin indent on
 set number relativenumber
 set signcolumn=yes
-set clipboard=unnamed
+set clipboard=unnamedplus
 
 " Language Settings
 let g:go_auto_type_info = 1
@@ -82,7 +87,11 @@ let g:coc_global_extensions = [
 	\'coc-css',
 	\'coc-rust-analyzer',
 	\'coc-yaml',
-	\'coc-omnisharp'
+	\'coc-omnisharp',
+  \'coc-flutter',
+  \'coc-calc',
+  \'coc-explorer',
+	\'coc-pyright'
 	\]
 
 let g:coc_filetype_map = {
@@ -163,6 +172,9 @@ vnoremap <nowait><expr> <c-b> coc#float#has_scroll() ? coc#float#nvim_scroll(0, 
 " selection ranges
 nmap <silent> <c-s> <Plug>(coc-range-select)
 xmap <silent> <c-s> <Plug>(coc-range-select)
+
+" Open explorer
+nnoremap <leader>e :CocCommand explorer<CR>
 
 " format the current buffer
 command! -nargs=0 Format :call CocAction('format')
