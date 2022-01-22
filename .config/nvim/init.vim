@@ -35,11 +35,13 @@ Plug 'mzlogin/vim-markdown-toc'
 Plug 'fatih/vim-go'
 Plug 'tomlion/vim-solidity'
 Plug 'dart-lang/dart-vim-plugin'
+Plug 'hspec/hspec.vim'
 
 call plug#end()
 
 " General settings
 set tabstop=2 softtabstop=2 shiftwidth=2
+set expandtab " expand tabs to spaces
 let mapleader = ','
 syntax enable
 filetype plugin indent on
@@ -59,6 +61,11 @@ augroup END
 
 " colorscheme
 colorscheme dracula
+
+"" Hspec highlighting
+highlight link hspecDescribe Type
+highlight link hspecIt Identifier
+highlight link hspecDescription Comment
 
 " NERDTree
 map <C-e> :NERDTreeToggle<CR>
