@@ -36,6 +36,10 @@ Plug 'fatih/vim-go'
 Plug 'tomlion/vim-solidity'
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'hspec/hspec.vim'
+Plug 'lervag/vimtex'
+Plug 'jamespeapen/swayconfig.vim'
+""" Additional plugins for yarn berry
+Plug 'lbrayner/vim-rzip'
 
 call plug#end()
 
@@ -98,7 +102,10 @@ let g:coc_global_extensions = [
   \'coc-flutter',
   \'coc-calc',
   \'coc-explorer',
-	\'coc-pyright'
+	\'coc-pyright',
+  \'coc-vimtex',
+  \'coc-toml',
+  \'coc-deno'
 	\]
 
 let g:coc_filetype_map = {

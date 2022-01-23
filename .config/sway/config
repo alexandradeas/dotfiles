@@ -1,0 +1,200 @@
+# autostart
+
+# style
+font                      pango:monospace 16px
+default_border            pixel           2
+titlebar_border_thickness pixel 2
+gaps                      top             2
+gaps                      bottom          2
+gaps                      left            2
+gaps                      right           2
+gaps                      inner           5
+
+# window decoration
+set $color_border                 #A4B9EF
+set $color_background_focused     #332E41
+set $color_background_unfocused   #1E1E28
+set $color_background_urgent      #575268
+set $color_text_focused           #E5B4E2
+set $color_text_unfocused         #DADAE8
+set $color_text_urgent            #EBDDAA
+set $color_indicator              #DADAE8
+set $color_child_border_focused   #A4B9EF
+set $color_child_border_unfocused #575268
+set $color_child_border_urgent    #EBDDAA
+
+# class                 border        background                  text                  indicator        child_border
+client.focused          $color_border $color_background_focused   $color_text_focused   $color_indicator $color_child_border_focused
+client.focused_inactive $color_border $color_background_focused   $color_text_focused   $color_indicator $color_child_border_focused
+client.unfocused        $color_border $color_background_unfocused $color_text_unfocused $color_indicator $color_child_border_unfocused
+client.urgent           $color_border $color_background_urgent    $color_text_urgent    $color_indicator $color_child_border_urgent
+
+# import GTK settings
+
+# window rules
+for_window [workspace="2"]       layout   tabbed
+for_window [workspace="5"]       layout   tabbed
+for_window [app_id="libera"]     floating enable, resize set height 500 px, resize set width 900  px, move position 1000 5
+for_window [class="Signal Beta"] floating enable, resize set height 900 px, resize set width 800  px, move position 30   25
+for_window [class="Deezer"]      floating enable, resize set height 650 px, resize set width 1050 px, move position 15   15
+
+# touchpad settings
+
+# keybindings
+
+## logo key
+set $mod Mod4
+## floating window controls
+floating_modifier $mod              normal
+
+## home row direction keys
+set $left  h
+set $down  j
+set $up    k
+set $right l
+
+## terminal emulator
+set $term alacritty
+
+# Pass the final command to swaymsg so that the resulting window can be
+# opened on the original workspace that the command was run on
+set $menu j4-dmenu-desktop --no-generic --dmenu="bemenu -i --prompt 'search' " | xargs swaymsg exec --
+
+## Output configuration
+output * bg ~/Pictures/Wallpapers/evening_sky.jpeg stretch
+
+# Behavior
+focus_follows_mouse yes
+
+# Idle configuration
+exec swayidle -w \
+     timeout 600 'swaylock -f#' \
+     timeout 180 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+     before-sleep 'swaylock -f'
+
+# keybindings
+
+## start terminal
+bindsym $mod+Return       exec       $term
+
+## kill focused window
+bindsym $mod+q            kill
+
+## start launcher
+bindsym $mod+Space        exec       $menu
+
+## dismiss notifications
+bindsym Control+Space     exec       makoctl   dismiss
+
+## screenshot
+bindsym Print             exec       ../screenshot.sh
+bindsym Shift+Print       exec       .,/partial_screenshot.sh
+
+## reload configuration
+bindsym $mod+r            reload
+
+## restart sway
+bindsym $mod+Shift+r      exec       swaymsg   exit
+
+## switch focus
+bindsym $mod+$left        focus      left
+bindsym $mod+$down        focus      down
+bindsym $mod+$up          focus      up
+bindsym $mod+$right       focus      right
+
+## move focused window
+bindsym $mod+Shift+$left  move       left
+bindsym $mod+Shift+$down  move       down
+bindsym $mod+Shift+$up    move       up
+bindsym $mod+Shift+$right move       right
+
+## switch workspaces
+bindsym $mod+1            workspace number    1
+bindsym $mod+2            workspace number    2
+bindsym $mod+3            workspace number    3
+bindsym $mod+4            workspace number    4
+bindsym $mod+5            workspace number    5
+bindsym $mod+6            workspace number    6
+bindsym $mod+7            workspace number    7
+bindsym $mod+8            workspace number    8
+bindsym $mod+9            workspace number    9
+bindsym $mod+10           workspace number    10
+
+## toggle previous workspace
+bindsym $mod+Tab          workspace  back_and_forth
+
+## Move focused window to workspace
+bindsym $mod+Shift+1      move container to     workspace number 1
+bindsym $mod+Shift+2      move container to     workspace number 2
+bindsym $mod+Shift+3      move container to     workspace number 3
+bindsym $mod+Shift+4      move container to     workspace number 4
+bindsym $mod+Shift+5      move container to     workspace number 5
+bindsym $mod+Shift+6      move container to     workspace number 6
+bindsym $mod+Shift+7      move container to     workspace number 7
+bindsym $mod+Shift+8      move container to     workspace number 8
+bindsym $mod+Shift+9      move container to     workspace number 9
+bindsym $mod+Shift+10     move container to     workspace number 10
+
+# Layout
+
+## toggle split direction
+bindsym $mod+x            splith
+bindsym $mod+y            splitv
+
+## switch the current container between layout styles
+bindsym $mod+m            layout     tabbed
+bindsym $mod+t            layout     toggle    split
+
+## Toggle floating
+bindsym $mod+f            floating   toggle
+
+## Toggle floating and previous layout
+bindsym $mod+Shift+s      focus      mode_toggle
+
+## Move floating windows
+bindsym $mod+left         move       left      1
+bindsym $mod+Shift+left   move       left      10
+bindsym $mod+down         move       down      1
+bindsym $mod+Shift+down   move       down      10
+bindsym $mod+up           move       up        1
+bindsym $mod+Shift+up     move       up        10
+bindsym $mod+right        move       right     1
+bindsym $mod+Shift+right  move       right     10
+
+## Focus parent container
+bindsym $mod+a            focus      parent
+## Focus child container
+bindsym $mod+Shift+a      focus      child
+
+# Scratchpad
+
+# Show the next scratchpad window or hide the focused scratchpad window
+bindsym $mod+minus        scratchpad sho2
+
+# Move focused window to the scratchpad
+bindsym $mod+Shift+minus  move       scratchpad
+
+# Resizing containers
+bindsym $mod+Alt+$left    resize     shrink    width  20px
+bindsym $mod+Alt+$up      resize     grow      height 20px
+bindsym $mod+Alt+$down    resize     shrink    height 20px
+bindsym $mod+Alt+$right   resize     grow      width  20px
+
+## Special Keys
+bindsym --locked XF86AudioRaiseVolume  exec --no-startup-id pactl set-sink-volume $(pactl list short sinks | grep RUNNING | awk '${print $1}') +5%
+bindsym --locked XF86AudioLowerVolume  exec --no-startup-id pactl set-sink-volume $(pactl list short sinks | grep RUNNING | awk '${print $1}') -5%
+bindsym --locked XF86AudioMute         exec --no-startup-id pactl set-sink-mute $(pactl list | rg 'Sink #' | sed 's/Sink #//') toggle
+bindsym --locked XF86MonBrightnessUp   exec light -A 10 && notify -send " Light" "Brightness $(light)%s" --hint="int::value::$(light)"
+bindsym --locked XF86MonBrightnessDown exec light -U 10 && notify-send " Light" "Brightness: $(light)%s" --hint="int::value::$(light)"
+bindsym --locked XF86AudioPlay         exec playerctl play-pause
+bindsym --locked XF86AudioNext         exec playerctl next
+bindsym --locked XF86AudioPrev         exec playerctl previous
+bindsym --locked $mod+d                exec sh -c "notify-send -i ./icons/dnd.png '  Do Not Disturb' 'Turning on Do Not Disturb Mode' && sleep 2 && makoctl set-mode do-not-disturb"
+bindsym --locked $mod+Shift+d          exec sh -c makectl set-mode default && notify-send -i ./icons/dnd.png '  Do Not Disturb' 'Do Not Disturb Mode disabled'"
+
+# Status Bar
+bar {
+	swaybar_command waybar
+}
+
+include /etc/sway/config.d/*
