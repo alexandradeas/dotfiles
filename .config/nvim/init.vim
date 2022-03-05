@@ -1,6 +1,6 @@
 call plug#begin()
 " UI
-Plug 'dracula/vim'
+Plug 'dracula/vim', {'as': 'dracula'}
 Plug 'bling/vim-airline'
 Plug 'ryanoasis/vim-devicons'
 
@@ -105,7 +105,8 @@ let g:coc_global_extensions = [
 	\'coc-pyright',
   \'coc-vimtex',
   \'coc-toml',
-  \'coc-deno'
+  \'coc-deno',
+  \'coc-pyright'
 	\]
 
 let g:coc_filetype_map = {
@@ -167,8 +168,8 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 nmap <leader>rn <Plug>(coc-rename)
 
 " Format
-nmap <leader>f <Plug>(coc-format-selected)
-xmap <leader>f <Plug>(coc-format-selected)
+nmap <leader>fs <Plug>(coc-format-selected)
+xmap <leader>fs <Plug>(coc-format-selected)
 
 " Apply the code action
 nmap <leader>ac <Plug>(coc-codeaction)
