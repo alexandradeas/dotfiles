@@ -28,14 +28,6 @@ function vimrc() {
 	workspace ~/.config/nvim init.vim
 }
 
-function termrc() {
-	workspace ~/.config/alacritty alacritty.yml
-}
-
-if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
-  source /etc/profile.d/vte.sh
-fi
-
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -43,14 +35,13 @@ fi
 ZSH_THEME="robbyrussell"
 COMPLETION_WAITING_DOTS="true"
 
-# eval $(thefuck --alias)
-
 autoload -U +X compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
 
 plugins=(
 	archlinux
 	asdf
+  aws
 	flutter
 	fzf
 	git
@@ -60,7 +51,6 @@ plugins=(
 	python
 	pip
 	ruby
-	thefuck
 	tmux
 )
 
@@ -125,4 +115,6 @@ fi
 export OPENCV_LOG_LEVEL=ERROR
 
 fpath=(${ASDF_DIR}/completions $fpath)
+
+eval "$(direnv hook zsh)"
 

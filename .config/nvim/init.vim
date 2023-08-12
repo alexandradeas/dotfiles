@@ -15,6 +15,11 @@ Plug 'junegunn/limelight.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-obsession'
 
+" Navigation
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.2' }
+Plug 'ThePrimeagen/harpoon'
+
 " Syntax
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
@@ -27,6 +32,7 @@ Plug 'alx741/vim-stylishask'
 
 " Completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'tpope/vim-surround'
 
 " Language Support
 Plug 'rust-lang/rust.vim'
@@ -75,6 +81,12 @@ highlight link hspecDescription Comment
 map <C-e> :NERDTreeToggle<CR>
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
+
+" Harpoon
+nnoremap <leader>hm :lua require("harpoon.mark").add_file()<CR>
+nnoremap <leader>hh :lua require("harpoon.ui").toggle_quick_menu()<CR>
+nnoremap <leader>hn :lua require("harpoon.ui").nav_next()<CR>
+nnoremap <leader>hp :lua require("harpoon.ui").nav_prev()<CR>
 
 " Ack
 cnoreabbrev Ack Ack!
