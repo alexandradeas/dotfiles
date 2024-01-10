@@ -98,7 +98,7 @@ in {
   programs.fish = {
     enable = true;
     interactiveShellInit = ''
-      set fiosh_greeting # disable greeting
+      set fish_greeting # disable greeting
       direnv hook fish | source
     '';
 
