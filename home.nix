@@ -33,17 +33,18 @@ in {
   home.packages = with pkgs; [
     beeper
     claws-mail
+		dbeaver
     neovide
     obsidian
     zathura
     sxiv
     spotify
     mpv
-    ack
+		ripgrep
+		_1password
     _1password-gui
     slack
     zoom-us
-    kmail
     (nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
 
     # # You can also create simple shell scripts directly inside your
