@@ -41,6 +41,7 @@ in {
     spotify
     mpv
 		ripgrep
+		postman
 		_1password
     _1password-gui
     slack
