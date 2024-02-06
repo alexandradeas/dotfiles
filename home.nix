@@ -16,6 +16,7 @@ in {
     allowUnfreePredicate = (_: true);
     permittedInsecurePackages = [
       "electron-24.8.6"
+			"electron-25.9.0"
       "nodejs-16.20.0"
     ];
   };
@@ -44,8 +45,20 @@ in {
 		postman
 		_1password
     _1password-gui
+		discord
     slack
     zoom-us
+		onlyoffice-bin
+		xclip
+		unzip
+		nodejs_20
+		perl
+		fd
+		nodePackages.neovim
+		python311
+		python311Packages.pynvim
+		ruby
+		lutris
     (nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
 
     # # You can also create simple shell scripts directly inside your

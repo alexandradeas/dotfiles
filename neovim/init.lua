@@ -123,6 +123,8 @@ require("lazy").setup({
 	{ 'tpope/vim-obsession' },
 
 	{ 'hashivim/vim-terraform' },
+
+	{ 'mattn/emmet-vim' },
 })
 
 -- Options
