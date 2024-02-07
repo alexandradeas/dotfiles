@@ -42,7 +42,6 @@ in {
     spotify
     mpv
 		ripgrep
-		postman
 		_1password
     _1password-gui
 		discord
@@ -58,7 +57,6 @@ in {
 		python311
 		python311Packages.pynvim
 		ruby
-		lutris
     (nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
 
     # # You can also create simple shell scripts directly inside your
