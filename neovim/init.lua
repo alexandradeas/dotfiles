@@ -138,20 +138,23 @@ vim.cmd [[colorscheme slate]]
 -- Relative line numbers for focused buffer, otherwise absolute line numbers
 local NumberToggle = vim.api.nvim_create_augroup("NumberToggle", {})
 -- vim.api.nvim_create_autocmd("", { group = NumberToggle })
-vim.api.nvim_create_autocmd("BufEnter,FocusGained,InsertLeave", {
-	group = NumberToggle,
-	pattern = "*",
-	callback = function()
-		vim.opt.relativenumber = true
-	end
-})
-vim.api.nvim_create_autocmd("BufLeave,FocusLost,InsertLeave", {
-	group = NumberToggle,
-	pattern = "*",
-	callback = function()
-		vim.opt.relativenumber = false
-	end
-})
+
+for _, event_name in ipairs({"BufEnter", "FocusGained", "InsertLeave"}) do
+	vim.api.nvim_create_autocmd(event_name, {
+		group = NumberToggle,
+		pattern = "*",
+		callback = function()
+			vim.opt.relativenumber = true
+		end
+	})
+	vim.api.nvim_create_autocmd(event_name, {
+		group = NumberToggle,
+		pattern = "*",
+		callback = function()
+			vim.opt.relativenumber = false
+		end
+	})
+end
 
 -- setup TabNine
 -- require('tabnine').setup({
