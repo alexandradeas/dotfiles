@@ -138,6 +138,8 @@ require("lazy").setup({
 	{ 'hashivim/vim-terraform' },
 
 	{ 'mattn/emmet-vim' },
+
+	{ 'frazrepo/vim-rainbow' },
 })
 
 -- Options
@@ -145,7 +147,11 @@ require("lazy").setup({
 vim.opt.smarttab = true
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
-vim.cmd [[colorscheme slate]]
+-- vim.cmd [[colorscheme slate]]
+
+vim.g.colors_name = "slate"
+
+vim.g.rainbow_active = 1
 
 
 -- Relative line numbers for focused buffer, otherwise absolute line numbers
