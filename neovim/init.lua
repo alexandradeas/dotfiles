@@ -72,7 +72,20 @@ require("lazy").setup({
 
 	{ "ziglang/zig-mode" },
 
-	{ "fatih/vim-go" },
+	{
+		"ray-x/go.nvim",
+		dependencies = {
+			"ray-x/guihua.lua",
+			"neovim/nvim-lspconfig",
+			"nvim-treesitter/nvim-treesitter",
+		},
+		config = function()
+			require("go").setup()
+		end,
+		event = { "CmdLineEnter" },
+		ft = { "go", "gomod" },
+		build = ':lua require("go.install").update_all_sync()'
+	},
 
 	-- {
 	-- 	"pmizio/typescript-tools.nvim",
@@ -139,7 +152,7 @@ vim.cmd [[colorscheme slate]]
 local NumberToggle = vim.api.nvim_create_augroup("NumberToggle", {})
 -- vim.api.nvim_create_autocmd("", { group = NumberToggle })
 
-for _, event_name in ipairs({"BufEnter", "FocusGained", "InsertLeave"}) do
+for _, event_name in ipairs({ "BufEnter", "FocusGained", "InsertLeave" }) do
 	vim.api.nvim_create_autocmd(event_name, {
 		group = NumberToggle,
 		pattern = "*",
