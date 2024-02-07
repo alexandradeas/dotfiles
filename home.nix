@@ -58,6 +58,7 @@ in {
 		python311Packages.pynvim
 		ruby
     (nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
+		lua-language-server
 
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
