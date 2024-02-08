@@ -166,11 +166,14 @@ for _, event_name in ipairs({ "BufEnter", "FocusGained", "InsertLeave" }) do
 			vim.opt.relativenumber = true
 		end
 	})
+end
+for _, event_name in ipairs({ "BufLeave", "FocusLost", "InsertEnter" }) do
 	vim.api.nvim_create_autocmd(event_name, {
 		group = NumberToggle,
 		pattern = "*",
 		callback = function()
 			vim.opt.relativenumber = false
+			vim.opt.number = true
 		end
 	})
 end
@@ -237,6 +240,7 @@ wk.register({
 wk.register({
 	k = { vim.lsp.buf.signature_help, "Signature Help" },
 }, { mode = "i", prefix = "<Ctrl>" })
+
 wk.register({
 	f = {
 		name = "Find",
@@ -251,8 +255,14 @@ wk.register({
 		name = "Buffers",
 		m = { "<cmd>:lua require(\"harpoon.mark\").add_file()<cr>", "Mark" },
 		s = { "<cmd>:lua require(\"harpoon.ui\").toggle_quick_menu()<cr>", "Toggle Buffer Stack" },
-		n = { "<cmd>:lua require(\"harpoon.ui\").nav_next()<cr>", "Next", },
-		p = { "<cmd>:lua require(\"harpoon.ui\").nav_prev()<cr>", "Previous" },
+		n = {
+			function() require("harpoon.ui").get_keymap("nav_next") end,
+			"Next",
+		},
+		p = {
+			function() require("harpoon.ui").get_keymap("nav_prev") end,
+			"Previous",
+		},
 	},
 
 	c = {

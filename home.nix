@@ -60,7 +60,6 @@ in {
     (nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
 		lua-language-server
 		jq
-		protonvpn-gui
 
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
