@@ -42,8 +42,6 @@ in {
     spotify
     mpv
 		ripgrep
-		_1password
-    _1password-gui
 		discord
     slack
     zoom-us
@@ -65,9 +63,6 @@ in {
     # # configuration. For example, this adds a command 'my-hello' to your
     # # environment:
     # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
-    # '')
-  ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
