@@ -188,17 +188,6 @@ for _, event_name in ipairs({ "BufLeave", "FocusLost", "InsertEnter" }) do
 	})
 end
 
--- setup TabNine
--- require('tabnine').setup({
--- 	disable_auto_comment = true,
--- 	accept_keymap = "<Tab>",
--- 	dismiss_keymap = "<C-]>",
--- 	debounce_ms = 800,
--- 	suggestion_color = { gui = "#808080", cterm = 244 },
--- 	exclude_filetypes = { "TelescopePrompt" },
--- 	log_file_path = nil, -- absolute path to Tabnine log file
--- })
-
 -- diagnostics
 vim.keymap.set("n", "<leader>xx", function() require("trouble").open() end)
 vim.keymap.set("n", "<leader>xw", function() require("trouble").open("workspace_diagnostics") end)
@@ -220,8 +209,6 @@ lspconfig.rust_analyzer.setup({})
 local telescope = require("telescope")
 telescope.load_extension("harpoon")
 telescope.load_extension("file_browser")
-
--- require("focus").setup()
 
 -- keybindings
 local wk = require("which-key")
