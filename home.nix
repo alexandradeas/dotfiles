@@ -60,13 +60,7 @@ in {
 		jq
 		tree
 		fzf
-
-    # # You can also create simple shell scripts directly inside your
-    # # configuration. For example, this adds a command 'my-hello' to your
-    # # environment:
-    # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
-    # '')
+		nil
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -114,21 +108,6 @@ in {
       set fish_greeting # disable greeting
       direnv hook fish | source
     '';
-
-    plugins = with pkgs.fishPlugins; [
-      # grc
-      # fzf
-      # fzf-fish
-      # {
-      #   name = "replay";
-      #   src = pkgs.fetchFromGithub {
-      #     owner = "jorgebucaran";
-      #     repo = "replay.fish";
-      #     rev = "bd8e5b89ec78313538e747f0292fcaf631e87bd2";
-      #     sha256 = "0dbnir6jbwjpjalz14snzd3cgdysgcs3raznsijd6savad3qhijc";
-      #   };
-      # }
-    ];
   };
 
   programs.git = {
