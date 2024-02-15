@@ -61,29 +61,20 @@ in {
 		tree
 		fzf
 		nil
+		go
+		gopls
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
-    # # Building this configuration will create a copy of 'dotfiles/screenrc' in
-    # # the Nix store. Activating the configuration will then make '~/.screenrc' a
-    # # symlink to the Nix store copy.
-    # ".screenrc".source = dotfiles/screenrc;
-
-    ".config/nvim/init.lua".source = ./neovim/init.lua;
-    # ".local/share/nvim/ftplugin/dart.vim".source = ./neovim/dart.vim;
-    # ".local/share/nvim/ftplugin/make.vim".source = ./neovim/make.vim;
-    # ".local/share/nvim/ftplugin/rust.vim".source = ./neovim/rust.vim;
-    # ".local/share/nvim/ftplugin/typescript.vim".source = ./neovim/typescript.vim;
-
-
-    # # You can also set the file content immediately.
-    # ".gradle/gradle.properties".text = ''
-    #   org.gradle.console=verbose
-    #   org.gradle.daemon.idletimeout=3600000
-    # '';
-  };
+		".config/nvim/init.lua".source = ./neovim/init.lua;
+		".config/nvim/ftplugin/dart.vim".source = ./neovim/ftplugin/dart.vim;
+		".config/nvim/ftplugin/make.vim".source = ./neovim/ftplugin/make.vim;
+		".config/nvim/ftplugin/rust.vim".source = ./neovim/ftplugin/rust.vim;
+		".config/nvim/ftplugin/typescript.vim".source = ./neovim/ftplugin/typescript.vim;
+		".config/nvim/ftplugin/go.lua".source = ./neovim/ftplugin/go.lua;
+	};
 
   home.sessionVariables = {
     EDITOR = "nvim";
@@ -126,6 +117,12 @@ in {
 
   programs.neovim = {
     enable = true;
+		defaultEditor = true;
+		viAlias = true;
+		vimAlias = true;
+		withRuby = true;
+		withPython3 = true;
+		withNodeJs = true;
   };
 
   programs.tmux = {
