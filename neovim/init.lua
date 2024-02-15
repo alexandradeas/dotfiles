@@ -19,19 +19,24 @@ vim.g.mapleader = "," -- Leader must be mapped before calling lazy
 
 require("lazy").setup({
 	-- { "willuiamboman/mason.nvim" },
-	{
-		"VonHeikemen/lsp-zero.nvim",
-		branch = "v2.x",
-		dependencies = {
-			-- LSP Support
-			{ "neovim/nvim-lspconfig" },
-			{ "williamboman/mason.nvim" },
-			{ "williamboman/mason-lspconfig.nvim" },
-			{ "hrsh7th/nvim-cmp" },
-			{ "hrsh7th/cmp-nvim-lsp" },
-			{ "L3MON4D3/LuaSnip" },
-		}
-	},
+	-- 	{
+	-- 		"VonHeikemen/lsp-zero.nvim",
+	-- 		branch = "v2.x",
+	-- 		dependencies = {
+	-- 			-- LSP Support
+	-- 			{ "neovim/nvim-lspconfig" },
+	-- 			{ "williamboman/mason.nvim" },
+	-- 			{ "williamboman/mason-lspconfig.nvim" },
+	-- 			{ "hrsh7th/nvim-cmp" },
+	-- 			{ "hrsh7th/cmp-nvim-lsp" },
+	-- 			{ "L3MON4D3/LuaSnip" },
+	-- 		}
+	-- 	},
+
+	{ "neovim/nvim-lspconfig" },
+	{ "hrsh7th/nvim-cmp" },
+	{ "hrsh7th/cmp-nvim-lsp" },
+	{ "L3MON4D3/LuaSnip" },
 
 	{
 		"nvim-telescope/telescope.nvim",
@@ -140,6 +145,11 @@ require("lazy").setup({
 	{ 'mattn/emmet-vim' },
 
 	{ 'frazrepo/vim-rainbow' },
+
+	{ 'HiPhish/gradle.nvim' },
+
+	{ 'udalov/kotlin-vim' },
+
 })
 
 -- Options
@@ -197,18 +207,14 @@ vim.keymap.set("n", "<leader>xq", function() require("trouble").open("quickfix")
 vim.keymap.set("n", "<leader>xl", function() require("trouble").open("loclist") end)
 vim.keymap.set("n", "gR", function() require("trouble").open("lsp_references") end)
 
--- LSP
-local lsp = require("lsp-zero").preset({})
-
-lsp.on_attach(function(_client, bufnr)
-	lsp.default_keymaps({ buffer = bufnr })
-	lsp.buffer_autoformat()
-end)
-
--- configure LuaLS for neovim
-require("lspconfig").lua_ls.setup(lsp.nvim_lua_ls())
-
-lsp.setup()
+local lspconfig = require("lspconfig")
+lspconfig.lua_ls.setup({})
+lspconfig.dartls.setup({})
+lspconfig.tsserver.setup({})
+lspconfig.nil_ls.setup({})
+lspconfig.tsserver.setup({})
+lspconfig.gopls.setup({})
+lspconfig.rust_analyzer.setup({})
 
 -- load telescope extensions
 local telescope = require("telescope")
