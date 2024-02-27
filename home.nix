@@ -137,26 +137,26 @@ in {
       {
         plugin = catppuccin;
 	extraConfig = ''
-	  set -g @catpuccin_flavour 'frappe'
-	  set -g @catpuccin_window_tabs_enabled on
-	  set -g @catpuccin_date_time "%H:%M"
+		set -g @catpuccin_flavour 'frappe'
+		set -g @catpuccin_window_tabs_enabled on
+		set -g @catpuccin_date_time "%H:%M"
 	'';
       }
       {
         plugin = resurrect;
 	extraConfig = ''
-	  set -g @resurrect-dir '~/.tmux/resurrect-sessions'
-	  set -g @resurrect-strategy-vim 'session'
-	  set -g @resurrect-strategy-nvim 'session'
-	  set -g @resurrect-capture-pane-contents 'on'
+		set -g @resurrect-dir '~/.tmux/resurrect-sessions'
+		set -g @resurrect-strategy-vim 'session'
+		set -g @resurrect-strategy-nvim 'session'
+		set -g @resurrect-capture-pane-contents 'on'
 	'';
       }
       {
         plugin = continuum;
 	extraConfig = ''
-	  set -g @continuum-restore 'on'
-	  set -g @continuum-boot 'on'
-	  set -g @continuum-save-interval '10'
+		set -g @continuum-restore 'on'
+		set -g @continuum-boot 'on'
+		set -g @continuum-save-interval '10'
 	'';
       }
       {
@@ -166,7 +166,7 @@ in {
       {
         plugin = better-mouse-mode;
         extraConfig = ''
-	  set -g mouse on
+		set -g mouse on
 	'';
       }
     ];
