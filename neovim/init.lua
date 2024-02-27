@@ -18,25 +18,14 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = "," -- Leader must be mapped before calling lazy
 
 require("lazy").setup({
-	-- { "willuiamboman/mason.nvim" },
-	-- 	{
-	-- 		"VonHeikemen/lsp-zero.nvim",
-	-- 		branch = "v2.x",
-	-- 		dependencies = {
-	-- 			-- LSP Support
-	-- 			{ "neovim/nvim-lspconfig" },
-	-- 			{ "williamboman/mason.nvim" },
-	-- 			{ "williamboman/mason-lspconfig.nvim" },
-	-- 			{ "hrsh7th/nvim-cmp" },
-	-- 			{ "hrsh7th/cmp-nvim-lsp" },
-	-- 			{ "L3MON4D3/LuaSnip" },
-	-- 		}
-	-- 	},
-
 	{ "neovim/nvim-lspconfig" },
-	{ "hrsh7th/nvim-cmp" },
+	{ "hrsh7th/cmp-buffer" },
+	{ "hrsh7th/cmp-path" },
+	{ "hrsh7th/cmp-cmdline" },
 	{ "hrsh7th/cmp-nvim-lsp" },
+	{ "hrsh7th/nvim-cmp" },
 	{ "L3MON4D3/LuaSnip" },
+	{ "saadparwaiz1/cmp_luasnip" },
 
 	{
 		"nvim-telescope/telescope.nvim",
@@ -75,7 +64,7 @@ require("lazy").setup({
 
 	{ "cheap-glitch/vim-v" },
 
-	{ "ziglang/zig-mode" },
+	{ "ziglang/zig.vim" },
 
 	{
 		"ray-x/go.nvim",
@@ -91,12 +80,6 @@ require("lazy").setup({
 		ft = { "go", "gomod" },
 		build = ':lua require("go.install").update_all_sync()'
 	},
-
-	-- {
-	-- 	"pmizio/typescript-tools.nvim",
-	-- 	dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-	-- 	opts = {},
-	-- },
 
 	{ "preservim/tagbar" },
 
@@ -135,7 +118,13 @@ require("lazy").setup({
 	},
 
 	-- { 'codota/tabnine-nvim', build = "./dl_binaries.sh" },
-	{ 'github/copilot.vim' },
+	{ 'zbirenbaum/copilot.lua' },
+	{
+		'zbirenbaum/copilot-cmp',
+		config = function()
+			require("copilot_cmp").setup()
+		end
+	},
 	{ 'tpope/vim-fugitive' },
 
 	{ 'tpope/vim-obsession' },
@@ -150,6 +139,9 @@ require("lazy").setup({
 
 	{ 'udalov/kotlin-vim' },
 
+	{ 'dart-lang/dart-vim-plugin' },
+
+	{ 'thosakwe/vim-flutter' },
 })
 
 -- Options
@@ -157,9 +149,6 @@ require("lazy").setup({
 vim.opt.smarttab = true
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
--- vim.cmd [[colorscheme slate]]
-
-vim.g.colors_name = "slate"
 
 vim.g.rainbow_active = 1
 
@@ -188,30 +177,115 @@ for _, event_name in ipairs({ "BufLeave", "FocusLost", "InsertEnter" }) do
 	})
 end
 
--- diagnostics
-vim.keymap.set("n", "<leader>xx", function() require("trouble").open() end)
-vim.keymap.set("n", "<leader>xw", function() require("trouble").open("workspace_diagnostics") end)
-vim.keymap.set("n", "<leader>xd", function() require("trouble").open("document_diagnostics") end)
-vim.keymap.set("n", "<leader>xq", function() require("trouble").open("quickfix") end)
-vim.keymap.set("n", "<leader>xl", function() require("trouble").open("loclist") end)
-vim.keymap.set("n", "gR", function() require("trouble").open("lsp_references") end)
-
-local lspconfig = require("lspconfig")
-lspconfig.lua_ls.setup({})
-lspconfig.dartls.setup({})
-lspconfig.tsserver.setup({})
-lspconfig.nil_ls.setup({})
-lspconfig.tsserver.setup({})
-lspconfig.gopls.setup({})
-lspconfig.rust_analyzer.setup({})
-
 -- load telescope extensions
 local telescope = require("telescope")
 telescope.load_extension("harpoon")
 telescope.load_extension("file_browser")
 
+local cmp = require("cmp")
+local luasnip = require("luasnip")
+
+-- disable copilot default suggestions as these will be handled by cmp instead
+require("copilot").setup({
+	suggestion = { enabled = false },
+	panel = { enabled = false },
+})
+
+cmp.setup({
+	snippet = {
+		expand = function(args)
+			luasnip.lsp_expand(args.body)
+		end,
+	},
+	window = {
+		completion = cmp.config.window.bordered(),
+		documentation = cmp.config.window.bordered(),
+	},
+	mapping = cmp.mapping.preset.insert({
+		['<C-b>'] = cmp.mapping.scroll_docs(-4),
+		['<C-f>'] = cmp.mapping.scroll_docs(4),
+		['<C-Space>'] = cmp.mapping.complete(),
+		['<C-e>'] = cmp.mapping.close(),
+		['<C-y>'] = cmp.mapping.confirm({ select = true }),
+		['<C-Tab>'] = cmp.mapping(function(fallback)
+			if cmp.visible() then
+				cmp.select_next_item()
+			elseif luasnip.expand_or_jumpable() then
+				luasnip.expand_or_jump()
+			else
+				fallback()
+			end
+		end, { 'i', 's' }),
+		['<S-Tab>'] = cmp.mapping(function(fallback)
+			if cmp.visible() then
+				cmp.select_prev_item()
+			elseif luasnip.jumpable(-1) then
+				luasnip.jump(-1)
+			else
+				fallback()
+			end
+		end, { 'i', 's' }),
+	}),
+	sources = cmp.config.sources({
+		{ name = "nvim_lsp" },
+		{ name = "luasnip" },
+		{ name = "copilot" },
+	}, {
+		{ name = "buffer" },
+	}),
+})
+
+cmp.setup.filetype("gitcommit", {
+	sources = cmp.config.sources({
+		{ name = "git" },
+	}, {
+		{ name = "buffer" },
+	}),
+})
+
+cmp.setup.cmdline({ "/", "?" }, {
+	mapping = cmp.mapping.preset.cmdline(),
+	sources = {
+		{ name = "buffer" },
+	},
+})
+
+cmp.setup.cmdline(":", {
+	mapping = cmp.mapping.preset.cmdline(),
+	sources = cmp.config.sources({
+		{ name = "path" },
+	}, {
+		{ name = "cmdline" },
+	}),
+})
+
+-- set up lspconfig
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+local lspconfig = require("lspconfig")
+
+local language_servers = {
+	lua_ls = lspconfig.lua_ls,
+	dartls = lspconfig.dartls,
+	nil_ls = lspconfig.nil_ls,
+	tsc = lspconfig.tsserver,
+	gopls = lspconfig.gopls,
+	rust_analyzer = lspconfig.rust_analyzer,
+	pyright = lspconfig.pyright,
+	zls = lspconfig.zls,
+}
+
+for name, handler in pairs(language_servers) do
+	-- only setup language servers which are found in path
+	if os.execute(string.format('command -v %s', name)) then
+		handler.setup({ capabilities = capabilities })
+	end
+end
+
 -- keybindings
 local wk = require("which-key")
+
+local trouble = require("trouble")
 
 -- register leader bindings
 wk.register({
@@ -227,8 +301,28 @@ wk.register({
 		r = { "<cmd>Telescope lsp_references<cr>", "Goto References" },
 		y = { function() require("telescope.builtin").lsp_type_definitions({ reuse_win = true }) end,
 			"Goto T[y]pe Definition" },
+		l = { function() vim.lsp.buf.open_float() end, "Open float" },
+	},
+	K = { function() vim.lsp.buf.hover() end, "Do Hover" },
+	r = {
+		name = "Refactor",
+		n = { vim.lsp.buf.rename, "Rename" },
 	},
 }, { prefix = "", mode = "n" })
+
+wk.register({
+	c = {
+		name = "Code",
+		f = { vim.lsp.buf.format, "Format" },
+		a = { function()
+			if vim.lsp.buf.range_code_action then
+				vim.lsp.buf.range_code_action()
+			else
+				vim.lsp.buf.code_action()
+			end
+		end, "Action" },
+	},
+}, { prefix = "<leader>", mode = "x" })
 
 wk.register({
 	k = { vim.lsp.buf.signature_help, "Signature Help" },
@@ -269,4 +363,14 @@ wk.register({
 		tb = { "<cmd>TagbarToggle<cr>", "Tagbar" },
 	},
 
+	x = {
+		name = "Diagnostic",
+		x = { trouble.toggle, "Trouble" },
+		w = { function() trouble.open("workspace_diagnostics") end, "Workspace Diagnostics" },
+		d = { function() trouble.open("document_diagnostics") end, "Document Diagnostics" },
+		q = { function() trouble.open("quickfix") end, "Quickfix" },
+		l = { function() trouble.open("loclist") end, "Loclist" },
+	},
 }, { prefix = "<leader>" })
+
+vim.cmd [[colorscheme default]]
