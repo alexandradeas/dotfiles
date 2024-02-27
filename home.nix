@@ -52,6 +52,7 @@ in {
 		perl
 		fd
 		nodePackages.neovim
+		nodePackages.pyright
 		python311
 		python311Packages.pynvim
 		ruby
@@ -107,6 +108,7 @@ in {
     userEmail = "me@alexandradeas.co.uk";
     extraConfig = {
       init.defaultBranch = "main";
+			pull.rebase = true;
     };
     aliases = {
       pu = "push";
