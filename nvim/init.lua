@@ -142,6 +142,11 @@ require("lazy").setup({
 	{ 'dart-lang/dart-vim-plugin' },
 
 	{ 'thosakwe/vim-flutter' },
+
+	{
+		"gennaro-tedesco/nvim-jqx",
+		ft = { "json", "yaml" },
+	},
 })
 
 -- Options
