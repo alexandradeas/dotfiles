@@ -1,0 +1,67 @@
+# WINDOW PROPERTIES
+
+window:
+  opacity: 1
+  dynamic_padding: true
+  padding:
+    x: 6
+    y: 6
+# FONTS
+
+font:
+  # normal:
+    # family: Victor Mono
+    # style: Regular
+# 
+  # bold:
+    # family: Victor Mono
+    # style: Bold
+# 
+  # italic:
+    # family: Victor Mono
+    # style: Italic
+# 
+  # bold_italic:
+    # family: Victor Mono
+    # style: Bold Italic
+
+  size: 10
+
+# COLORS
+
+colors:
+    primary:
+        background:      '#050505'
+        foreground:      '#F0F0F0'
+        dim_foreground:  '#F0F0F0'
+        dim_background:  '#F0F0F0'
+    normal:
+      black:   '#050505'
+      red:     '#AC8A8C'
+      green:   '#8AAC8B'
+      yellow:  '#ACA98A'
+      blue:    '#898cab'
+      magenta: '#AC8AAC'
+      cyan:    '#8AABAC'
+      white:   '#F0F0F0'
+    bright:
+      black:   '#0C0C0C'
+      red:     '#C49EA0'
+      green:   '#9EC49F'
+      yellow:  '#C4C19E'
+      blue:    '#7a7d9a'
+      magenta: '#C49EC4'
+      cyan:    '#9EC3C4'
+      white:   '#FAFAFA'
+    dim:
+      black:   '#050505'
+      red:     '#AC8A8C'
+      green:   '#8AAC8B'
+      yellow:  '#ACA98A'
+      blue:    '#898cab'
+      magenta: '#AC8AAC'
+      cyan:    '#8AABAC'
+      white:   '#F0F0F0'
+env:
+  TERM: xterm-256color
+

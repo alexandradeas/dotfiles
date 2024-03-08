@@ -1,0 +1,6 @@
+[submodule "Colloid-gtk-theme"]
+	path = Colloid-gtk-theme
+	url = git@github.com:vinceliuice/Colloid-gtk-theme
+[submodule "Colloid-icon-theme"]
+	path = Colloid-icon-theme
+	url = git@github.com:vinceliuice/Colloid-icon-theme

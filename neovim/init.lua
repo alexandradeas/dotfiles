@@ -264,8 +264,18 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 local lspconfig = require("lspconfig")
 
+-- Setup lua seperately because it needs to be passed in the vim global
+lspconfig.lua_ls.setup({
+	settings = {
+		Lua = {
+			diagnostics = {
+				globals = { 'vim' }
+			}
+		}
+	}
+})
+
 local language_servers = {
-	lua_ls = lspconfig.lua_ls,
 	dartls = lspconfig.dartls,
 	nil_ls = lspconfig.nil_ls,
 	tsc = lspconfig.tsserver,
@@ -274,6 +284,8 @@ local language_servers = {
 	pyright = lspconfig.pyright,
 	zls = lspconfig.zls,
 }
+
+
 
 for name, handler in pairs(language_servers) do
 	-- only setup language servers which are found in path
@@ -373,4 +385,4 @@ wk.register({
 	},
 }, { prefix = "<leader>" })
 
-vim.cmd [[colorscheme default]]
+vim.cmd [[colorscheme slate]]
