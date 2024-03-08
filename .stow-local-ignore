@@ -1,2 +1,6 @@
 home.nix
 Makefile
+Colloid-icon-theme
+Colloid-gtk-theme
+.git
+.gitmodules
