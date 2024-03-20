@@ -199,7 +199,19 @@ require("lazy").setup({
 		end
 	},
 
-	{"ellisonleao/glow.nvim", config = true, cmd = "Glow"}
+	{ "ellisonleao/glow.nvim", config = true, cmd = "Glow" },
+
+	{
+		"ahollister/nota.nvim",
+		config = function()
+			require("nota").setup({
+				global_path = os.getenv("HOME") .. "notes/notes.md",
+				scratch_path = os.getenv("HOME") .. "notes/scratch.md",
+				local_path = "notes/notes.md",
+				vertical_split = true
+			})
+		end
+	},
 })
 
 -- Options
@@ -376,6 +388,7 @@ wk.register({
 		name = "Refactor",
 		n = { vim.lsp.buf.rename, "Rename" },
 	},
+
 }, { prefix = "", mode = "n" })
 
 wk.register({
