@@ -346,7 +346,7 @@ lspconfig.lua_ls.setup({
 })
 
 local language_servers = {
-	dartls = lspconfig.dartls,
+	dart = lspconfig.dartls,
 	nil_ls = lspconfig.nil_ls,
 	tsc = lspconfig.tsserver,
 	gopls = lspconfig.gopls,
