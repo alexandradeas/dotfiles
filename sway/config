@@ -64,15 +64,30 @@ input "type:touchpad" {
     middle_emulation enabled
 }
 
-input "1:1:AT_Translated_Set_2_keyboard" {
+input "type:keyboard" {
     xkb_layout gb
 }
+
+set $gnome-schema org.gnome.desktop.interface
+
+exec_always {
+	gsettings set $gnome-schema gtk-theme 'Colloid-Dark'
+	gsettings set $gnome-schema icon-theme 'Papirus-Dark'
+	gsettings set $gnome-schema color-scheme 'prefer-dark'
+}
+
+# client.focused "$color0" "$color0" "$foreground" "$color8" "$color0"
+client.focused_inactive "#23242a" "#2b2b2b" "#888888" "#000000" "#000000"
+client.unfocused "#2c2c2c" "#2b2b2b" "#888888" "#000000" "#000000"
 
 default_border none
 default_floating_border none
 font pango:monospace 0
 titlebar_padding 1
 titlebar_border_thickness 0
+
+for_window [class="1Password"] floating enable
+
 #
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
