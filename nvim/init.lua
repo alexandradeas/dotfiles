@@ -23,7 +23,9 @@ require("lazy").setup({
 	{ "hrsh7th/cmp-path" },
 	{ "hrsh7th/cmp-cmdline" },
 	{ "hrsh7th/cmp-nvim-lsp" },
-	{ "hrsh7th/nvim-cmp" },
+	{ "hrsh7th/nvim-cmp",
+	  dependencies = {'tzachar/cmp-ai'}
+	},
 	{ "L3MON4D3/LuaSnip" },
 	{ "saadparwaiz1/cmp_luasnip" },
 	{ "mfussenegger/nvim-dap" },
@@ -212,6 +214,8 @@ require("lazy").setup({
 			})
 		end
 	},
+
+	{ "jparise/vim-graphql" },
 })
 
 -- Options
@@ -300,9 +304,30 @@ cmp.setup({
 		{ name = "nvim_lsp" },
 		{ name = "luasnip" },
 		{ name = "copilot" },
+		{ name = 'cmp_ai' },
 	}, {
 		{ name = "buffer" },
 	}),
+})
+
+local cmp_ai = require('cmp_ai.config')
+
+cmp_ai:setup({
+  max_lines = 100,
+  provider = 'Ollama',
+  provider_options = {
+    model = 'wizardcoder:latest',
+  },
+  notify = true,
+  notify_callback = function(msg)
+    vim.notify(msg)
+  end,
+  run_on_every_keystroke = true,
+  ignored_file_types = {
+    -- default is not to ignore
+    -- uncomment to ignore in lua:
+    -- lua = true
+  },
 })
 
 cmp.setup.filetype("gitcommit", {
@@ -350,16 +375,45 @@ local language_servers = {
 	nil_ls = lspconfig.nil_ls,
 	tsc = lspconfig.tsserver,
 	gopls = lspconfig.gopls,
-	rust_analyzer = lspconfig.rust_analyzer,
-	pyright = lspconfig.pyright,
 	zls = lspconfig.zls,
 }
+
+lspconfig.pylsp.setup({
+	settings = {
+		pylsp = {
+			plugins = {
+				-- formatter
+				black = { enabled = true },
+				autopep8 = { enabled = true },
+				yapf = { enabled = true },
+				-- linter
+				pylint = { enabled = true },
+				pyflakes = { enabled = true },
+				pycodestyle = { enabled = true },
+				-- typechecker
+				pylsp_mypy = { enabled = true },
+				-- auto-completion
+				jedi_completion = { enabled = true },
+				-- import sorting
+				pyls_isort = { enabled = true },
+			},
+		},
+	},
+})
 
 for name, handler in pairs(language_servers) do
 	-- only setup language servers which are found in path
 	if os.execute(string.format('command -v %s', name)) then
 		handler.setup({ capabilities = capabilities })
 	end
+end
+
+if (os.execute("command -v rust-analyzer")) then
+	lspconfig.rust_analyzer.setup({})
+end
+
+if (os.execute("command -v graphql-lsp")) then
+	lspconfig.graphql.setup({ capabilities = capabilities })
 end
 
 -- keybindings
