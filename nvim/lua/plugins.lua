@@ -1,4 +1,5 @@
 return require("lazy").setup({
+	-- completion
 	{ "neovim/nvim-lspconfig" },
 	{ "hrsh7th/cmp-buffer" },
 	{ "hrsh7th/cmp-path" },
@@ -10,24 +11,29 @@ return require("lazy").setup({
 	{ "L3MON4D3/LuaSnip" },
 	{ "saadparwaiz1/cmp_luasnip" },
 	{ "mfussenegger/nvim-dap" },
+	{ 'zbirenbaum/copilot.lua' },
+	{
+		'zbirenbaum/copilot-cmp',
+		config = function()
+			require("copilot_cmp").setup()
+		end
+	},
+	{ 'mattn/emmet-vim' },
 
+	-- navigation
 	{
 		"nvim-telescope/telescope.nvim",
 		tag = "0.1.2",
 		dependencies = { "nvim-lua/plenary.nvim" }
 	},
-
 	{
 		"nvim-telescope/telescope-file-browser.nvim",
 		dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
 	},
-
 	{
 		"ThePrimeagen/harpoon",
 		dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
 	},
-
-	{ "tpope/vim-surround" },
 
 	{
 		"folke/which-key.nvim",
@@ -44,10 +50,8 @@ return require("lazy").setup({
 		opts = {},
 	},
 
-	{ "cheap-glitch/vim-v" },
-
+	-- languages
 	{ "ziglang/zig.vim" },
-
 	{
 		"ray-x/go.nvim",
 		dependencies = {
@@ -62,33 +66,18 @@ return require("lazy").setup({
 		ft = { "go", "gomod" },
 		build = ':lua require("go.install").update_all_sync()'
 	},
-
-	-- { 'codota/tabnine-nvim', build = "./dl_binaries.sh" },
-	{ 'zbirenbaum/copilot.lua' },
-	{
-		'zbirenbaum/copilot-cmp',
-		config = function()
-			require("copilot_cmp").setup()
-		end
-	},
-	{ 'tpope/vim-fugitive' },
-
-	{ 'tpope/vim-obsession' },
-
-	{ 'hashivim/vim-terraform' },
-
-	{ 'mattn/emmet-vim' },
-
-	{ 'frazrepo/vim-rainbow' },
-
+	{ "cheap-glitch/vim-v" },
 	{ 'HiPhish/gradle.nvim' },
-
 	{ 'udalov/kotlin-vim' },
-
 	{ 'dart-lang/dart-vim-plugin' },
-
 	{ 'thosakwe/vim-flutter' },
+	{ 'hashivim/vim-terraform' },
+	{ "jparise/vim-graphql" },
 
+	-- utility
+	{ 'frazrepo/vim-rainbow' },
+	{ 'tpope/vim-fugitive' },
+	{ 'tpope/vim-obsession' },
 	{
 		"gennaro-tedesco/nvim-jqx",
 		ft = { "json", "yaml" },
@@ -143,9 +132,7 @@ return require("lazy").setup({
 			require('tree-sitter.install').update({ with_sync = true })()
 		end
 	},
-
 	{ "ellisonleao/glow.nvim", config = true, cmd = "Glow" },
-
 	{
 		"ahollister/nota.nvim",
 		config = function()
@@ -157,7 +144,5 @@ return require("lazy").setup({
 			})
 		end
 	},
-
-	{ "jparise/vim-graphql" },
 })
 
