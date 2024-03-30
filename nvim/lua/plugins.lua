@@ -38,8 +38,6 @@ return require("lazy").setup({
 		end,
 	},
 
-	{ "nvim-focus/focus.nvim", version = "*" },
-
 	{
 		"folke/trouble.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
