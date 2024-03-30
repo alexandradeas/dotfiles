@@ -52,7 +52,12 @@ for name, handler in pairs(language_servers) do
 end
 
 if (os.execute("command -v rust-analyzer")) then
-	lspconfig.rust_analyzer.setup({})
+	lspconfig.rust_analyzer.setup({
+		capabilities = capabilities,
+		settings = {
+			["rust-analyzer"] = {},
+		},
+	})
 end
 
 if (os.execute("command -v graphql-lsp")) then
