@@ -65,8 +65,6 @@ return require("lazy").setup({
 		build = ':lua require("go.install").update_all_sync()'
 	},
 
-	{ "preservim/tagbar" },
-
 	-- { 'codota/tabnine-nvim', build = "./dl_binaries.sh" },
 	{ 'zbirenbaum/copilot.lua' },
 	{
