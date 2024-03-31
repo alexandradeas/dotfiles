@@ -3,4 +3,5 @@ Makefile
 Colloid-icon-theme
 Colloid-gtk-theme
 .git
+.gitconfig
 .gitmodules
