@@ -19,6 +19,7 @@ local language_servers = {
 	tsc = lspconfig.tsserver,
 	gopls = lspconfig.gopls,
 	zls = lspconfig.zls,
+	gleam = lspconfig.gleam,
 }
 
 lspconfig.pylsp.setup({

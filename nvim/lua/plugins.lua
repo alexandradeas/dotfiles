@@ -73,6 +73,7 @@ return require("lazy").setup({
 	{ 'thosakwe/vim-flutter' },
 	{ 'hashivim/vim-terraform' },
 	{ "jparise/vim-graphql" },
+	{ 'gleam-lang/gleam.vim' },
 
 	-- utility
 	{ 'frazrepo/vim-rainbow' },
