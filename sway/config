@@ -151,6 +151,7 @@ for_window [class="1Password"] floating enable
 #
 # Moving around:
 #
+		focus_follows_mouse no
     # Move your focus around
     bindsym $mod+$left focus left
     bindsym $mod+$down focus down
@@ -240,8 +241,8 @@ for_window [class="1Password"] floating enable
 #
 # Screenshots:
 #
-		bindsym Print exec sway-interactive-screenshot
-		bindsym $mod+Print exec sway-interactive-screenshot --video
+		bindsym $mod+Print exec sway-interactive-screenshot
+		bindsym $mod+Shift+Print exec sway-interactive-screenshot --video
 
 #
 # Resizing containers:
