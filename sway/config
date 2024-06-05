@@ -109,10 +109,14 @@ bar {
 default_border pixel 2
 default_floating_border none
 font pango:monospace 0
-titlebar_padding 1
-titlebar_border_thickness 0
+# border pixel 2
+# titlebar_padding 1
+# titlebar_border_thickness pixel 10
+
+focus_follows_mouse no
 
 for_window [class="1Password"] floating enable
+
 
 #
 # You can get the names of your inputs by running: swaymsg -t get_inputs
@@ -143,6 +147,7 @@ for_window [class="1Password"] floating enable
 
     # Exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+		bindsym $mod+Shift+Pause exec systemctl suspend
 #
 # Moving around:
 #

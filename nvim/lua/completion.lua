@@ -7,6 +7,25 @@ require("copilot").setup({
 	panel = { enabled = false },
 })
 
+require("cmp_ai.config"):setup({
+  max_lines = 100,
+  provider = 'Ollama',
+  provider_options = {
+    model = 'wizardcoder:latest',
+  },
+  notify = true,
+  notify_callback = function(msg)
+    vim.notify(msg)
+  end,
+  run_on_every_keystroke = true,
+  ignored_file_types = {
+    -- default is not to ignore
+    -- uncomment to ignore in lua:
+    -- lua = true
+  },
+})
+
+
 cmp.setup({
 	snippet = {
 		expand = function(args)
@@ -44,32 +63,13 @@ cmp.setup({
 	}),
 	sources = cmp.config.sources({
 		{ name = "nvim_lsp" },
-		{ name = "luasnip" },
-		{ name = "copilot" },
 		{ name = 'cmp_ai' },
+		{ name = "luasnip" },
+		-- { name = "copilot" },
+		{ name = "codeium" },
 	}, {
 		{ name = "buffer" },
 	}),
-})
-
-local cmp_ai = require('cmp_ai.config')
-
-cmp_ai:setup({
-  max_lines = 100,
-  provider = 'Ollama',
-  provider_options = {
-    model = 'wizardcoder:latest',
-  },
-  notify = true,
-  notify_callback = function(msg)
-    vim.notify(msg)
-  end,
-  run_on_every_keystroke = true,
-  ignored_file_types = {
-    -- default is not to ignore
-    -- uncomment to ignore in lua:
-    -- lua = true
-  },
 })
 
 cmp.setup.filetype("gitcommit", {

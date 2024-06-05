@@ -87,3 +87,4 @@ wk.register({
 		l = { function() trouble.open("loclist") end, "Loclist" },
 	},
 }, { prefix = "<leader>" })
+

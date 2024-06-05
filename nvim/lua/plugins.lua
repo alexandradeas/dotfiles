@@ -19,6 +19,28 @@ return require("lazy").setup({
 		end
 	},
 	{ 'mattn/emmet-vim' },
+	-- { "tzarchar/cmp-ai" }, is currerntly not working with ollama
+	{ "maxwell-bland/cmp-ai" },
+	{
+		"Exafunction/codeium.nvim",
+		dependencies = {
+			"nvim-plenary/plenary.nvim",
+			"hrsh7th/nvim-cmp",
+		},
+		config = function()
+			require("codeium").setup({
+				enable_chat = true,
+				chat_window = {
+					relative = "editor",
+					position = "50%",
+					size = {
+						height = "80%",
+						width = "80%",
+					}
+				}
+			})
+		end,
+	},
 
 	-- navigation
 	{
@@ -74,6 +96,7 @@ return require("lazy").setup({
 	{ 'hashivim/vim-terraform' },
 	{ "jparise/vim-graphql" },
 	{ 'gleam-lang/gleam.vim' },
+	{ 'petobens/poet-v' },
 
 	-- utility
 	{ 'frazrepo/vim-rainbow' },
@@ -144,6 +167,17 @@ return require("lazy").setup({
 				vertical_split = true
 			})
 		end
+	},
+	{
+		"David-Kunz/gen.nvim",
+		opts = {
+			model = "wizardcoder:latest",
+			show_prompt = true,
+			show_model = true,
+			no_auto_close = true,
+			debug = false,
+			display_mode = "split",
+		},
 	},
 })
 

@@ -29,3 +29,4 @@ for _, event_name in ipairs({ "BufLeave", "FocusLost", "InsertEnter" }) do
 	})
 end
 
+vim.cmd("highlight MatchParen cterm=none ctermbg=none ctermfg=none")
