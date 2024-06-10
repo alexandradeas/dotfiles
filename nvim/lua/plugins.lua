@@ -179,5 +179,8 @@ return require("lazy").setup({
 			display_mode = "split",
 		},
 	},
+
+	-- UI
+	{ "catppuccin/nvim", name = "catpuccin", priority = 1000 }
 })
 

@@ -65,3 +65,6 @@ if (os.execute("command -v graphql-lsp")) then
 	lspconfig.graphql.setup({ capabilities = capabilities })
 end
 
+if (os.execute("command -v ruby-lsp")) then
+	lspconfig.ruby_lsp.setup({ capabilities = capabilities })
+end

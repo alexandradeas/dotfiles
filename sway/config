@@ -35,6 +35,11 @@ set $menu wofi --show drun -i | xargs swaymsg exec --
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 # Requires: desktop-backgrounds-compat, swaybg
 output * bg ../evening-sky.png fill
+output eDP-1 scale 1.3333
+output eDP-1 pos 0 0 res 2256x1504
+output DP-1 pos 0 0 res 1920x1080
+
+# output eDP-1 resolution 1920x1080
 #
 # Example configuration:
 #
@@ -46,10 +51,16 @@ output * bg ../evening-sky.png fill
 #
 # Example configuration:
 #
-# exec swayidle -w \
-#          timeout 300 'swaylock -f -c 000000' \
-#          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-#          before-sleep 'swaylock -f -c 000000'
+#exec swayidle -w \
+#         timeout 300 'swaylock -f -c 000000' \
+#         timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+#         before-sleep 'swaylock -f -c 000000'
+
+bindsym $mod+Shift+Delete exec swaylock -f -c 000000
+# bindsym $mod+Shift+s exec swayidle -w 'swaymsg "output * power off"' resume 'swaymsg "output * power on" before-sleep 'swaylock -f -c 0000000'
+
+bindsym $mod+Pause exec systemctl suspend
+bindsym $mod+Shift+Pause exec systemctl hibernate
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
@@ -68,14 +79,6 @@ input "type:touchpad" {
 
 input "type:keyboard" {
     xkb_layout gb
-}
-
-set $gnome-schema org.gnome.desktop.interface
-
-exec_always {
-	gsettings set $gnome-schema gtk-theme 'Colloid-Dark'
-	gsettings set $gnome-schema icon-theme 'Papirus-Dark'
-	gsettings set $gnome-schema color-scheme 'prefer-dark'
 }
 
 # client.focused "$color0" "$color0" "$foreground" "$color8" "$color0"
@@ -198,6 +201,19 @@ for_window [class="1Password"] floating enable
     bindsym $mod+Shift+8 move container to workspace number 8
     bindsym $mod+Shift+9 move container to workspace number 9
     bindsym $mod+Shift+0 move container to workspace number 10
+
+		# assign workspaces to displays
+		workspace 1 output DP-1
+		workspace 2 output DP-1
+		workspace 3 output DP-1
+		workspace 4 output DP-1
+		workspace 5 output DP-1
+		workspace 6 output eDP-1
+		workspace 7 output eDP-1
+		workspace 8 output eDP-1
+		workspace 9 output eDP-1
+		workspace 0 output eDP-1
+
     # Note: workspaces can have any name you want, not just numbers.
     # We just use 1-10 as the default.
 #
@@ -272,10 +288,14 @@ bindsym $mod+r mode "resize"
 
 exec_always dunst
 
+set $gnome-schema org.gnome.desktop.interface
+
 exec_always {
 	gsettings set $gnome-schema gtk-theme 'Colloid-Dark'
-	gsettings set $gnome-schema icon-theme 'Colloid'
+	gsettings set $gnome-schema icon-theme 'Papirus-Dark'
+	gsettings set $gnome-schema color-scheme 'prefer-dark'
 }
+
 # Include configs from 3 locations:
 #  - /usr/share/sway/config.d
 #  - /etc/sway/config.d
