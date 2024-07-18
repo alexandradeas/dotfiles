@@ -97,6 +97,7 @@ return require("lazy").setup({
 	{ "jparise/vim-graphql" },
 	{ 'gleam-lang/gleam.vim' },
 	{ 'petobens/poet-v' },
+	{ 'joerdav/templ.vim' },
 
 	-- utility
 	{ 'frazrepo/vim-rainbow' },

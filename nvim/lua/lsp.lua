@@ -20,6 +20,7 @@ local language_servers = {
 	gopls = lspconfig.gopls,
 	zls = lspconfig.zls,
 	gleam = lspconfig.gleam,
+	templ = lspconfig.templ,
 }
 
 lspconfig.pylsp.setup({
@@ -67,4 +68,11 @@ end
 
 if (os.execute("command -v ruby-lsp")) then
 	lspconfig.ruby_lsp.setup({ capabilities = capabilities })
+end
+
+if (os.execute("command -c htmx-lsp")) then
+	lspconfig.htmx.setup({
+		capabilities = capabilities,
+		filetypes = { "html", "templ" },
+	})
 end

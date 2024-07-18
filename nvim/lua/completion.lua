@@ -63,7 +63,7 @@ cmp.setup({
 	}),
 	sources = cmp.config.sources({
 		{ name = "nvim_lsp" },
-		{ name = 'cmp_ai' },
+		-- { name = 'cmp_ai' },
 		{ name = "luasnip" },
 		-- { name = "copilot" },
 		{ name = "codeium" },

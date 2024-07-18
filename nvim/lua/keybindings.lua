@@ -50,6 +50,7 @@ wk.register({
 		g = { "<cmd>Telescope live_grep<cr>", "Live Grep" },
 		b = { "<cmd>Telescope buffers<cr>", "buffers" },
 		h = { "<cmd>Telescope help_tags<cr>", "Help tags" },
+		i = { "<cmd>Telescope find_files hidden=true<cr>", "Files (with ignored)" },
 		e = { "<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr>", "Explore relative" },
 	},
 

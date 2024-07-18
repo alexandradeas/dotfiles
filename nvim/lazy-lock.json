@@ -33,6 +33,7 @@
   "poet-v": { "branch": "master", "commit": "85a5dd44d89602cc3dccd2489924e9c7caab0044" },
   "telescope-file-browser.nvim": { "branch": "master", "commit": "4d5fd21bae12ee6e9a79232e1c377f43c419d0c5" },
   "telescope.nvim": { "branch": "master", "commit": "776b509f80dd49d8205b9b0d94485568236d1192" },
+  "templ.vim": { "branch": "main", "commit": "5cc48b93a4538adca0003c4bc27af844bb16ba24" },
   "trouble.nvim": { "branch": "main", "commit": "a8264a65a0b894832ea642844f5b7c30112c458f" },
   "vim-flutter": { "branch": "master", "commit": "422ff301a4fe7b989b79b83adf95add0c71ffda5" },
   "vim-fugitive": { "branch": "master", "commit": "4f59455d2388e113bd510e85b310d15b9228ca0d" },

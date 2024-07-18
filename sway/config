@@ -59,8 +59,8 @@ output DP-1 pos 0 0 res 1920x1080
 bindsym $mod+Shift+Delete exec swaylock -f -c 000000
 # bindsym $mod+Shift+s exec swayidle -w 'swaymsg "output * power off"' resume 'swaymsg "output * power on" before-sleep 'swaylock -f -c 0000000'
 
-bindsym $mod+Pause exec systemctl suspend
-bindsym $mod+Shift+Pause exec systemctl hibernate
+# bindsym $mod+Pause exec systemctl suspend
+# bindsym $mod+Shift+Pause exec systemctl hibernate
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
