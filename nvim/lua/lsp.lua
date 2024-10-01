@@ -21,29 +21,6 @@ local language_servers = {
 	templ = lspconfig.templ,
 }
 
-lspconfig.pylsp.setup({
-	settings = {
-		pylsp = {
-			plugins = {
-				-- formatter
-				black = { enabled = true },
-				autopep8 = { enabled = true },
-				yapf = { enabled = true },
-				-- linter
-				pylint = { enabled = true },
-				pyflakes = { enabled = true },
-				pycodestyle = { enabled = true },
-				-- typechecker
-				pylsp_mypy = { enabled = true },
-				-- auto-completion
-				jedi_completion = { enabled = true },
-				-- import sorting
-				pyls_isort = { enabled = true },
-			},
-		},
-	},
-})
-
 for name, handler in pairs(language_servers) do
 	-- only setup language servers which are found in path
 	if os.execute(string.format('command -v %s', name)) then
