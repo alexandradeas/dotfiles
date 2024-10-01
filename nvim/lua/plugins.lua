@@ -96,7 +96,6 @@ return require("lazy").setup({
 	{ 'hashivim/vim-terraform' },
 	{ "jparise/vim-graphql" },
 	{ 'gleam-lang/gleam.vim' },
-	{ 'petobens/poet-v' },
 	{ 'joerdav/templ.vim' },
 
 	-- utility
@@ -182,6 +181,20 @@ return require("lazy").setup({
 	},
 
 	-- UI
-	{ "catppuccin/nvim", name = "catpuccin", priority = 1000 }
+	{ "catppuccin/nvim", name = "catpuccin", priority = 1000 },
+	{
+		"f-person/auto-dark-mode.nvim",
+		opts = {
+			update_interval = 1000,
+			set_dark_mode = function()
+				vim.api.nvim_set_option_value("background", "dark", {})
+				vim.cmd("colorscheme catpuccin")
+			end,
+			set_light_mode = function()
+				vim.api.nvim_set_option_value("background", "light", {})
+				vim.cmd("colorscheme catpuccin-latte")
+			end,
+		},
+	},
 })
 
