@@ -14,8 +14,6 @@ lspconfig.lua_ls.setup({
 })
 
 local language_servers = {
-	dart = lspconfig.dartls,
-	nil_ls = lspconfig.nil_ls,
 	tsc = lspconfig.tsserver,
 	gopls = lspconfig.gopls,
 	zls = lspconfig.zls,
@@ -51,6 +49,17 @@ for name, handler in pairs(language_servers) do
 	if os.execute(string.format('command -v %s', name)) then
 		handler.setup({ capabilities = capabilities })
 	end
+end
+
+if (os.execute("command -v dart")) then
+	lspconfig.dartls.setup({
+		-- capabilities = capabilities,
+		settings = {
+			dart = {
+				lineLength = 120
+			}
+		}
+	})
 end
 
 if (os.execute("command -v rust-analyzer")) then
