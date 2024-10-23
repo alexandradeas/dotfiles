@@ -8,5 +8,6 @@ let b:dart_format_on_save=0
 set tabstop=2
 set shiftwidth=2
 set expandtab
+set textwidth=120
 
 
