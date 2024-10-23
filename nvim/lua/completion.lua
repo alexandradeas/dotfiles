@@ -1,12 +1,6 @@
 local cmp = require("cmp")
 local luasnip = require("luasnip")
 
--- disable copilot default suggestions as these will be handled by cmp instead
-require("copilot").setup({
-	suggestion = { enabled = false },
-	panel = { enabled = false },
-})
-
 require("cmp_ai.config"):setup({
   max_lines = 100,
   provider = 'Ollama',
@@ -65,10 +59,8 @@ cmp.setup({
 		{ name = "nvim_lsp" },
 		-- { name = 'cmp_ai' },
 		{ name = "luasnip" },
-		-- { name = "copilot" },
 		{ name = "codeium" },
 		{ name = "luasnip" },
-		{ name = "copilot" },
 		-- { name = 'cmp_ai' },
 	}, {
 		{ name = "buffer" },

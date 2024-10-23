@@ -5,19 +5,13 @@ return require("lazy").setup({
 	{ "hrsh7th/cmp-path" },
 	{ "hrsh7th/cmp-cmdline" },
 	{ "hrsh7th/cmp-nvim-lsp" },
-	{ "hrsh7th/nvim-cmp",
-	  dependencies = {'tzachar/cmp-ai'}
+	{
+		"hrsh7th/nvim-cmp",
+		dependencies = { 'tzachar/cmp-ai' }
 	},
 	{ "L3MON4D3/LuaSnip" },
 	{ "saadparwaiz1/cmp_luasnip" },
 	{ "mfussenegger/nvim-dap" },
-	{ 'zbirenbaum/copilot.lua' },
-	{
-		'zbirenbaum/copilot-cmp',
-		config = function()
-			require("copilot_cmp").setup()
-		end
-	},
 	{ 'mattn/emmet-vim' },
 	-- { "tzarchar/cmp-ai" }, is currerntly not working with ollama
 	{ "maxwell-bland/cmp-ai" },
@@ -156,7 +150,7 @@ return require("lazy").setup({
 			require('tree-sitter.install').update({ with_sync = true })()
 		end
 	},
-	{ "ellisonleao/glow.nvim", config = true, cmd = "Glow" },
+	{ "ellisonleao/glow.nvim", config = true,      cmd = "Glow" },
 	{
 		"ahollister/nota.nvim",
 		config = function()
@@ -181,7 +175,7 @@ return require("lazy").setup({
 	},
 
 	-- UI
-	{ "catppuccin/nvim", name = "catpuccin", priority = 1000 },
+	{ "catppuccin/nvim",       name = "catpuccin", priority = 1000 },
 	{
 		"f-person/auto-dark-mode.nvim",
 		opts = {
@@ -197,4 +191,3 @@ return require("lazy").setup({
 		},
 	},
 })
-
