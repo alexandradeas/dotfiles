@@ -14,7 +14,7 @@ lspconfig.lua_ls.setup({
 })
 
 local language_servers = {
-	tsc = lspconfig.tsserver,
+	tsc = lspconfig.ts_ls,
 	gopls = lspconfig.gopls,
 	zls = lspconfig.zls,
 	gleam = lspconfig.gleam,
@@ -30,9 +30,12 @@ end
 
 if (os.execute("command -v dart")) then
 	lspconfig.dartls.setup({
-		-- capabilities = capabilities,
+		capabilities = capabilities,
 		settings = {
 			dart = {
+				codelens = {
+					enabled = true,
+				},
 				lineLength = 120
 			}
 		}
@@ -60,5 +63,11 @@ if (os.execute("command -c htmx-lsp")) then
 	lspconfig.htmx.setup({
 		capabilities = capabilities,
 		filetypes = { "html", "templ" },
+	})
+end
+
+if (os.execute("command -v terraform-ls")) then
+	lspconfig.terraformls.setup({
+		capabilities = capabilities,
 	})
 end
