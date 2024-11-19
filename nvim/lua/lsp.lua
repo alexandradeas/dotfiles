@@ -19,6 +19,7 @@ local language_servers = {
 	zls = lspconfig.zls,
 	gleam = lspconfig.gleam,
 	templ = lspconfig.templ,
+	tflint = lspconfig.tflint,
 }
 
 for name, handler in pairs(language_servers) do
