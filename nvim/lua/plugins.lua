@@ -129,6 +129,17 @@ return require("lazy").setup({
 			display_mode = "split",
 		},
 	},
+	{
+    "ThePrimeagen/refactoring.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    lazy = false,
+    config = function()
+      require("refactoring").setup()
+    end,
+  },
 
 	-- UI
 	{ "catppuccin/nvim",       name = "catpuccin", priority = 1000 },
