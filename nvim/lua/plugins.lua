@@ -159,5 +159,6 @@ return require("lazy").setup({
 		},
 	},
 
-	{ "nvim-tree/nvim-web-devicons" }
+	{ "nvim-tree/nvim-web-devicons" },
+	{ "echasnovski/mini.icons" },
 })
