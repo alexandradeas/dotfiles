@@ -58,6 +58,7 @@ return require("lazy").setup({
 			vim.o.timeout = true
 			vim.o.timeoutlen = 300
 		end,
+		tag = "v2.1.0",
 	},
 
 	{

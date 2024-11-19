@@ -40,6 +40,6 @@
   "vim-rainbow": { "branch": "master", "commit": "a6c7fd5a2b0193b5dbd03f62ad820b521dea3290" },
   "vim-terraform": { "branch": "master", "commit": "24de93afb05078bac6a2e966402cc1f672277708" },
   "vim-v": { "branch": "main", "commit": "c13c73cfbb2c89e405df0a1c05c8a441f7eba39d" },
-  "which-key.nvim": { "branch": "main", "commit": "68e37e12913a66b60073906f5d3f14dee0de19f2" },
+  "which-key.nvim": { "branch": "main", "commit": "0539da005b98b02cf730c1d9da82b8e8edb1c2d2" },
   "zig.vim": { "branch": "master", "commit": "15d6510b77a4efbb6ffcb151ed7e2ce4de4d06f6" }
 }
