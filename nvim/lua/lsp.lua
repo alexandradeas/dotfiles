@@ -72,3 +72,7 @@ if (os.execute("command -v terraform-ls")) then
 		capabilities = capabilities,
 	})
 end
+
+if (os.execute("command -v svelte-language-server")) then
+	lspconfig.svelte.setup({})
+end

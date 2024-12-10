@@ -19,6 +19,7 @@ vim.g.mapleader = "," -- Leader must be mapped before calling lazy
 
 require("plugins")
 require("opts")
+require("ui")
 require("completion")
 require("lsp")
 require("keybindings")
