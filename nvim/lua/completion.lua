@@ -5,18 +5,20 @@ require("cmp_ai.config"):setup({
   max_lines = 100,
   provider = 'Ollama',
   provider_options = {
-    model = 'wizardcoder:latest',
+    model = 'qwen2.5-coder:7b-base-q6_K',
+		base_url = 'microvac.local:11434/api/generate',
+		prompt = function(lines_before, lines_after)
+			return "<|fim_prefix|>" .. lines_before .. "<|fim_suffix|>" .. lines_after .. "<|fim_middle|>"
+		end,
+		suffix = function(lines_after)
+			return lines_after
+		end,
   },
   notify = true,
   notify_callback = function(msg)
     vim.notify(msg)
   end,
-  run_on_every_keystroke = true,
-  ignored_file_types = {
-    -- default is not to ignore
-    -- uncomment to ignore in lua:
-    -- lua = true
-  },
+  run_on_every_keystroke = false,
 })
 
 
@@ -57,35 +59,12 @@ cmp.setup({
 	}),
 	sources = cmp.config.sources({
 		{ name = "nvim_lsp" },
-		-- { name = 'cmp_ai' },
+		{ name = 'cmp_ai' },
 		{ name = "luasnip" },
-		{ name = "codeium" },
-		{ name = "luasnip" },
-		-- { name = 'cmp_ai' },
 	}, {
 		{ name = "buffer" },
 	}),
 })
-
--- local cmp_ai = require('cmp_ai.config')
--- 
--- cmp_ai:setup({
---   max_lines = 100,
---   provider = 'Ollama',
---   provider_options = {
---     model = 'wizardcoder:latest',
---   },
---   notify = true,
---   notify_callback = function(msg)
---     vim.notify(msg)
---   end,
---   run_on_every_keystroke = true,
---   ignored_file_types = {
---     -- default is not to ignore
---     -- uncomment to ignore in lua:
---     -- lua = true
---   },
--- })
 
 cmp.setup.filetype("gitcommit", {
 	sources = cmp.config.sources({
