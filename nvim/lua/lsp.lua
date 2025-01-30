@@ -76,3 +76,13 @@ end
 if (os.execute("command -v svelte-language-server")) then
 	lspconfig.svelte.setup({})
 end
+
+if (os.execute("command -v gleam")) then
+	lspconfig.gleam.setup({})
+end
+
+-- if (os.execute("command -v elixir-ls")) then
+-- 	lspconfig.elixirls.setup({
+-- 		cmd = { "elixir-ls" }
+-- 	})
+-- end

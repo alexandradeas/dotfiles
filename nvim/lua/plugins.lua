@@ -93,6 +93,34 @@ return require("lazy").setup({
 	{ 'gleam-lang/gleam.vim' },
 	{ 'joerdav/templ.vim' },
 	{ 'evanleck/vim-svelte' },
+	{
+		'elixir-tools/elixir-tools.nvim',
+		version = "v0.17.0",
+		event   = { "BufReadPre", "BufNewFile" },
+		config  = function()
+			local elixir = require("elixir")
+			local elixirls = require("elixir.elixirls")
+
+			elixir.setup({
+				nextls = { enabled = true },
+				elixirls = {
+					enabled = true,
+					settings = elixirls.settings {
+						dialyzerEnabled = true,
+						enableTestLenses = true,
+					},
+					on_attach = function(client, bufnr)
+						vim.keymap.set("n", "<space>fp", ":ElixirFromPipe<cr>", { buffer = true, noremap = true })
+						vim.keymap.set("n", "<space>tp", ":ElixirToPipe<cr>", { buffer = true, noremap = true })
+						vim.keymap.set("n", "<space>em", ":ElixirExpandMacro<cr>", { buffer = true, noremap = true })
+					end
+				},
+				projectionist = { enabled = true },
+			})
+		end
+	},
+	{ 'elixir-lang/vim-elixir' },
+	-- { 'avdgaag/vim-phoenix' },
 
 	-- utility
 	{ 'frazrepo/vim-rainbow' },
@@ -104,11 +132,18 @@ return require("lazy").setup({
 	},
 	{
 		"nvim-treesitter/nvim-treesitter",
+		config = function()
+			require("nvim-treesitter.configs").setup({
+				ensure_installed = { "elixir", "eex", "heex" },
+				highlight = { enable = true },
+				indent = { enable = true },
+			})
+		end,
 		run = function()
 			require('tree-sitter.install').update({ with_sync = true })()
 		end
 	},
-	{ "ellisonleao/glow.nvim", config = true,      cmd = "Glow" },
+	{ "ellisonleao/glow.nvim",      config = true,      cmd = "Glow" },
 	{
 		"ahollister/nota.nvim",
 		config = function()
@@ -132,19 +167,19 @@ return require("lazy").setup({
 		},
 	},
 	{
-    "ThePrimeagen/refactoring.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-    },
-    lazy = false,
-    config = function()
-      require("refactoring").setup()
-    end,
-  },
+		"ThePrimeagen/refactoring.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
+		},
+		lazy = false,
+		config = function()
+			require("refactoring").setup()
+		end,
+	},
 
 	-- UI
-	{ "catppuccin/nvim",       name = "catpuccin", priority = 1000 },
+	{ "catppuccin/nvim",            name = "catpuccin", priority = 1000 },
 	{
 		"f-person/auto-dark-mode.nvim",
 		opts = {
