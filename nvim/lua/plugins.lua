@@ -15,26 +15,6 @@ return require("lazy").setup({
 	{ 'mattn/emmet-vim' },
 	-- { "tzarchar/cmp-ai" }, is currerntly not working with ollama
 	{ "maxwell-bland/cmp-ai" },
-	{
-		"Exafunction/codeium.nvim",
-		dependencies = {
-			"nvim-plenary/plenary.nvim",
-			"hrsh7th/nvim-cmp",
-		},
-		config = function()
-			require("codeium").setup({
-				enable_chat = true,
-				chat_window = {
-					relative = "editor",
-					position = "50%",
-					size = {
-						height = "80%",
-						width = "80%",
-					}
-				}
-			})
-		end,
-	},
 
 	-- navigation
 	{
@@ -158,7 +138,7 @@ return require("lazy").setup({
 	{
 		"David-Kunz/gen.nvim",
 		opts = {
-			model = "wizardcoder:latest",
+			model = "qwen2.5:latest",
 			show_prompt = true,
 			show_model = true,
 			no_auto_close = true,
@@ -197,4 +177,5 @@ return require("lazy").setup({
 
 	{ "nvim-tree/nvim-web-devicons" },
 	{ "echasnovski/mini.icons" },
+	{ "David-Kunz/gen.nvim" },
 })
