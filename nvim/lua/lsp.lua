@@ -46,6 +46,7 @@ local language_servers = {
 	gleam = lspconfig.gleam,
 	templ = lspconfig.templ,
 	tflint = lspconfig.tflint,
+	pyright = lspconfig.pyright,
 }
 
 for name, handler in pairs(language_servers) do
@@ -53,6 +54,11 @@ for name, handler in pairs(language_servers) do
 	if os.execute(string.format('command -v %s', name)) then
 		handler.setup({ capabilities = capabilities })
 	end
+end
+
+if (os.execute("command -v jedi-language-server")) then
+	lspconfig.jedi_language_server.setup({ capabilities = capabilities })
+
 end
 
 if (os.execute("command -v dart")) then
