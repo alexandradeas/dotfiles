@@ -7,14 +7,14 @@ return require("lazy").setup({
 	{ "hrsh7th/cmp-nvim-lsp" },
 	{
 		"hrsh7th/nvim-cmp",
-		dependencies = { 'tzachar/cmp-ai' }
+		dependencies = { "tzachar/cmp-ai" }
 	},
 	{ "L3MON4D3/LuaSnip" },
 	{ "saadparwaiz1/cmp_luasnip" },
 	{ "mfussenegger/nvim-dap" },
 	{ 'mattn/emmet-vim' },
-	-- { "tzarchar/cmp-ai" }, is currerntly not working with ollama
-	{ "maxwell-bland/cmp-ai" },
+	{ "tzachar/cmp-ai" },
+	-- { "maxwell-bland/cmp-ai" },
 
 	-- navigation
 	{
@@ -101,6 +101,8 @@ return require("lazy").setup({
 	},
 	{ 'elixir-lang/vim-elixir' },
 	-- { 'avdgaag/vim-phoenix' },
+	{ 'meatballs/vim-xonsh' },
+	{ 'averms/black-nvim' },
 
 	-- utility
 	{ 'frazrepo/vim-rainbow' },
@@ -157,6 +159,7 @@ return require("lazy").setup({
 			require("refactoring").setup()
 		end,
 	},
+	{ 'sindrets/diffview.nvim' },
 
 	-- UI
 	{ "EdenEast/nightfox.nvim", name = "nightfox" },

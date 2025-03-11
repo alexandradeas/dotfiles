@@ -77,9 +77,18 @@ end
 
 if (os.execute("command -v rust-analyzer")) then
 	lspconfig.rust_analyzer.setup({
-		capabilities = capabilities,
+		capabilities = {
+			experimental = {
+				serverStatusNotification = true,
+			},
+			capabilities,
+		},
 		settings = {
-			["rust-analyzer"] = {},
+			["rust-analyzer"] = {
+				diagnostics = {
+					enable = true;
+				}
+			},
 		},
 	})
 end
@@ -118,3 +127,16 @@ end
 -- 		cmd = { "elixir-ls" }
 -- 	})
 -- end
+--
+if (os.execute("command -v kotlin-language-server")) then
+	lspconfig.kotlin_language_server.setup({
+		capabilities = capabilities,
+	})
+end
+
+if (os.execute("command -v jedi-langauge-server")) then
+	lspconfig.jedi_language_server.setup({
+		capabilities = capabilities,
+		filetypes = { "python", "xonsh" },
+	})
+end
