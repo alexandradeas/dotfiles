@@ -1,25 +1,25 @@
 local cmp = require("cmp")
 local luasnip = require("luasnip")
 
-require("cmp_ai.config"):setup({
-  max_lines = 100,
-  provider = 'Ollama',
-  provider_options = {
-    model = 'qwen2.5-coder:7b-base-q6_K',
-		base_url = 'microvac.local:11434/api/generate',
-		prompt = function(lines_before, lines_after)
-			return "<|fim_prefix|>" .. lines_before .. "<|fim_suffix|>" .. lines_after .. "<|fim_middle|>"
-		end,
-		suffix = function(lines_after)
-			return lines_after
-		end,
-  },
-  notify = true,
-  notify_callback = function(msg)
-    vim.notify(msg)
-  end,
-  run_on_every_keystroke = false,
-})
+-- require("cmp_ai.config"):setup({
+--   max_lines = 100,
+--   provider = 'Ollama',
+--   provider_options = {
+--     model = 'qwen2.5-coder:7b-base-q6_K',
+-- 		base_url = 'microvac.local:11434/api/generate',
+-- 		prompt = function(lines_before, lines_after)
+-- 			return "<|fim_prefix|>" .. lines_before .. "<|fim_suffix|>" .. lines_after .. "<|fim_middle|>"
+-- 		end,
+-- 		suffix = function(lines_after)
+-- 			return lines_after
+-- 		end,
+--   },
+--   notify = true,
+--   notify_callback = function(msg)
+--     vim.notify(msg)
+--   end,
+--   run_on_every_keystroke = false,
+-- })
 
 
 cmp.setup({
@@ -59,7 +59,7 @@ cmp.setup({
 	}),
 	sources = cmp.config.sources({
 		{ name = "nvim_lsp" },
-		{ name = 'cmp_ai' },
+		-- { name = 'cmp_ai' },
 		{ name = "luasnip" },
 	}, {
 		{ name = "buffer" },

@@ -5,7 +5,7 @@ vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 
 vim.g.rainbow_active = 1
-vim.cmd.colorscheme("catppuccin")
+vim.cmd.colorscheme("nightfox")
 
 -- Relative line numbers for focused buffer, otherwise absolute line numbers
 local NumberToggle = vim.api.nvim_create_augroup("NumberToggle", {})
