@@ -47,7 +47,7 @@ return require("lazy").setup({
 		opts = {},
 	},
 
-	-- languages
+	-- languages/platforms
 	{ "ziglang/zig.vim" },
 	{
 		"ray-x/go.nvim",
@@ -103,6 +103,11 @@ return require("lazy").setup({
 	-- { 'avdgaag/vim-phoenix' },
 	{ 'meatballs/vim-xonsh' },
 	{ 'averms/black-nvim' },
+	{ 'zadirion/Unreal.nvim',
+		dependencies = {
+			"tpope/vim-dispatch",
+		},
+	},
 
 	-- utility
 	{ 'frazrepo/vim-rainbow' },

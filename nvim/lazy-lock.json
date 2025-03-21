@@ -1,5 +1,6 @@
 {
   "LuaSnip": { "branch": "master", "commit": "c9b9a22904c97d0eb69ccb9bab76037838326817" },
+  "Unreal.nvim": { "branch": "main", "commit": "cdacf7ae1138bb7fcb2002b15edb6ba5fadf82d8" },
   "auto-dark-mode.nvim": { "branch": "master", "commit": "02ef9553e2a1d6e861bc6955d58ce5883d28a6ad" },
   "black-nvim": { "branch": "master", "commit": "8fb3efc562b67269e6f31f8653297f826534fa4b" },
   "cmp-ai": { "branch": "main", "commit": "f5e4dcbf763770880d0a01fe2bc139eb47597261" },
@@ -36,6 +37,7 @@
   "telescope.nvim": { "branch": "master", "commit": "a0bbec21143c7bc5f8bb02e0005fa0b982edc026" },
   "templ.vim": { "branch": "main", "commit": "5cc48b93a4538adca0003c4bc27af844bb16ba24" },
   "trouble.nvim": { "branch": "main", "commit": "85bedb7eb7fa331a2ccbecb9202d8abba64d37b3" },
+  "vim-dispatch": { "branch": "master", "commit": "a2ff28abdb2d89725192db5b8562977d392a4d3f" },
   "vim-elixir": { "branch": "master", "commit": "39cfaec9ea71c22a82c459ecd64860c8850f1215" },
   "vim-flutter": { "branch": "master", "commit": "422ff301a4fe7b989b79b83adf95add0c71ffda5" },
   "vim-fugitive": { "branch": "master", "commit": "4a745ea72fa93bb15dd077109afbb3d1809383f2" },
