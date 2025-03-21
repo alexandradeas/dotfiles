@@ -40,7 +40,6 @@ if (os.execute("command -v lua-language-server")) then
 end
 
 local language_servers = {
-	tsc = lspconfig.ts_ls,
 	gopls = lspconfig.gopls,
 	zls = lspconfig.zls,
 	gleam = lspconfig.gleam,
@@ -140,3 +139,19 @@ if (os.execute("command -v jedi-langauge-server")) then
 		filetypes = { "python", "xonsh" },
 	})
 end
+
+if (os.execute("command -v tsc")) then
+	lspconfig.ts_ls.setup({
+		capabilities = capabilities,
+		root_dir = lspconfig.util.root_pattern("package.json"),
+		single_file_support = false,
+	})
+end
+
+if (os.execute("command -v deno")) then
+	lspconfig.denols.setup({
+		capabilities = capabilities,
+		root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
+	})
+end
+
