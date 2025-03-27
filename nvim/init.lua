@@ -23,6 +23,7 @@ require("ui")
 require("completion")
 require("lsp")
 require("keybindings")
+require("debugger")
 
 -- load telescope extensions
 local telescope = require("telescope")

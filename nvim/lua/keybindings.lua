@@ -1,5 +1,4 @@
 local wk = require("which-key")
-local trouble = require("trouble")
 
 -- register leader bindings
 wk.register({
@@ -75,17 +74,29 @@ wk.register({
 	},
 
 	t = {
-		name = "Toggle",
-		tb = { "<cmd>TagbarToggle<cr>", "Tagbar" },
+		name = "Test",
+		s = { function() require("neotest").run.run() end, "Single" },
+		b = { function() require("neotest").run.run(vim.fn.expand("%")) end, "Run Buffer" },
+		d = { function() require("neotest").run.run({ strategy = "dap" }) end, "Debug" },
+		h = { function() require("neotest").run.step() end, "Halt" },
+		t = {
+			name = "Toggle",
+			p = { function() require("neotest").output_panel.toggle() end, "Panel" },
+			s = { function() require("neotest").summary.toggle() end, "Summary" },
+		},
+		w = {
+			name = "Watch",
+			a = { function() require("neotest").watch.toggle() end, "All" },
+			b = { function() require("neotest").watch.toggle(vim.fn.expand("%")) end, "Buffer" },
+		},
 	},
 
 	x = {
-		name = "Diagnostic",
-		x = { trouble.toggle, "Trouble" },
-		w = { function() trouble.open("workspace_diagnostics") end, "Workspace Diagnostics" },
-		d = { function() trouble.open("document_diagnostics") end, "Document Diagnostics" },
-		q = { function() trouble.open("quickfix") end, "Quickfix" },
-		l = { function() trouble.open("loclist") end, "Loclist" },
+		name = "Trouble",
+		x = { "<cmd>Trouble diagnostics toggle<cr>", "Diagnostics " },
+		X = { "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", "Buffer diagnostics" },
+		s = { "<cmd>Trouble symbols toggle<cr>", "Symbols" },
+		L = { "<cmd>Trouble loclist toggle<cr>", "Location List" },
+		Q = { "<cmd>Trouble qflist toggle<cr>", "Quickfix List" },
 	},
 }, { prefix = "<leader>" })
-

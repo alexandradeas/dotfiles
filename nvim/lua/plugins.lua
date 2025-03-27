@@ -59,7 +59,7 @@ return require("lazy").setup({
 		config = function()
 			require("go").setup()
 		end,
-		event = { "CmdLineEnter" },
+		event = { "CmdlineEnter" },
 		ft = { "go", "gomod" },
 		build = ':lua require("go.install").update_all_sync()'
 	},
@@ -103,10 +103,24 @@ return require("lazy").setup({
 	-- { 'avdgaag/vim-phoenix' },
 	{ 'meatballs/vim-xonsh' },
 	{ 'averms/black-nvim' },
-	{ 'zadirion/Unreal.nvim',
+	{
+		'zadirion/Unreal.nvim',
 		dependencies = {
 			"tpope/vim-dispatch",
 		},
+	},
+	{
+		'windwp/nvim-ts-autotag',
+		lazy = false,
+		config = function()
+			require("nvim-ts-autotag").setup({
+				opts = {
+					enable_close = true,
+					enable_rename = true,
+					enable_close_on_slash = true,
+				},
+			})
+		end,
 	},
 
 	-- utility
@@ -130,7 +144,7 @@ return require("lazy").setup({
 			require('tree-sitter.install').update({ with_sync = true })()
 		end
 	},
-	{ "ellisonleao/glow.nvim",      config = true,      cmd = "Glow" },
+	{ "ellisonleao/glow.nvim",  config = true, cmd = "Glow" },
 	{
 		"ahollister/nota.nvim",
 		config = function()
@@ -165,9 +179,66 @@ return require("lazy").setup({
 		end,
 	},
 	{ 'sindrets/diffview.nvim' },
+	{ 'lewis6991/gitsigns.nvim' },
+	{
+		"nvim-neotest/neotest",
+		dependencies = {
+			"nvim-neotest/nvim-nio",
+			"nvim-lua/plenary.nvim",
+			"antoinemadec/FixCursorHold.nvim",
+			"nvim-treesitter/nvim-treesitter",
+			"sidlatau/neotest-dart"
+		},
+		config = function()
+			require("neotest").setup({
+				adapters = {
+					require("neotest-dart") {
+						command = "fvm flutter",
+						use_lsp = true,
+					},
+				}
+			})
+		end,
+	},
+	{
+		"sidlatau/neotest-dart",
+		dependencies = {
+			"nvim-neotest/neotest",
+		},
+		lazy = false,
+		custom_test_method_names = { 'blocTest' },
+	},
+	{
+		"nvim-neotest/neotest-go",
+		dependencies = {
+			"nvim-neotest/neotest",
+		},
+		config = function()
+			local neotest_ns = vim.api.nvim_create_namespace("neotest")
+			vim.diagnostic.config({
+				virtual_text = {
+					format = function(diagnostic)
+						local message = diagnostic.message:gsub("\n", " "):gsub("\t", " "):gsub("%s+", " "):gsub("^%s+", "")
+						return message
+					end,
+				},
+			}, neotest_ns)
+
+			require("neotest").setup({
+				adapters = {
+					require("neotest-go") {
+						experimental = {
+							test_table = true,
+						},
+						args = { "-count=1", "-timeout=60s", "-race" },
+					},
+				},
+			})
+		end,
+	},
 
 	-- UI
-	{ "EdenEast/nightfox.nvim", name = "nightfox" },
+	{ "EdenEast/nightfox.nvim",     name = "nightfox" },
 	{
 		"f-person/auto-dark-mode.nvim",
 		opts = {

@@ -57,7 +57,6 @@ end
 
 if (os.execute("command -v jedi-language-server")) then
 	lspconfig.jedi_language_server.setup({ capabilities = capabilities })
-
 end
 
 if (os.execute("command -v dart")) then
@@ -85,7 +84,7 @@ if (os.execute("command -v rust-analyzer")) then
 		settings = {
 			["rust-analyzer"] = {
 				diagnostics = {
-					enable = true;
+					enable = true,
 				}
 			},
 		},
@@ -155,3 +154,8 @@ if (os.execute("command -v deno")) then
 	})
 end
 
+if (os.execute("command -v vscode-html-language-server")) then
+	lspconfig.html.setup({
+		capabilities = capabilities,
+	})
+end
