@@ -4,6 +4,3 @@
 [submodule "Colloid-icon-theme"]
 	path = Colloid-icon-theme
 	url = git@github.com:vinceliuice/Colloid-icon-theme
-[submodule "themes"]
-	path = alacritty/themes
-	url = https://github.com/alacritty/alacritty-theme
